@@ -1,14 +1,14 @@
-import * as React from 'react';
+import React from "react";
+import Banner from "../components/Banner/Banner";
 
-export interface HomeProps {
-}
-
-export default class Home extends React.Component<HomeProps> {
-  public render() {
+class Home extends React.Component {
+  render() {
     return (
       <div>
-        Test
+        <Banner />
       </div>
     );
   }
 }
+
+export default Home;

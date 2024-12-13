@@ -3,12 +3,13 @@ import { ProjectList } from "../types/Project";
 export const gameProjects: ProjectList = {
     projectList: [
       {
-        title: "Messi vs Ronaldo Pong",
+        title: "Messi vs Ronaldo",
+        type: "Pong Game",
         description: "A fast-paced Pong game with unique power-ups and dynamic gameplay.",
         folderName: "pong",
         img: { url: "https://via.placeholder.com/600x400", alt: "Pong Game" },
-        year: "2024",
-        role: "Developer",
+        year: "October 2024",
+        roles: ["Tech", "Art"],
         progress: 100,
         screenshots: [
           { url: "https://via.placeholder.com/300x200", alt: "Gameplay Screenshot" },
@@ -54,20 +55,21 @@ export const gameProjects: ProjectList = {
             ],
           },
         ],
-        tools: ["Stencyl", "Photoshop", "Illustrator"],
+        tools: ["Stencyl", "Photoshop"],
         rules: ["Two players required", "Two modes: Normal and Turbo"],
         resources: [
-          { title: "Game Engine", interpret: "Stencyl" },
-          { title: "Music Assets", interpret: "Audio Jungle" },
+          { title: "Game Engine", interpret: "Stencyl", url: "" },
+          { title: "Game Engine", interpret: "Stencyl", url: "" },
         ],
       },
       {
         title: "VietVaders",
+        type: "Shoot em up",
         description: "A shoot-em-up game with procedurally generated waves and endless mode.",
         folderName: "vietVaders",
         img: { url: "https://via.placeholder.com/600x400", alt: "Shoot-em-up Game" },
         year: "2024",
-        role: "Developer and Artist",
+        roles: ["Tech", "Art"],
         progress: 95,
         screenshots: [
           { url: "https://via.placeholder.com/300x200", alt: "Gameplay Screenshot" },
@@ -95,11 +97,25 @@ export const gameProjects: ProjectList = {
             ],
           },
         ],
-        tools: ["Unity", "Blender", "Aseprite"],
+        tools: ["Stencyl", "Photoshop", "Illustrator"],
         rules: ["Single-player mode", "Endless and Wave modes"],
         resources: [
-          { title: "Game Engine", interpret: "Unity" },
-          { title: "Sprites", interpret: "Custom-made" },
+            { 
+                title: "Blacknut Cloud Gaming. (n.d.). Men of War: Vietnam - Apocalypse Now. Retrieved November 22, 2024, from", 
+                url: "https://www.blacknutlemag.com/en/men-of-war-vietnam-video-game" 
+            }, { 
+                title: "Ahemotion Music. (2022, March 1). Helicopter sound effect [Video]. YouTube. ", 
+                url: "https://www.youtube.com/watch?v=QlGzLhnwJX4" 
+            }, { 
+                title: "Sound Effects Pro. (2019, July 15). Explosion sound effect [Video]. YouTube.", 
+                url: "https://www.youtube.com/watch?v=LdGe-qosfRA" 
+            }, { 
+                title: "HD Sound Effects. (2016, November 30). Missile sound effect [Video]. YouTube.", 
+                url: "https://www.youtube.com/watch?v=1qUN59Oebe0" 
+            }, { 
+                title: "PhantomMusic. (2014, April 12). Title song [Video]. YouTube. ", 
+                url: "https://www.youtube.com/watch?v=OrPKJos3tA0" 
+            }, 
         ],
       },
     ],

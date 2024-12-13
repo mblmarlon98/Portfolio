@@ -24,16 +24,18 @@ export type CodeScreenshot = {
   
   export type ProjectResource = {
     title: string; // Resource name
-    url?: string; // Optional URL for external resources
+    url: string; // Optional URL for external resources
     interpret?: string; // Author or creator of the resource
   };
+
   
   export type ProjectDetail = {
     title: string; // Project title
+    type: string;
     description: string; // Project description
     img: Img; // Cover image or thumbnail for the project
     year: string; // Year of creation
-    role: string; // Role of the user in the project (e.g., Developer, Artist)
+    roles: string[]; // Role of the user in the project (e.g., Developer, Artist)
     progress: number; // Progress percentage for the progress bar
     screenshots?: Img[]; // Gallery of project screenshots
     features?: FeatureDetail[]; // List of features with detailed descriptions

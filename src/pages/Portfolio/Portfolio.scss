@@ -28,12 +28,14 @@ $hint-range: 15%; /* Slightly increased range for the animation */
 
     /* Web Development Background */
     &.web {
-      background: linear-gradient(135deg, #3498db, #2ecc71);
+      background-color: white;
+      color: black;
     }
 
     /* Game Development Background */
     &.game {
-      background: linear-gradient(135deg, #8e44ad, #e74c3c);
+      background-color: #0d0d0d;
+      color: white;
     }
 
     /* Active (Hover) Effect */

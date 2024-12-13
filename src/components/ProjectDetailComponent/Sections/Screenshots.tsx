@@ -32,10 +32,10 @@ ScreenshotSectionState > {
     componentDidMount() {
         // Perform an initial check after the component mounts
         this.checkScroll();
-        
+
         // Re-check scroll state on window resize
         window.addEventListener("resize", this.checkScroll);
-        
+
         // Ensure scroll indicators update after images are rendered
         setTimeout(() => {
             this.checkScroll();
@@ -49,17 +49,12 @@ ScreenshotSectionState > {
     checkScroll = () => {
         const scrollContainer = this.scrollContainerRef.current;
         if (scrollContainer) {
-          const canScrollUp = scrollContainer.scrollTop > 0;
-          const canScrollDown =
-            scrollContainer.scrollTop + scrollContainer.clientHeight <
-            scrollContainer.scrollHeight;
-      
-          this.setState({
-            canScrollUp,
-            canScrollDown,
-          });
+            const canScrollUp = scrollContainer.scrollTop > 0;
+            const canScrollDown = scrollContainer.scrollTop + scrollContainer.clientHeight < scrollContainer.scrollHeight;
+
+            this.setState({canScrollUp, canScrollDown});
         }
-      };
+    };
 
     handleImageClick = (index : number) => {
         this.setState({activeIndex: index});
@@ -74,47 +69,51 @@ ScreenshotSectionState > {
         const {activeIndex, canScrollUp, canScrollDown} = this.state;
 
         return (
-            <div className="screenshot-section">
-                {/* Scrollable List */}
-                <div
-                    className="scrollable-list"
-                    ref={this.scrollContainerRef}
-                    onScroll={this.handleScroll}>
-                    <div
-                        className={`scroll-indicator top ${canScrollUp
-                        ? "visible"
-                        : ""}`}
-                        aria-hidden="true"></div>
-                    <div className="image-list" role="list">
-                        {screenshots.map((screenshot, index) => (
-                            <div key={index} className={`image-item ${activeIndex === index
-                                ? "active"
-                                : ""}`} onClick={() => this.handleImageClick(index)} role="listitem" aria-selected={activeIndex === index} tabIndex={0} // Makes items focusable
->
-                                <img src={screenshot.url} alt={screenshot.alt}/>
-                            </div>
-                        ))}
-                    </div>
-                    <div
-                        className={`scroll-indicator bottom ${canScrollDown
-                        ? "visible"
-                        : ""}`}
-                        aria-hidden="true"></div>
-                </div>
+            <section className="mb-6">
+                <h2 className="text-3xl border-b mb-6">Screenshots</h2>
 
-                {/* Active Image Display */}
-                <div className="active-image-display">
-                    <h2>{screenshots[activeIndex]
-                            ?.alt}</h2>
-                    <div className="image-container">
-                        <img
-                            src={screenshots[activeIndex]
-                            ?.url}
-                            alt={screenshots[activeIndex]
-                            ?.alt}/>
+                <div className="screenshot-section">
+                    {/* Scrollable List */}
+                    <div
+                        className="scrollable-list"
+                        ref={this.scrollContainerRef}
+                        onScroll={this.handleScroll}>
+                        <div
+                            className={`scroll-indicator top ${canScrollUp
+                            ? "visible"
+                            : ""}`}
+                            aria-hidden="true"></div>
+                        <div className="image-list" role="list">
+                            {screenshots.map((screenshot, index) => (
+                                <div key={index} className={`image-item ${activeIndex === index
+                                    ? "active"
+                                    : ""}`} onClick={() => this.handleImageClick(index)} role="listitem" aria-selected={activeIndex === index} tabIndex={0} // Makes items focusable
+>
+                                    <img src={screenshot.url} alt={screenshot.alt}/>
+                                </div>
+                            ))}
+                        </div>
+                        <div
+                            className={`scroll-indicator bottom ${canScrollDown
+                            ? "visible"
+                            : ""}`}
+                            aria-hidden="true"></div>
+                    </div>
+
+                    {/* Active Image Display */}
+                    <div className="active-image-display">
+                        <h2>{screenshots[activeIndex]
+                                ?.alt}</h2>
+                        <div className="image-container">
+                            <img
+                                src={screenshots[activeIndex]
+                                ?.url}
+                                alt={screenshots[activeIndex]
+                                ?.alt}/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         );
     }
 }

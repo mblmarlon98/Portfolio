@@ -33,11 +33,11 @@ export const gameProjects: ProjectList = {
                 alt: "Knuckleball power-up" 
               }],
               codeScreenshots: [{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/Knuckleball-code.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/Knuckleball-code.png`, 
                 alt: "Knuckleball Code",
                 description: "The directional deflection is achieved by increasing the ball's Y speed. The <b>if/else</b> statement in the code ensures that the ball maintains its general direction."
               }, { 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/IsSensor.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/IsSensor.png`, 
                 alt: "Knuckleball Is a Sensor",
                 description: "Setting <b>'Is a Sensor?'</b> to true prevents the ball from colliding with the power-up actor. As a result, the ball does not bounce back upon contact with the power-up actor but instead changes its flight angle manually upon collision."
               }], 
@@ -49,11 +49,11 @@ export const gameProjects: ProjectList = {
                 alt: "Powershot power-up" 
               }],
               codeScreenshots: [{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/Powershot-code.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/Powershot-code.png`, 
                 alt: "Powershot Code",
                 description: "Similar to the <b>Knuckleball</b>, the <b>Powershot</b> power-up increases the ball's speed in a specific direction. In this case, it enhances the <b>x-speed</b>, which determines the ball's horizontal movement speed."
               }, { 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/IsSensor.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/IsSensor.png`, 
                 alt: "Knuckleball is a Sensor",
                 description: "Setting <b>'Is a Sensor?'</b> to true prevents the ball from colliding with the power-up actor. As a result, the ball does not bounce back upon contact with the power-up actor but instead changes its flight angle manually upon collision."
               }], 
@@ -65,11 +65,11 @@ export const gameProjects: ProjectList = {
                 alt: "The Wall power-up" 
               }],
               codeScreenshots: [{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/BallMovement.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/BallMovement.png`, 
                 alt: "Ball Movement",
                 description: "This code snippet demonstrates an effective solution to prevent the ball from slowing down or glitching when interacting with <b>The Wall</b> power-up. If the ball's speed falls below a certain threshold based on its direction, it will progressively regain velocity to ensure smooth gameplay continuity."
               }, { 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/IsNotSensor.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/IsNotSensor.png`, 
                 alt: "The Wall is not a Sensor",
                 description: "<b>The Wall</b> power-up is <b>not a Sensor</b>, meaning it is a collidable actor that causes the ball to bounce upon impact."
               }], 
@@ -84,11 +84,11 @@ export const gameProjects: ProjectList = {
                 alt: "Crowd Balloons" 
               }],
               codeScreenshots: [{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/BalloonSpawn.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/BalloonSpawn.png`, 
                 alt: "Crowd Balloon Spawn",
                 description: "A <b>Crowd Balloon</b> spawns at the sidelines and gradually drifts onto the pitch."
               },{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/BalloonMovement.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/BalloonMovement.png`, 
                 alt: "Crowd Balloon Movement",
                 description: "This code demonstrates how the balloons move unpredictably, randomly changing direction as they drift and come to a stop—just like real balloons."
               }], 
@@ -105,7 +105,7 @@ export const gameProjects: ProjectList = {
                 alt: "Ball Stuck in Sideline" 
               }],
               codeScreenshots: [{ 
-                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/code/BallSideline.png`, 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/Code/BallSideline.png`, 
                 alt: "Sideline Fix Code",
                 description: "A simple solution to this bug was to forcibly increase the vertical movement of the ball until it is recovered from the sidelines."
               }], 

@@ -12,7 +12,7 @@ export const projectsOverviewData: projectsOverview = {
             title: "Messi vs Ronaldo",
             type: "Game",
             description: "A fast-paced Pong game with unique power-ups and dynamic gameplay.",
-            img: { url: `${process.env.PUBLIC_URL}/assets/images/games/pong/TitleScreen.png`, alt: "Pong Game" },
+            img: { url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/TitleScreen.png`, alt: "Pong Game" },
             year: "2024",
         },{
             title: "PartyPass",

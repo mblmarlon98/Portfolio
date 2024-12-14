@@ -1,0 +1,11 @@
+.dropdown {
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px #bbb8b8;
+
+    &-title, &-content {
+        padding: 13px;
+    }
+    p {
+        font-weight: 200;
+    }
+}

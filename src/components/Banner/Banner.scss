@@ -1,0 +1,130 @@
+// /* Variables */
+// $white: #ffffff;
+// $hover-color: #00ff88;
+// $nav-bg: rgba(0, 0, 0, 0.7);
+// $font-family: "Arial", sans-serif;
+
+// /* Global Hover Style */
+// a {
+//   text-decoration: none;
+//   color: $white;
+//   transition: color 0.3s ease, transform 0.2s ease;
+
+//   &:hover {
+//     color: $hover-color;
+//     transform: scale(1.1);
+//   }
+// }
+
+// /* Banner Layout */
+// .banner {
+//   display: flex;
+//   height: 100vh;
+//   width: 100%;
+//   position: relative;
+//   font-family: $font-family;
+//   color: $white;
+
+//   .nav {
+//     flex: 1;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     background-color: $nav-bg;
+
+//     ul {
+//       list-style: none;
+//       padding: 0;
+
+//       li {
+//         margin: 1rem 0;
+
+//         a {
+//           font-size: 1.5rem;
+//           font-weight: bold;
+//         }
+//       }
+//     }
+//   }
+
+//   .background {
+//     flex: 3;
+//     position: relative;
+//     overflow: hidden;
+
+//     .diagonal-split {
+//       display: flex;
+//       position: absolute;
+//       width: 100%;
+//       height: 100%;
+
+//       .image-left,
+//       .image-right {
+//         flex: 1;
+//         background-size: cover;
+//         background-position: center;
+
+//         &.image-left {
+//           background-image: url("https://via.placeholder.com/800x800/FF5733");
+//           clip-path: polygon(0 0, 70% 0, 50% 100%, 0 100%);
+//         }
+
+//         &.image-right {
+//           background-image: url("https://via.placeholder.com/800x800/3498DB");
+//           clip-path: polygon(70% 0, 100% 0, 100% 100%, 50% 100%);
+//         }
+//       }
+//     }
+
+//     .hero-text {
+//       position: absolute;
+//       top: 50%;
+//       left: 10%;
+//       transform: translateY(-50%);
+//       z-index: 2;
+//       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+
+//       h1 {
+//         font-size: 4rem;
+//         font-weight: bold;
+//         margin: 0;
+//       }
+
+//       p {
+//         font-size: 1.5rem;
+//         margin-top: 1rem;
+//         color: $hover-color;
+//       }
+//     }
+//   }
+// }
+
+// /* Responsiveness */
+// @media (max-width: 768px) {
+//   .hero-text {
+//     h1 {
+//       font-size: 3rem;
+//     }
+
+//     p {
+//       font-size: 1rem;
+//     }
+//   }
+// }
+
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(to right, black, transparent);
+    z-index: 5;
+  }
+  
+
+  li > ul > li {
+    padding-left: 2rem;
+    font-size: 14px;
+  } 

@@ -1,0 +1,47 @@
+.progress-bar {
+    width: 100%; // Ensure the progress bar spans the full width
+  
+    .relative {
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .h-6 {
+      height: 24px; // Increase the height for better visibility
+    }
+  
+    .bg-gray-200 {
+      background-color: #e5e7eb; // Light gray background for the progress bar
+    }
+  
+    .rounded-full {
+      border-radius: 9999px; // Full rounded corners
+    }
+  
+    .absolute {
+      position: absolute;
+    }
+  
+    .top-0 {
+      top: 0;
+    }
+  
+    .left-0 {
+      left: 0;
+    }
+  
+    .transition-all {
+      transition: width 1s ease-in-out, background-color 1s ease-in-out;
+    }
+  
+    .progress-label {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.875rem;
+      color: white;
+      font-weight: bold;
+    }
+  }
+  

@@ -1,0 +1,170 @@
+@import url( 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+.home {
+
+    #typing {
+        font-size: 1.2rem;
+        letter-spacing: 0;
+        font-family: 'Gloria Hallelujah', cursive;
+    }
+    
+    .bg-gradient {
+        position: absolute;
+        right: 0;
+        left: 40%;
+        background: linear-gradient(101deg, transparent 52%, #0d0d0d 52%);
+        height: 110vh;
+        top: 0;
+        z-index: 0;
+    }
+    &#scroll_snap_container {
+        height: 100vh;
+        width: 100%;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        background-color: #f7f7f7;
+        color: black;
+        transition: all 1s ease;
+    
+        &.bg-dark {
+            background-color: #131313;
+            color: white;
+        }
+    
+        section {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            scroll-snap-align: start;
+            justify-content: center;
+            // background-image: url("../src/assets/images/Logo.png");
+            &:nth-child(even) {
+                background-color: #0d0d0d;
+                color: white;
+            }
+    
+            > div {
+                z-index: 1;
+                max-width: 1280px;
+            }
+    
+            .skill-icon {
+                cursor: help;
+                border: 1px solid transparent;
+                border-radius: 5px;
+                padding: 10px;
+                transition: all 1s ease;
+                &:hover {
+                    border: 1px solid white;
+                }
+                &:nth-child(even) {
+                    animation-delay: 200ms;
+                }
+                height: 100px;
+                width: auto;
+                margin: 0.5rem;
+    
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                svg {
+                    width: 90px;
+                }
+                @media screen and (max-width: 576px) {
+                    padding: 3px;
+                    margin: 0.5rem 0;
+                    height: 60px;
+                    width: 80px;
+                }
+            }
+            @media screen and (max-width: 576px) {
+                padding: 90px 1rem 70px;
+                justify-content: space-around;
+            }
+        }
+    }
+    
+    .icon-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+        @media screen and (max-width: 340px) {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            width: 100vw;
+        }
+        @media (orientation: landscape) and (max-width: 576px) {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            width: 100vw;
+        }
+    }
+    
+    
+    .skills-overview {
+        .web-skills, .game-skills {
+            border: 1px solid white;
+            padding: 80px;
+        }
+    
+        .web-skills {
+            border-radius: 0px 60px 60px 60px;
+        }
+    
+        .game-skills {
+            border-radius: 60px 0px 60px 60px;
+        }
+    }
+    
+    
+    .featured-projects {
+        .project-card {
+            position: relative;
+            box-shadow: 0px 0px 10px 0px #000000;
+            background-color: #f7f7f7;
+            color: black;
+            border-radius: 0px 20px 0px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+    
+            .type {
+                position: absolute;
+                right: -15px;
+                top: -10px;
+                box-shadow: 0 0 10px #9c27b0;
+                background-color: #9c27b0;
+                color: white;
+                padding: 5px 10px;
+                text-align: center;
+                border-radius: 0px 5px 0px 5px;
+                transform: rotate(-25deg);
+                letter-spacing: 1px;
+                z-index: 1;
+            }
+    
+            .content {
+                padding: 20px;
+            }
+    
+            .img-wrapper {
+                height: 200px;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                img {
+                    width: 100%;
+                    object-fit: fill;
+                }
+            }
+        }
+    }
+}

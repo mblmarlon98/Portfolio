@@ -1,0 +1,100 @@
+@import url( 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+.web-portfolio {
+    .bg-gradient {
+        position: absolute;
+        right: 0;
+        left: 40%;
+        background: linear-gradient(101deg, transparent 52%, #0d0d0d 52%);
+        height: 110vh;
+        top: 0;
+        z-index: 0;
+    }
+    &#scroll_snap_container {
+        height: 100vh;
+        width: 100%;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        transition: all 1s ease;
+    
+        &.bg-dark {
+            background-color: #131313;
+            color: white;
+        }
+    
+        section {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            scroll-snap-align: start;
+            justify-content: center;
+            // background-image: url("../src/assets/images/Logo.png");
+            &:nth-child(even) {
+                background-color: #0d0d0d;
+                color: white;
+            }
+    
+            > div {
+                z-index: 1;
+                max-width: 1280px;
+            }
+    
+            .skill-icon {
+                cursor: help;
+                border: 1px solid transparent;
+                border-radius: 5px;
+                padding: 10px;
+                transition: all 1s ease;
+                &:hover {
+                    border: 1px solid white;
+                }
+                &:nth-child(even) {
+                    animation-delay: 200ms;
+                }
+                height: 100px;
+                width: auto;
+                margin: 0.5rem;
+    
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                svg {
+                    width: 90px;
+                }
+                @media screen and (max-width: 576px) {
+                    padding: 3px;
+                    margin: 0.5rem 0;
+                    height: 60px;
+                    width: 80px;
+                }
+            }
+            @media screen and (max-width: 576px) {
+                padding: 90px 1rem 70px;
+                justify-content: space-around;
+            }
+        }
+    }
+    
+    .icon-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+        @media screen and (max-width: 340px) {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            width: 100vw;
+        }
+        @media (orientation: landscape) and (max-width: 576px) {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            width: 100vw;
+        }
+    }
+}
+

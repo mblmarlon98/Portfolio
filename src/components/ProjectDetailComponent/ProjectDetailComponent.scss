@@ -1,0 +1,156 @@
+.project-detail {
+    padding-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    font-family: "Arial", sans-serif;
+
+    section {
+      margin-bottom: 4rem;
+    }
+  
+    .project-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+  
+      h1 {
+        font-weight: bold;
+      }
+  
+      p {
+        font-size: 1rem;
+        color: #555;
+      }
+    }
+  
+    .project-metadata {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+  
+      div {
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+
+  
+    .dropdown-section {
+      margin-bottom: 2rem;
+  
+      h2 {
+        margin-bottom: 1rem;
+        cursor: pointer;
+  
+        &:hover {
+          color: #007bff;
+        }
+      }
+  
+      .dropdown-content {
+        display: none;
+        padding: 1rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 0.5rem;
+  
+        &.open {
+          display: block;
+        }
+  
+        .grid-layout {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 1rem;
+  
+          .image-container {
+            img {
+              width: 100%;
+              border-radius: 5px;
+            }
+          }
+  
+          .description {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #333;
+          }
+        }
+  
+        .code-section {
+          margin-top: 1rem;
+          padding-left: 2rem; // Indentation for subcategories
+  
+          .code-screenshot {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+  
+            img {
+              width: 50%;
+              border-radius: 5px;
+            }
+  
+            .description {
+              font-size: 0.875rem;
+              color: #333;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+    }
+  
+    .challenges {
+      margin-bottom: 2rem;
+  
+      h2 {
+        margin-bottom: 1rem;
+      }
+  
+      .challenge-list {
+        .challenge-item {
+          margin-bottom: 1.5rem;
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 1rem;
+  
+          img {
+            width: 100%;
+            border-radius: 5px;
+          }
+  
+          .description {
+            font-size: 0.875rem;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  
+    .tools {
+      margin-bottom: 2rem;
+  
+      h2 {
+        margin-bottom: 1rem;
+      }
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          font-size: 0.875rem;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid #ddd;
+  
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+  

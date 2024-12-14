@@ -1,0 +1,135 @@
+/* Variables */
+$transition-duration: 0.6s; /* Smooth transition */
+$hint-animation-duration: 2s; /* Duration of the hint animation */
+$hint-range: 15%; /* Slightly increased range for the animation */
+
+/* Main Container */
+.portfolio {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  font-family: Arial, sans-serif;
+  outline: none; /* Remove focus outline */
+
+  .side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform $transition-duration, background-color $transition-duration;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    /* Web Development Background */
+    &.web {
+      background-color: #f7f7f7;
+      color: black;
+    }
+
+    /* Game Development Background */
+    &.game {
+      background-color: #0d0d0d;
+      color: white;
+    }
+
+    /* Active (Hover) Effect */
+    &.active {
+      transform: scale(1.1);
+    }
+
+    .title {
+      position: absolute;
+      top: calc(30%); /* Offset by controller height */
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+  }
+
+  /* Controller */
+  .controller {
+    position: absolute;
+    top: 50%;
+    transition: left $transition-duration, transform $transition-duration;
+    z-index: 5;
+
+    &.none {
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &.web {
+      left: 25%; /* Center over Web side */
+      transform: translate(-50%, -50%);
+    }
+
+    &.game {
+      left: 75%; /* Center over Game side */
+      transform: translate(-50%, -50%);
+    }
+
+    .controller-image {
+      width: 100px;
+      height: 100px;
+    }
+
+    /* Hint Animation */
+    &.hint {
+      animation: hint-move $hint-animation-duration ease-in-out;
+    }
+  }
+
+  /* Friendly Indicator */
+  .friendly-indicator {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: #ffffff;
+    text-align: center;
+    opacity: 0.8;
+    animation: fade-in-out 5s infinite;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+/* Friendly Indicator Animation */
+@keyframes fade-in-out {
+    0%, 65% {
+      opacity: 1; /* Stay fully visible for 80% of the animation */
+    }
+    90% {
+      opacity: 0; /* Quickly fade out */
+    }
+    100% {
+      opacity: 1; /* Fade back in */
+    }
+}
+
+/* Hint Animation */
+@keyframes hint-move {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(calc(-50% - $hint-range), -50%);
+  }
+  50% {
+    transform: translate(calc(-50% + $hint-range), -50%);
+  }
+  75% {
+    transform: translate(calc(-50% - $hint-range / 2), -50%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}

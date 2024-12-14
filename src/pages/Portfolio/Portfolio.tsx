@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "../../utils/withRouter"; // Import the custom HOC
 import "./Portfolio.scss";
+import { toggleNavbarBackground } from "../../components/Navbar/NavbarUtils";
 
 class Portfolio extends React.Component<any> {
   state = {
@@ -12,6 +13,7 @@ class Portfolio extends React.Component<any> {
 
   componentDidMount() {
     this.startHintCycle();
+    toggleNavbarBackground();
   }
 
   componentWillUnmount() {

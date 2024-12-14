@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import './WebPortfolio.scss';
 import { Link } from 'react-router-dom';
 import Tooltip from '../../../components/Tooltip/Tooltip';
 import BookSlider from '../../../components/Slider/BookSlider/BookSlider';
+import './WebPortfolio.scss';
 
 class WebPortfolio extends Component {
     state = {
@@ -18,8 +18,14 @@ class WebPortfolio extends Component {
     componentDidMount() {
         this.typeWriter();
         const scrollContainer = document.getElementById('scroll_snap_container');
+        const navbar = document.getElementById('navbar');
+
         if (scrollContainer) {
             scrollContainer.addEventListener('scroll', this.updateScroll);
+        }
+
+        if(navbar) {
+            navbar.classList.add('bg-dark');
         }
     }
 
@@ -51,29 +57,6 @@ class WebPortfolio extends Component {
     };
 
     updateScroll = () => {
-        const scrollContainer = document.getElementById('scroll_snap_container');
-        const navbar = document.getElementById('navbar');
-
-        if (scrollContainer && navbar) {
-            this.setState({scrollPosition: scrollContainer.scrollTop});
-
-            if (scrollContainer.scrollTop > 500) {
-                scrollContainer
-                    .classList
-                    .add('bg-dark');
-                navbar
-                    .classList
-                    .add('bg-dark');
-            } else {
-                scrollContainer
-                    .classList
-                    .remove('bg-dark');
-                navbar
-                    .classList
-                    .remove('bg-dark');
-            }
-        }
-
         const sections = document.querySelectorAll('section');
         sections.forEach((section) => {
             const animatedDivs = section.querySelectorAll('div.animate__animated');
@@ -117,32 +100,17 @@ class WebPortfolio extends Component {
 
     render() {
         return (
-            <div id="scroll_snap_container">
-                <section className="flex-row justify-center items-center">
+            <div id="scroll_snap_container" className='web-portfolio bg-dark'>
+                <section className="flex flex-col justify-between section-bookslider">
                     <div className="bg-gradient"/>
-                    <div className="w-full flex flex-row justify-between">
-                        <div className="w-2/3 xl:w-1/2 flex-start">
-                            <div className="animate__animated">
-                                <b id="typing">{this.state.typingText}</b>
-                            </div>
-                            <div className="animate__animated animate__fadeInLeftBig animate__delay-3s">
-                                <h1>Front-End Software & Game Developer</h1>
-                            </div>
-                            <div className="animate__animated animate__fadeInLeftBig animate__delay-4s">
-                                <p>I create websites and Games</p>
-                            </div>
-                        </div>
-                        <div className="hidden xl:inline w-1/4">
-                            <img src={`${process.env.PUBLIC_URL}/assets/images/images/Computer.svg`} alt=""/>
-                        </div>
-                        <div className="flex justify-center items-center">
-                            <Link
-                                to="about-me"
-                                className="btn-white font-medium rounded-lg text-sm px-5 py-2.5">About me</Link>
-                        </div>
+                    <div className="">
+                        <h2>Portfolio & Previous Projects</h2>
+                    </div>
+                    {/* <!-- <Slider/> --> */}
+                    <div className=" w-full">
+                        <BookSlider/>
                     </div>
                 </section>
-
                 <section className="flex-col justify-around md:justify-center">
                     <div className="animate__animated animate__fadeOutUp animate__delay-0s w-full md:w-2/3 xl:w-1/2 text-center md:mb-4">
                         <h2>Skills & Experience</h2>
@@ -480,22 +448,11 @@ class WebPortfolio extends Component {
                     </div>
                 </section>
 
-                <section className="flex flex-col justify-between">
-                    <div className="bg-gradient"/>
-                    <div className="animate__animated animate__fadeOutDown">
-                        <h2>Portfolio & Previous Projects</h2>
-                    </div>
-                    {/* <!-- <Slider/> --> */}
-                    <div className="animate__animated animate__fadeOutDown w-full">
-                        <BookSlider/>
-                    </div>
-                </section>
-
                 <section>
                     <div
                         className="animate__animated animate__fadeOutDown flex flex-col justify-center items-center w-full">
                         <div className="w-full md:w-1/2 text-center">
-                            <h1 className="mb-5">Get in touch!</h1>
+                            <h2 className="mb-5">Get in touch!</h2>
                             <p className="mb-5">What would you do if you had a developer at hand? Click the
                                 button bellow and let me know.</p>
                             <div className="mt-5">

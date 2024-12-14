@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     font-family: "Arial", sans-serif;
+
+    section {
+      margin-bottom: 4rem;
+    }
   
     .project-header {
       text-align: center;

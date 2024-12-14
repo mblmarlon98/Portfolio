@@ -8,7 +8,7 @@ export default class GameWrapper extends React.Component < GameWrapperProps > {
     public render() {
         return (
             <section className='mb-6'>
-                <h3 className='text-3xl border-b mb-6'>Play the Game</h3>
+                <h3 className='border-b mb-6'>Play the Game</h3>
                 <div
                     style={{
                     display: "flex",

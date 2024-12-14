@@ -70,7 +70,7 @@ ScreenshotSectionState > {
 
         return (
             <section className="mb-6">
-                <h2 className="text-3xl border-b mb-6">Screenshots</h2>
+                <h3 className="border-b mb-6">Screenshots</h3>
 
                 <div className="screenshot-section">
                     {/* Scrollable List */}

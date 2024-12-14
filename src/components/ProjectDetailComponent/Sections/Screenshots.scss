@@ -44,11 +44,11 @@
           transition: border-color 0.3s ease;
   
           &:hover {
-            border-color: cyan;
+            border-color: #0d0d0d;
           }
   
           &.active {
-            border-color: limegreen;
+            border-color: #9c27b0;
           }
   
           img {

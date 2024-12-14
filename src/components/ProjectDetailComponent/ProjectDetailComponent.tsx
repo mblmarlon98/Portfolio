@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import LightBox from "../Box/LightBox/LightBox";
 import StickerBox from "../Box/StickerBox/StickerBox";
 import Footer from "../Footer/Footer";
+import DOMPurify from 'dompurify';
+
 
 type ProjectDetailProps = {
   projectDetail: ProjectDetail;
@@ -30,39 +32,6 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
     componentDidMount() {
         this.animateProgressBar();
-        window.addEventListener('scroll', this.updateScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.updateScroll);
-    }
-
-
-    isPartiallyInViewport = (el : any, percentVisible : any) => {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        return (!(Math.floor(100 - (((rect.top >= 0
-            ? 0
-            : rect.top) / -rect.height) * 100)) < percentVisible || Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < percentVisible));
-    };
-
-    updateScroll = () => {
-        const navbar = document.getElementById('navbar');
-
-        if (navbar) {
-
-            if (window.scrollY > 0) {
-       
-                navbar
-                    .classList
-                    .add('bg-dark');
-            } else {
-                navbar
-                    .classList
-                    .remove('bg-dark');
-            }
-        }
     }
 
   animateProgressBar = () => {
@@ -87,23 +56,48 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
       <div className="features">
         <h5 className="mb-4">Features</h5>
         {features?.map((feature, index) => (
-            <Dropdown key={`feature-${index + 1}`} title={feature.name}>
-                <div className="feature-details grid grid-cols-2 gap-4">
-                    <div>
-                        <h4>{feature.name}</h4>
-                        <img src={feature.screenshots[0]?.url} alt={feature.screenshots[0]?.alt} />
-                        <p>{feature.description}</p>
-                    </div>
-                    <div>
-                        <h4>Code:</h4>
-                        {feature.codeScreenshots.map((code, idx) => (
-                            <div key={idx} className={`${idx > 0 ? ("mt-6" + " ") : ""} code-item flex`}>
-                                <img src={code.url} alt={code.alt} />
-                                <p>Explanation of the code snippet above.</p>
+            <Dropdown key={`feature-${index + 1}`} title={feature.title}>
+                {feature.featureDetails && feature.featureDetails.length > 0 && feature.featureDetails.map((featureDetail, i) => {
+                    const safeDescriptionHTML = DOMPurify.sanitize(featureDetail.description as string);
+
+                    return (
+                        <div className="feature-details grid grid-cols-2 gap-4 mt-6 p-4">
+                            <div>
+                                <h4>{featureDetail.name}</h4>
+                                {featureDetail.screenshots && featureDetail.screenshots.length > 0 && featureDetail.screenshots.map((screenshot, idx) => {
+                                    return (
+                                        <div key={`feature-${i}-screenshot-${idx}`}>
+                                            <img src={screenshot.url} alt={screenshot.alt} />
+                                        </div>
+                                    )
+                                })}
+                                <p
+                                    className="description"
+                                    dangerouslySetInnerHTML={{
+                                        __html: safeDescriptionHTML,
+                                    }}
+                                ></p>
                             </div>
-                        ))}
-                    </div>
-                </div>
+                            <div>
+                                <h4>Code:</h4>
+                                {featureDetail.codeScreenshots && featureDetail.codeScreenshots.length > 0 && featureDetail.codeScreenshots.map((code, idx) => {
+                                    const safeHTML = DOMPurify.sanitize(code.description as string);
+                                    return (
+                                        <div key={`feature-${i}-codeScreenshot-${idx}`} className={`${idx > 0 ? ("mt-6" + " ") : ""} code-item flex flex-col`}>
+                                            <img src={code.url} alt={code.alt} />
+                                            <p
+                                                className="description"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: safeHTML,
+                                                }}
+                                            ></p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )
+                })}
 
             </Dropdown>
         ))}
@@ -118,23 +112,48 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
       <div className="challenges">
         <h5 className="mb-4 mt-6">Challenges and Solutions</h5>
         {challenges?.map((challenge, index) => (
-            <Dropdown key={`challenge-${index + 1}`} title={`Challenge ${index + 1}`}>
-              <div className="challenge-details grid grid-cols-2 gap-4">
-                <div>
-                  <h4>Code:</h4>
-                  <img src={challenge.screenshots[0]?.url} alt={challenge.screenshots[0]?.alt} />
-                  <p>{challenge.description}</p>
-                </div>
-                <div>
-                  <h4>Code:</h4>
-                  {challenge.codeScreenshots.map((code, idx) => (
-                    <div key={idx} className={`${idx > 0 ? ("mt-6" + " ") : ""} code-item flex`}>
-                      <img src={code.url} alt={code.alt} />
-                      <p>Explanation of the code snippet above.</p>
-                    </div>
-                  ))}
-                </div>
-                </div>
+            <Dropdown key={`challenge-${index + 1}`} title={challenge.title}>
+              {challenge.featureDetails && challenge.featureDetails.length > 0 && challenge.featureDetails.map((featureDetail, i) => {
+                    const safeDescriptionHTML = DOMPurify.sanitize(featureDetail.description as string);
+
+                    return (
+                        <div className="feature-details grid grid-cols-2 gap-4 mt-6 p-4">
+                            <div>
+                                <h4>{featureDetail.name}</h4>
+                                {featureDetail.screenshots && featureDetail.screenshots.length > 0 && featureDetail.screenshots.map((screenshot, idx) => {
+                                    return (
+                                        <div key={`feature-${i}-screenshot-${idx}`}>
+                                            <img src={screenshot.url} alt={screenshot.alt} />
+                                        </div>
+                                    )
+                                })}
+                                <p
+                                    className="description"
+                                    dangerouslySetInnerHTML={{
+                                        __html: safeDescriptionHTML,
+                                    }}
+                                ></p>
+                            </div>
+                            <div>
+                                <h4>Code:</h4>
+                                {featureDetail.codeScreenshots && featureDetail.codeScreenshots.length > 0 && featureDetail.codeScreenshots.map((code, idx) => {
+                                    const safeHTML = DOMPurify.sanitize(code.description as string);
+                                    return (
+                                        <div key={`feature-${i}-codeScreenshot-${idx}`} className={`${idx > 0 ? ("mt-6" + " ") : ""} code-item flex flex-col`}>
+                                            <img src={code.url} alt={code.alt} />
+                                            <p
+                                                className="description"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: safeHTML,
+                                                }}
+                                            ></p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )
+                })}
             </Dropdown>
         ))}
       </div>
@@ -144,9 +163,10 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
   render() {
     const { projectDetail } = this.props;
     const { progress } = this.state;
+    const safeRulesHTML = DOMPurify.sanitize(projectDetail.rules as string);
 
     return (
-      <div className="project-detail max-w-5xl mx-auto">
+      <div className="project-detail xl:w-2/3 mx-auto">
         <header className="project-header text-center mb-4">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -174,7 +194,12 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                             <LightBox>
                                 <div>
                                     <strong>Rules:</strong>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quod officia iure unde ab vel tenetur mollitia cumque veritatis. Obcaecati autem quibusdam, quidem a possimus veniam quo natus nulla molestias!</p>
+                                    <p
+                                        className="description"
+                                        dangerouslySetInnerHTML={{
+                                            __html: safeRulesHTML,
+                                        }}
+                                    ></p>
                                 </div>
                             </LightBox>
                         </div>
@@ -258,7 +283,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
   
 
         <section>
-            <h3 className="text-3xl border-b mb-6">Technical Details</h3>
+            <h3 className="border-b mb-6">Technical Details</h3>
             {this.renderFeatures()}
             {this.renderChallenges()}
         </section>
@@ -267,7 +292,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
         {projectDetail.resources && projectDetail.resources.length > 0 && (
         <section>
-            <h3 className="text-3xl border-b mb-6">
+            <h3 className="border-b mb-6">
                 References
             </h3>
             <div className="grid grid-cols-2 gap-4">
@@ -291,7 +316,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
         <section>
             <div className="border-b flex justify-between items-center mb-6">
                 <h3 className="text-3xl">More Porjects</h3>
-                <Link to="">
+                <Link to="/portfolio/game/projects">
                     View all
                 </Link>
             </div>

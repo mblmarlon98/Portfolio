@@ -1,19 +1,26 @@
-import { Img } from "./Image";
+import { Img } from './Image';
 
 export type ProjectList = {
     projectList: ProjectDetail[];
 }
 
+export type FeatureDetails = {
+  name: string; // Name of the feature (e.g., "Power-ups")
+  description: string; // General description of the feature
+  screenshots: Img[]; // Screenshots related to the feature
+  codeScreenshots: CodeScreenshot[]; // Code screenshots showcasing implementation
+};
+
+
 export type CodeScreenshot = {
     url: string;
     alt: string;
+    description?: string;
   };
   
   export type FeatureDetail = {
-    name: string; // Name of the feature (e.g., "Power-ups")
-    description: string; // General description of the feature
-    screenshots: Img[]; // Screenshots related to the feature
-    codeScreenshots: CodeScreenshot[]; // Code screenshots showcasing implementation
+    title: string;
+    featureDetails: FeatureDetails[];
   };
   
   export type ChallengeDetail = {
@@ -39,9 +46,25 @@ export type CodeScreenshot = {
     progress: number; // Progress percentage for the progress bar
     screenshots?: Img[]; // Gallery of project screenshots
     features?: FeatureDetail[]; // List of features with detailed descriptions
-    challenges?: ChallengeDetail[]; // List of challenges and solutions
-    rules?: string[]; // List of gameplay or project rules
+    challenges?: FeatureDetail[]; // List of challenges and solutions
+    rules?: string; // List of gameplay or project rules
     resources?: ProjectResource[]; // List of project resources
     tools?: string[]; // Tools, frameworks, or languages used
     folderName: string; // Folder name for embedding the game
   };
+
+
+
+
+
+export type projectsOverview = {
+  projectList: projectOverview[];
+}
+
+export type projectOverview = {
+  title: string;
+  description: string;
+  type: string;
+  img: Img;
+  year: string;
+}

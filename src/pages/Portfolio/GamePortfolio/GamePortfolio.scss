@@ -16,19 +16,43 @@
   
       /* Menu Items */
       .menu-item {
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 1px;
+        font-weight: 200;
+        border-radius: 15px 0 15px 0;
+        background-color: #131313;
+        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 2px solid #444;
-        border-radius: 8px;
         font-size: 1.2rem;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s ease;
+
+        &.row-span-2 {
+          padding-bottom: 30%;
+        } 
   
         &:hover {
-          transform: scale(1.05);
+          transform: scale(1.01);
           cursor: pointer;
+        }
+
+        &-overlay {
+          position: absolute;
+          bottom: 0;
+          height: 30%;
+          display: flex;
+          justify-content: center;
+          background-color: #8000806e;
+          right: 0;
+          left: 0;
+          align-items: center;
+          border: 30px solid #9c27b0;
+          border-radius: 15px 0 15px 0;
+
         }
       }
   
@@ -131,11 +155,42 @@
             transition: background 0.3s;
   
             &.active {
-              background: white;
+              background: #f7f7f7;
             }
           }
         }
       }
     }
+
+    .skill-icon {
+      cursor: help;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      padding: 10px;
+      transition: all 1s ease;
+      &:hover {
+          border: 1px solid white;
+      }
+      &:nth-child(even) {
+          animation-delay: 200ms;
+      }
+      height: 100px;
+      width: auto;
+      margin: 0.5rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      svg {
+          width: 90px;
+      }
+      @media screen and (max-width: 576px) {
+          padding: 3px;
+          margin: 0.5rem 0;
+          height: 60px;
+          width: 80px;
+      }
   }
+}
   

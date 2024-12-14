@@ -4,7 +4,7 @@ import "./Footer.scss";
 class Footer extends Component {
     render() {
         return (
-            <footer className="mb-5 pt-5">
+            <footer>
                 <small className="footer-title">Contact me</small>
                 <div className="flex justify-center flex-col items-center">
                     <div className="w-1/3 flex justify-around">

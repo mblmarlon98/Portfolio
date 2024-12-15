@@ -1,3 +1,18 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
+
 #navbar {
     z-index: 99;
     position: fixed;
@@ -33,12 +48,24 @@
       border: inset;
     }
     svg {
-      height: 35px;
+      height: 20px;
       width: auto;
       path {
         fill: black;
         transition-delay: 150ms;
         transition-duration: 2s;
+      }
+
+      @media screen and (min-width: #{breakpoint(xs)}) and (max-width: #{breakpoint(sm)}) {
+      }
+      @media screen and (min-width: #{breakpoint(sm)}) and (max-width: #{breakpoint(md)}) {
+      }
+      @media screen and (min-width: #{breakpoint(md)}) and (max-width: #{breakpoint(lg)}) {
+      }
+      @media screen and (min-width: #{breakpoint(lg)}) and (max-width: #{breakpoint(xl)}) {
+      }
+      @media screen and (min-width: #{breakpoint(xl)}) {
+        height: 35px;
       }
     }
 
@@ -71,7 +98,7 @@
     }
 
     @media screen and (max-width: 768px) {
-        padding: 0.7em 1em;
+        padding: 0.4em 1em;
 
         svg {
             // height: 30px;

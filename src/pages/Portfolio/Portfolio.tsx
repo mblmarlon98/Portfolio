@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "../../utils/withRouter"; // Import the custom HOC
 import "./Portfolio.scss";
-import { toggleNavbarBackground } from "../../components/Navbar/NavbarUtils";
 
 class Portfolio extends React.Component<any> {
   state = {
@@ -13,7 +12,6 @@ class Portfolio extends React.Component<any> {
 
   componentDidMount() {
     this.startHintCycle();
-    toggleNavbarBackground();
   }
 
   componentWillUnmount() {
@@ -57,8 +55,8 @@ class Portfolio extends React.Component<any> {
     const { activeSide } = this.state;
     const { navigate } = this.props;
 
-    if (activeSide === "web") navigate("/portfolio/web");
-    if (activeSide === "game") navigate("/portfolio/game");
+    if (activeSide === "web") navigate("/my-portfolio/web");
+    if (activeSide === "game") navigate("/my-portfolio/game");
   };
 
   // Reset the controller to the center on mouse leave
@@ -87,7 +85,7 @@ class Portfolio extends React.Component<any> {
         <div
           className={`side web ${activeSide === "web" ? "active" : ""}`}
           onMouseEnter={() => this.handleMouseEnterSide("web")}
-          onClick={() => this.props.navigate("/portfolio/web")}
+          onClick={() => this.props.navigate("/my-portfolio/web")}
         >
           <h1 className="title">Web Development</h1>
         </div>
@@ -105,7 +103,7 @@ class Portfolio extends React.Component<any> {
         <div
           className={`side game ${activeSide === "game" ? "active" : ""}`}
           onMouseEnter={() => this.handleMouseEnterSide("game")}
-          onClick={() => this.props.navigate("/portfolio/game")}
+          onClick={() => this.props.navigate("/my-portfolio/game")}
         >
           <h1 className="title">Game Development</h1>
         </div>
@@ -119,4 +117,4 @@ class Portfolio extends React.Component<any> {
   }
 }
 
-export default withRouter(Portfolio);
+export default Portfolio;

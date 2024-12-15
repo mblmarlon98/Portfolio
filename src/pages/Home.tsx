@@ -140,7 +140,7 @@ class Home extends Component {
                         <div className="flex justify-center items-center">
                             <Link
                                 to="about-me"
-                                className="btn-white font-medium rounded-lg text-sm px-5 py-2.5">About me</Link>
+                                className="btn btn-white font-medium">About me</Link>
                         </div>
                     </div>
                 </section>
@@ -150,13 +150,13 @@ class Home extends Component {
                         <div className='animate__animated animate__fadeOutDown'>
                             <h2>Bridging Web & Game Technology</h2>
                         </div>
-                        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="container gap-2 mx-auto grid grid-cols-1 md:grid-cols-2 lg:gap-8">
                             <div className="web-skills text-center animate__animated animate__fadeOutDown">
-                                <h3 className="text-2xl font-bold">Web Development</h3>
-                                <p className="text-gray-600 mt-4">
+                                <h4 className="font-bold">Web Development</h4>
+                                <p className="text-gray-600 lg:mt-4">
                                     Building modern and user-friendly websites using cutting-edge technologies.
                                 </p>
-                                <div className="mt-6 flex justify-center gap-4">
+                                <div className="flex justify-center lg:gap-4 lg:mt-6">
                                     <Tooltip tooltipText="3+ years">
                                         <div
                                             className="text-center skill-icon">
@@ -193,16 +193,16 @@ class Home extends Component {
                                         </div>
                                     </Tooltip>
                                 </div>
-                                <div className='mt-6'>
-                                    <Link to="" className='btn btn-white w-full mt-6'>Show all</Link>
+                                <div className='lg:mt-6'>
+                                    <Link to="" className='btn btn-white w-full'>Show all</Link>
                                 </div>
                             </div>
                             <div className="game-skills text-center animate__animated animate__fadeOutDownBig">
-                                <h3 className="text-2xl font-bold">Game Development</h3>
-                                <p className="text-gray-600 mt-4">
+                                <h4 className="font-bold">Game Development</h4>
+                                <p className="text-gray-600 lg:mt-4">
                                     Designing immersive experiences and mechanics for diverse audiences.
                                 </p>
-                                <div className="mt-6 flex justify-center gap-4">
+                                <div className="flex justify-center lg:gap-4 lg:mt-6">
                                     <Tooltip tooltipText="1< year">
                                         <div className="text-center skill-icon">
                                             <svg 
@@ -219,7 +219,7 @@ class Home extends Component {
                                         </div>
                                     </Tooltip>
                                 </div>
-                                <div className='mt-6'>
+                                <div className='lg:mt-6'>
                                     <Link to="" className='btn btn-white w-full'>Show all</Link>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@ class Home extends Component {
                     <div className="bg-gradient"/>
                     <div className="container mx-auto h-full w-full flex flex-col justify-evenly items-center">
                         <div className='animate__animated animate__fadeOutDown'>
-                            <h2 className="text-3xl font-bold text-center">Recent Projects</h2>
+                            <h2 className="font-bold text-center">Recent Projects</h2>
                             <p className="text-center text-gray-600 mt-4">Explore some of my most recent projects.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
@@ -256,14 +256,14 @@ class Home extends Component {
                                             </div>
                                         </div>
                                         <div className="content">
-                                            <Link to="/portfolio/web/project-1" className="text-center block btn btn-white">View Project</Link>
+                                            <Link to="/my-portfolio/web/project-1" className="text-center block btn btn-white">View Project</Link>
                                         </div>
                                     </div>
                                 )
                             })}
                         </div>
                         <div className='animate__animated animate__fadeOutDownBig text-center'>
-                            <Link to="/portfolio" className='btn btn-white'>View Portfolio</Link>
+                            <Link to="/my-portfolio" className='btn btn-white'>View Portfolio</Link>
                         </div>
                     </div>
                 </section>
@@ -295,7 +295,7 @@ class Home extends Component {
                             <div className="mt-5">
                                 <a
                                     href="mailto:berdefymarlon@gmail.com?subject=Project%20Inquiry%20from%20mbl.com&body=Hi%20Marlon,%0D%0A%0D%0AI%20am%20reaching%20out%20regarding%20a%20potential%20project.%20I've%20had%20the%20chance%20to%20explore%20your%20work%20on%20your%20website,%20and%20I%20would%20like%20to%20discuss%20a%20specific%20project%20in%20more%20detail.%0D%0A%0D%0ACould%20you%20please%20provide%20additional%20information%20on%20your%20availability,%20rates,%20and%20the%20next%20steps%20for%20starting%20a%20collaboration?%0D%0A%0D%0AThank%20you,%0D%0A[Sender's%20Name]"
-                                    className="btn-white font-medium rounded-lg text-sm px-5 py-2.5">
+                                    className="btn btn-white font-medium">
                                     Hire Me!
                                 </a>
                             </div>

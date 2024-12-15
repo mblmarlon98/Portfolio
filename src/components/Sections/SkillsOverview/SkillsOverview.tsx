@@ -102,7 +102,7 @@ class SkillsOverview extends Component {
                     Green {index + 1}
                 </div>
                 ))}
-                <Link to={"/portfolio/game"} className="btn btn-white">More</Link>
+                <Link to={"/my-portfolio/game"} className="btn btn-white">More</Link>
             </div>
 
         </div>

@@ -19,7 +19,7 @@ class Banner extends React.Component {
             </li>
             <li>
               <Link
-                to="/portfolio"
+                to="/my-portfolio"
                 className="hover:text-green-500 transition-transform transform hover:scale-110"
               >
                 Portfolio
@@ -27,7 +27,7 @@ class Banner extends React.Component {
               <ul>
                 <li className="mt-6">
                   <Link
-                    to="/portfolio/web"
+                    to="/my-portfolio/web"
                     className="hover:text-green-500 transition-transform transform hover:scale-110"
                   >
                     Web Development
@@ -35,7 +35,7 @@ class Banner extends React.Component {
                 </li>
                 <li className="mt-6">
                   <Link
-                    to="/portfolio/game"
+                    to="/my-portfolio/game"
                     className="hover:text-green-500 transition-transform transform hover:scale-110"
                   >
                     Game Development

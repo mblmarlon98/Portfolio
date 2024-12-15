@@ -26,7 +26,7 @@ export default class GameProjects extends React.Component<GameProjectsProps> {
                               <h3 className='text-right'>{project.title}</h3>
                               <p>{project.description}</p>
                             </div>
-                            <Link to={`/portfolio/game/projects/${encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, "-"))}`} className='w-full btn btn-white flex justify-center'>View Project</Link>
+                            <Link to={`/my-portfolio/game/projects/${encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, "-"))}`} className='w-full btn btn-white flex justify-center'>View Project</Link>
                           </div>
                         </div>
                       </div>
@@ -38,7 +38,7 @@ export default class GameProjects extends React.Component<GameProjectsProps> {
                               <h3>{project.title}</h3>
                               <p>{project.description}</p>
                             </div>
-                            <Link to={`/portfolio/game/projects/${encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, "-"))}`} className='w-full btn btn-white flex justify-center'>View Project</Link>
+                            <Link to={`/my-portfolio/game/projects/${encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, "-"))}`} className='w-full btn btn-white flex justify-center'>View Project</Link>
                           </div>
                         </div>
                         <div><img src={project.img.url} alt={project.img.alt} className='w-full'/></div>

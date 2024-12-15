@@ -59,7 +59,7 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
         {/* Grid Layout */}
         <div className="grid">
           {/* Three Menu Options */}
-          <Link to={"/portfolio/game/projects"} className="menu-item">All Projects</Link>
+          <Link to={"/my-portfolio/game/projects"} className="menu-item">All Projects</Link>
           <div className="menu-item row-span-2">
             <Tooltip tooltipText="1< year">
                   <div className="text-center skill-icon">
@@ -100,7 +100,7 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
               {gameProjects.projectList.map((project: ProjectDetail) => (
                 <div key={project.title} className="slide">
                   <Link
-                    to={`/portfolio/game/projects/${encodeURIComponent(
+                    to={`/my-portfolio/game/projects/${encodeURIComponent(
                       project.title.toLowerCase().replace(/\s+/g, "-")
                     )}`}
                   >

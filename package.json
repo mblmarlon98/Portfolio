@@ -27,7 +27,7 @@
     "react-dom": "^18",
     "eslint": "^8"
   },
-  "homepage": "https://mblmarlon98.github.io/Portfolio",
+  "homepage": "https://www.mblmarlon.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

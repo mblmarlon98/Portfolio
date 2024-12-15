@@ -458,7 +458,7 @@ class WebPortfolio extends Component {
                             <div className="mt-5">
                                 <a
                                     href="mailto:berdefymarlon@gmail.com?subject=Project%20Inquiry%20from%20mbl.com&body=Hi%20Marlon,%0D%0A%0D%0AI%20am%20reaching%20out%20regarding%20a%20potential%20project.%20I've%20had%20the%20chance%20to%20explore%20your%20work%20on%20your%20website,%20and%20I%20would%20like%20to%20discuss%20a%20specific%20project%20in%20more%20detail.%0D%0A%0D%0ACould%20you%20please%20provide%20additional%20information%20on%20your%20availability,%20rates,%20and%20the%20next%20steps%20for%20starting%20a%20collaboration?%0D%0A%0D%0AThank%20you,%0D%0A[Sender's%20Name]"
-                                    className="btn-white font-medium rounded-lg text-sm px-5 py-2.5">
+                                    className="btn btn-white font-medium">
                                     Hire Me!
                                 </a>
                             </div>

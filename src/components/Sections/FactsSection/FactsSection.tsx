@@ -81,10 +81,10 @@ function FactsSection(props: FactsSectionProps) {
         <section className="flex flex-col items-center justify-center facts-section">
             
             {props.title && props.description && (
-                <div className='flex flex-row justify-center pb-6 animate__animated animate__fadeOutDown'>
+                <div className='flex flex-row justify-center xl:pb-6 animate__animated animate__fadeOutDown'>
                     <div data-aos="fade-up" data-aos-once="true" className='text-center'>
                         <h3>{props.title}</h3>
-                        <p className='text-center text-gray-600 mt-4'>{props.description}</p>
+                        <p className='text-center text-gray-600 xl:mt-4'>{props.description}</p>
                     </div>
                 </div>
             )}

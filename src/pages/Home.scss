@@ -1,6 +1,20 @@
 @import url( 'https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-.home {
 
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
+.home {
     #typing {
         font-size: 1.2rem;
         letter-spacing: 0;
@@ -75,13 +89,13 @@
                 }
                 @media screen and (max-width: 576px) {
                     padding: 3px;
-                    margin: 0.5rem 0;
-                    height: 60px;
-                    width: 80px;
+                    margin: 0.2rem 0;
+                    height: 45px;
+                    width: 70px;
                 }
             }
             @media screen and (max-width: 576px) {
-                padding: 90px 1rem 70px;
+                padding: 50px 1rem 70px;
                 justify-content: space-around;
             }
         }
@@ -108,16 +122,33 @@
     
     .skills-overview {
         .web-skills, .game-skills {
-            border: 1px solid white;
-            padding: 80px;
+            background-color: #131313;
+            padding: 0.5rem;
+            box-shadow: 0 0 5px #363636;
+            border-radius: 5px;
         }
-    
-        .web-skills {
-            border-radius: 0px 60px 60px 60px;
+
+        @media screen and (min-width: #{breakpoint(xs)}) and (max-width: #{breakpoint(sm)}) {
         }
-    
-        .game-skills {
-            border-radius: 60px 0px 60px 60px;
+        @media screen and (min-width: #{breakpoint(sm)}) and (max-width: #{breakpoint(md)}) {
+        }
+        @media screen and (min-width: #{breakpoint(md)}) and (max-width: #{breakpoint(lg)}) {
+        }
+        @media screen and (min-width: #{breakpoint(lg)}) and (max-width: #{breakpoint(xl)}) {
+        }
+        @media screen and (min-width: #{breakpoint(xl)}) {
+            .web-skills, .game-skills {
+                border: 1px solid white;
+                padding: 80px;
+            }
+        
+            .web-skills {
+                border-radius: 0px 60px 60px 60px;
+            }
+        
+            .game-skills {
+                border-radius: 60px 0px 60px 60px;
+            }
         }
     }
     

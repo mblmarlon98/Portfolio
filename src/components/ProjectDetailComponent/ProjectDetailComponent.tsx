@@ -316,7 +316,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
         <section>
             <div className="border-b flex justify-between items-center mb-6">
                 <h3 className="text-3xl">More Porjects</h3>
-                <Link to="/portfolio/game/projects">
+                <Link to="/my-portfolio/game/projects">
                     View all
                 </Link>
             </div>

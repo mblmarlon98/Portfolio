@@ -53,7 +53,7 @@ class BookSlider extends Component<{}, BookSliderState> {
     {
         slideContent: [
             {
-                Icon: { url: `${process.env.PUBLIC_URL}/assets/images/images/Logo.png` },
+                Icon: { url: `${process.env.PUBLIC_URL}/assets/Logo.png` },
                 slideTitle: 'Mina',
                 description: 'Meet Mina, the pioneering digital psychotherapist and coach rooted in cognitive behavioral therapy. Offering support for exam fears, performance pressure, and learning stress, Mina is currently undergoing testing in a closed beta phase with students.',
             }, {
@@ -90,7 +90,7 @@ class BookSlider extends Component<{}, BookSliderState> {
     {
         slideContent: [
             {
-                Icon: { url: `${process.env.PUBLIC_URL}/assets/images/images/Logo.png` },
+                Icon: { url: `${process.env.PUBLIC_URL}/assets/Logo.png` },
                 slideTitle: 'ABEL FARKASS',
                 description: 'Explore the world through the lens of Abel Farkass, a talented photographer whose captivating portfolio has been enchanting viewers for the past two years.',
             }, {

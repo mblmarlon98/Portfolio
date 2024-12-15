@@ -259,12 +259,12 @@ class BookSlider extends Component<{}, BookSliderState> {
                                         </h4>
                                         </div>
                                     )}
-                                    <div
+                                    <p
                                     className="description"
                                     dangerouslySetInnerHTML={{
                                         __html: this.makeDescriptionLink(obj.description || ""),
                                     }}
-                                    ></div>
+                                    ></p>
                                     </div>
                                 ))}
                             </div>
@@ -292,7 +292,7 @@ class BookSlider extends Component<{}, BookSliderState> {
               </div>
             </div>
             <div className="col-12 text-center">
-              <div className="text-center my-4 slider-controls">
+              <div className="text-center md:my-4 slider-controls">
                 <button onClick={() => this.handleClick("prev")}>
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/images/images/arrow-left.png`}

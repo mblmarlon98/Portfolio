@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import './FactsSection.scss'; 
 import { removeWhitespace } from '../../../utils/removeWhitespace';
 import { Link } from 'react-router-dom';
+import StickerBox from '../../Box/StickerBox/StickerBox';
 
 // Represents a box element with text and position coordinates
 class Box {
@@ -84,19 +85,19 @@ function FactsSection(props: FactsSectionProps) {
                 <div className='flex flex-row justify-center xl:pb-6 animate__animated animate__fadeOutDown'>
                     <div data-aos="fade-up" data-aos-once="true" className='text-center'>
                         <h3>{props.title}</h3>
-                        <p className='text-center text-gray-600 xl:mt-4'>{props.description}</p>
+                        <p className='hidden text-center text-gray-600 md:block xl:mt-4'>{props.description}</p>
                     </div>
                 </div>
             )}
 
-            <div className='md:h-[80vh] xl:h-[60vh] flex flex-col items-center justify-between w-1/2 animate__animated animate__fadeOutDown'>
+            <div className='md:h-[80vh] xl:h-[60vh] flex flex-col items-center justify-between w-full lg:w-1/2 animate__animated animate__fadeOutDown'>
                 {/* Box row 1 */}
                 <div data-aos="fade-up" data-aos-once='true' className="w-full hidden md:flex justify-center items-center z-[3] relative">
                     {boxesRow1.map((box, index) => renderBox(box, index))}
                 </div>
 
                 {/* Box row 2 */}
-                <div data-aos="fade-up" data-aos-once='true' className="w-full flex justify-center md:justify-between items-center mt-4">
+                <div data-aos="fade-up" data-aos-once='true' className="w-full flex justify-center md:justify-between items-center md:mt-4">
                     {boxesRow2[0] && renderBox(boxesRow2[0], 0)}
                     <div className="image-container relative">
                     <div data-aos="fade-up" data-aos-once='true' className="h-[100px] w-[100px] xl:h-[200px] xl:w-[200px] relative z-[3] preview-img">
@@ -128,13 +129,13 @@ function FactsSection(props: FactsSectionProps) {
             </div>
 
             {/*** START MOBILE ***/}
-            <div className='flex flex-wrap justify-around items-center md:hidden mt-4'>
+            <div className='flex flex-wrap justify-between items-center md:hidden mt-4'>
                 {props.facts && props.facts.length > 0 && props.facts.map((fact: string) => {
                     return (
                         <div key={`${removeWhitespace(fact)}`} data-aos="fade-up" data-aos-once="true" data-aos-offset="-100" className='m-2'>
-                            <div className='bg-dark-linear p-1 rounded-md'>
+                            <StickerBox>
                                 <small className='mx-3'>{fact}</small>
-                            </div>
+                            </StickerBox>
                         </div>
                     );
                 })}

@@ -52,7 +52,10 @@ $breakpoints: (
             display: flex;
             align-items: center;
             scroll-snap-align: start;
-            justify-content: center;
+            padding: 50px 1rem 10px;
+            justify-content: space-around;
+
+
             // background-image: url("../src/assets/images/Logo.png");
             &:nth-child(even) {
                 background-color: #0d0d0d;
@@ -94,9 +97,8 @@ $breakpoints: (
                     width: 70px;
                 }
             }
-            @media screen and (max-width: 576px) {
-                padding: 50px 1rem 70px;
-                justify-content: space-around;
+            @media screen and (min-width: breakpoint(md)) {
+                justify-content: center;
             }
         }
     }

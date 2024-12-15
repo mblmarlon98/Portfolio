@@ -1,7 +1,21 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
 
 .partial-book-slider * {
     transform-style: preserve-3d;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: breakpoint(sm)) {
         transform-style: inherit;
     }
 }
@@ -9,6 +23,10 @@
 .partial-book-slider {
     perspective: 70em;
     height: 70vh;
+
+    @media screen and (max-width: breakpoint(sm)) {
+        height: 70vh;
+    }
     a {
         color: black !important;
     }
@@ -19,7 +37,7 @@
     > .container-fluid {
         > .row {
             > .offset-md-1 {
-                @media screen and (max-width: 600px) {
+                @media screen and (max-width: breakpoint(sm)) {
                     padding: 0 !important;
                 }
             }
@@ -41,7 +59,7 @@
     
     .flipped {
         transform: rotateY(-180deg);
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: breakpoint(sm)) {
             transform: rotateY(0deg) !important;
             transform: rotateX(-180deg) !important;
         }
@@ -61,7 +79,7 @@
     color: white;
     box-shadow: 0 0 20px 0 #ffffff0a;
     height: 100%;
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: breakpoint(sm)) {
         height: 60vh;
     }
 
@@ -150,7 +168,7 @@
         transition: opacity 0.3s;
         transition-delay: 0.2s;
         padding: 30px;
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: breakpoint(sm)) {
             display: block;
             transform: rotateY(-0deg);
             padding: 10px;
@@ -190,7 +208,7 @@
             background-color: #f7f7f7;
         }
     }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: breakpoint(sm)) {
         width: 100%;
         &:not(.flipepd) {
             height: 30%;
@@ -217,7 +235,7 @@
             min-height: 50vh;
         }
     }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: breakpoint(sm)) {
         position: absolute;
         width: 100%;
         bottom: 0;
@@ -247,8 +265,8 @@
             }
         }
     }
-    @media screen and (max-width: 600px) {
-        margin: 10px 0 0;
+    @media screen and (max-width: breakpoint(sm)) {
+        // margin: 10px 0 0;
         button {
             margin: 5px 20px;
             img {

@@ -1,28 +1,35 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
+
 .game-portfolio {
-    padding-top: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     height: 100vh;
+    padding: 4rem 1rem 10px;
+
+    @media screen and (min-width: breakpoint(md)) {
+      padding-top: 8rem ;
+    } 
   
-    .grid {
-      display: grid;
-      grid-template-columns: 40% 60%; /* Left side 40%, right side 60% */
-      grid-template-rows: repeat(3, 1fr); /* Three rows for menu items */
-      gap: 10px;
-      width: 90%;
-      max-width: 1200px;
-      height: 80%;
-  
+    .grid {  
       /* Menu Items */
       .menu-item {
         position: relative;
+        box-shadow: 0 0 2px black;
         overflow: hidden;
         letter-spacing: 1px;
-        font-weight: 200;
         border-radius: 15px 0 15px 0;
-        background-color: #131313;
-        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,39 +38,47 @@
         cursor: pointer;
         transition: all 0.3s ease;
 
-        &.row-span-2 {
-          padding-bottom: 30%;
-        } 
-  
         &:hover {
           transform: scale(1.01);
           cursor: pointer;
         }
 
+        &-skills {
+          background-color: black;
+          color: white;
+        }
+
         &-overlay {
-          position: absolute;
+          color: white;
           bottom: 0;
-          height: 30%;
+          height: 40%;
           display: flex;
           justify-content: center;
-          background-color: #8000806e;
-          right: 0;
-          left: 0;
           align-items: center;
-          border: 30px solid #9c27b0;
           border-radius: 15px 0 15px 0;
+          background-color: #9c27b0;
+          padding: 10px;
+          
+          @media screen and (min-width: breakpoint(lg)) {
+            position: absolute;
+            height: 40%;
+            right: 0;
+            left: 0;
+            background-color: #8000806e;
+            border: 30px solid #9c27b0;
+          }
 
         }
       }
   
       /* Slider */
       .slider {
-        grid-column: 2; /* Ensure the slider is on the right side */
-        grid-row: 1 / span 3; /* Slider spans all three rows */
         position: relative;
         overflow: hidden;
-        border: 2px solid #444;
-        border-radius: 8px;
+        border-radius: 15px 0 15px 0;
+        box-shadow: 0 0 2px black;
+
+
   
         /* Overlay to darken the slides */
         .slider-overlay {
@@ -72,7 +87,6 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(0, 0, 0, 0.4); /* Darken the slides */
           z-index: 1; /* Ensure it sits above the slides */
           pointer-events: none; /* Allow interactions to pass through */
           transition: background 0.3s ease; /* Smooth transition effect */
@@ -94,14 +108,13 @@
         /* Individual slide */
         .slide {
           min-width: 100%; /* Ensure each slide takes full width */
-          height: 100%; /* Inherit height from parent container */
+          min-height: 100%; /* Inherit height from parent container */
           position: relative;
   
           img {
-            width: 100%; /* Make the image width fill the container */
-            height: 100%; /* Make the image height fill the container */
+            min-width: 100%; /* Make the image width fill the container */
+            min-height: 100%; /* Make the image height fill the container */
             object-fit: cover; /* Ensure the image fills the box without stretching */
-            border-radius: 8px; /* Add rounded corners if needed */
           }
         }
   

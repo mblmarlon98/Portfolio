@@ -1,9 +1,26 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
 .dropdown {
     border-radius: 15px;
     box-shadow: 5px 5px 10px #bbb8b8;
 
     &-title, &-content {
         padding: 13px;
+        @media screen and (max-width: breakpoint(md)) {
+            padding: 5px 10px;
+        }
     }
     p {
         font-weight: 200;

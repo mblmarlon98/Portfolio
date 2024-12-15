@@ -1,3 +1,19 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+
+
+
 /* Variables */
 $transition-duration: 0.6s; /* Smooth transition */
 $hint-animation-duration: 2s; /* Duration of the hint animation */
@@ -12,6 +28,11 @@ $hint-range: 15%; /* Slightly increased range for the animation */
   position: relative;
   font-family: Arial, sans-serif;
   outline: none; /* Remove focus outline */
+
+  /* Stack sides vertically on smaller screens */
+  @media screen and (max-width: breakpoint(md)) {
+    flex-direction: column; /* Stack sides vertically */
+  }
 
   .side {
     flex: 1;
@@ -48,6 +69,10 @@ $hint-range: 15%; /* Slightly increased range for the animation */
       top: calc(30%); /* Offset by controller height */
       transform: translateY(-50%);
       z-index: 2;
+
+      @media screen and (max-width: breakpoint(md)) {
+        top: 5rem; /* Adjust for vertical layout */
+      }
     }
   }
 
@@ -57,6 +82,8 @@ $hint-range: 15%; /* Slightly increased range for the animation */
     top: 50%;
     transition: left $transition-duration, transform $transition-duration;
     z-index: 5;
+    display: block;
+
 
     &.none {
       left: 50%;
@@ -82,6 +109,12 @@ $hint-range: 15%; /* Slightly increased range for the animation */
     &.hint {
       animation: hint-move $hint-animation-duration ease-in-out;
     }
+
+    @media screen and (max-width: breakpoint(md)) {
+      display: none;
+      left: 50%; /* Center the controller horizontally */
+      top: 10%; /* Adjust position for vertical layout */
+    }
   }
 
   /* Friendly Indicator */
@@ -99,20 +132,25 @@ $hint-range: 15%; /* Slightly increased range for the animation */
     p {
       margin: 0;
     }
+
+    @media screen and (max-width: breakpoint(md)) {
+      bottom: 5%; /* Adjust for vertical layout */
+    }
   }
 }
 
 /* Friendly Indicator Animation */
 @keyframes fade-in-out {
-    0%, 65% {
-      opacity: 1; /* Stay fully visible for 80% of the animation */
-    }
-    90% {
-      opacity: 0; /* Quickly fade out */
-    }
-    100% {
-      opacity: 1; /* Fade back in */
-    }
+  0%,
+  65% {
+    opacity: 1; /* Stay fully visible for 80% of the animation */
+  }
+  90% {
+    opacity: 0; /* Quickly fade out */
+  }
+  100% {
+    opacity: 1; /* Fade back in */
+  }
 }
 
 /* Hint Animation */

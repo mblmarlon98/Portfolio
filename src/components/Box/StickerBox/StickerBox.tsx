@@ -9,7 +9,9 @@ export default class StickerBox extends React.Component<StickerBoxProps> {
   public render() {
     return (
       <div className='box-sticker'>
-        {this.props.children}
+        <small>
+          {this.props.children}
+        </small>
       </div>
     );
   }

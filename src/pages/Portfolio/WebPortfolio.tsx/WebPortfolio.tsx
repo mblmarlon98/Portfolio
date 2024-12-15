@@ -101,9 +101,9 @@ class WebPortfolio extends Component {
     render() {
         return (
             <div id="scroll_snap_container" className='web-portfolio bg-dark'>
-                <section className="flex flex-col justify-between section-bookslider">
+                <section className="flex flex-col section-bookslider">
                     <div className="bg-gradient"/>
-                    <div className="">
+                    <div className="text-center">
                         <h2>Portfolio & Previous Projects</h2>
                     </div>
                     {/* <!-- <Slider/> --> */}
@@ -115,12 +115,12 @@ class WebPortfolio extends Component {
                     <div className="animate__animated animate__fadeOutUp animate__delay-0s w-full md:w-2/3 xl:w-1/2 text-center md:mb-4">
                         <h2>Skills & Experience</h2>
                         <div className="md:mt-5 ">
-                            <p>
+                            <p className='text-gray-600'>
                                 My specialization lies in front-end development, creating engaging web
                                 applications using HTML, CSS, and JavaScript.
                             </p>
                             <br/>
-                            <p>
+                            <p className='text-gray-600'>
                                 Proficiency includes building small to medium-sized applications with Vue and
                                 React, incorporating custom features, animations, and interactive layouts. There
                                 is also experience as a full-stack developer, having worked with CMS and backend

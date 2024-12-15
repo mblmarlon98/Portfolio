@@ -35,7 +35,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
       >
         <p data-text={title}>{title}</p>
         <img
-          className={`h-[15px] ${isOpen ? "" : "rotate-90"}`}
+          className={`h-[10px] md:h-[15px] ${isOpen ? "" : "rotate-90"}`}
           src={`${process.env.PUBLIC_URL}/assets/images/icons/triangle.png`}
           alt=""
         />

@@ -252,14 +252,14 @@ export default class Navbar extends React.Component < NavbarProps > {
                         </Link>
 
                         <div className="" id="navbar-multi-level flex flex items-center">
-                            <Link to="/my-portfolio" className="block lg:py-2 lg:pl-3 lg:pr-4 lg:ml-5">
+                            <Link to="/my-portfolio" className="block md:py-2 md:pl-3 md:pr-4 md:ml-5">
                                 <span>
                                     Portfolio
                                 </span>
                             </Link>
                         </div>
                         <div className="" id="navbar-multi-level flex flex items-center">
-                            <Link to="/about-me" className="block lg:py-2 lg:pl-3 lg:pr-4 lg:ml-5">
+                            <Link to="/about-me" className="block md:py-2 md:pl-3 md:pr-4 md:ml-5">
                                 <span>
                                     About Me
                                 </span>

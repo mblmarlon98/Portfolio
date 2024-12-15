@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./AboutMe.scss";
 import Footer from "../../components/Footer/Footer";
+import StickerBox from "../../components/Box/StickerBox/StickerBox";
 
 class AboutMe extends Component {
   getDownloadUrl = (languageCode: string) => {
@@ -9,7 +10,7 @@ class AboutMe extends Component {
 
   render() {
     return (
-      <section className="pt-[8rem]">
+      <section className="about-me">
         <div className="about xl:w-2/3 mx-auto">
           <div>
             <div className="flex flex-col md:flex-row justify-start items-center mb-5">
@@ -19,7 +20,7 @@ class AboutMe extends Component {
                   alt=""
                 />
               </div>
-              <div className="ml-5">
+              <div className="md:ml-5">
                 <h3>Fullstack developer specialized in Front-End</h3>
                 <p>
                   Hi, I'm Marlon. Vintage 98. Born in Switzerland, grown up in
@@ -39,23 +40,23 @@ class AboutMe extends Component {
               ].map((lang, index) => (
                 <div
                   key={index}
-                  className="language-box mb-5 flex justify-between items-center"
+                  className="language-box md:mb-5 flex justify-between items-center"
                 >
                   <div className="flex justify-start items-center">
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/images/images/${lang.flag}`}
-                      className="h-[30px]"
+                      className="h-[20px] md:h-[30px]"
                       alt={lang.name}
                     />
                     <p className="ml-4">{lang.name}</p>
                   </div>
-                  <div>{lang.level}</div>
+                  <b>{lang.level}</b>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mb-5 pt-5">
+          <div className="mb-5 pt-5 mt-5 md:mt-0">
             <h3 className="mb-5 border-b">Skills</h3>
             {[
               { years: "6+ years", skills: ["HTML5", "CSS3"] },
@@ -79,13 +80,13 @@ class AboutMe extends Component {
                 skills: ["Node", "Express", "MongoDb", "MySql"],
               },
             ].map((group, index) => (
-              <div key={index} className="mb-5">
-                <h5>{group.years}</h5>
-                <div className="flex flex-wrap">
+              <div key={index} className="mb-1 md:mb-5">
+                <b>{group.years}</b>
+                <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill, idx) => (
-                    <div key={idx} className="overview-box mt-3">
+                    <StickerBox>
                       {skill}
-                    </div>
+                    </StickerBox>
                   ))}
                 </div>
               </div>
@@ -124,9 +125,9 @@ class AboutMe extends Component {
                 <div key={index} className="mb-5">
                   <div>
                     <div className="flex items-center">
-                      <h4 className="pr-5 border-r border-black">
+                      <b className="pr-5 border-r border-black">
                         {job.title}
-                      </h4>
+                      </b>
                       <p className="pl-5">{job.role}</p>
                     </div>
                     <small className="border-black">{job.period}</small>
@@ -134,7 +135,9 @@ class AboutMe extends Component {
                   <ul className="list-disc mt-2">
                     {job.tasks.map((task, idx) => (
                       <li key={idx} className="ml-4">
-                        {task}
+                        <span>
+                            {task}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -143,7 +146,7 @@ class AboutMe extends Component {
             </div>
           </div>
 
-          <div className="mb-5 pt-5 pb-5">
+          <div className="mb-5 md:pt-5 pb-5">
             <h3 className="mb-5 border-b">Download my CV</h3>
             <div className="grid md:grid-cols-3 gap-4">
               {[
@@ -159,13 +162,13 @@ class AboutMe extends Component {
                 >
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/images/images/${cv.flag}`}
-                    className="h-[30px]"
+                    className="h-[20px] md:h-[30px]"
                     alt={cv.lang}
                   />
                   <button>Download CV</button>
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/images/images/pdf.svg`}
-                    className="h-[25px]"
+                    className="h-[18px] md:h-[25px]"
                     alt="PDF"
                   />
                 </a>

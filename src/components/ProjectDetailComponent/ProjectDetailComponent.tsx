@@ -61,7 +61,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                     const safeDescriptionHTML = DOMPurify.sanitize(featureDetail.description as string);
 
                     return (
-                        <div className="feature-details grid grid-cols-2 gap-4 mt-6 p-4">
+                        <div className="feature-details grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 p-4">
                             <div>
                                 <h4>{featureDetail.name}</h4>
                                 {featureDetail.screenshots && featureDetail.screenshots.length > 0 && featureDetail.screenshots.map((screenshot, idx) => {
@@ -117,7 +117,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                     const safeDescriptionHTML = DOMPurify.sanitize(featureDetail.description as string);
 
                     return (
-                        <div className="feature-details grid grid-cols-2 gap-4 mt-6 p-4">
+                        <div className="feature-details grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 p-4">
                             <div>
                                 <h4>{featureDetail.name}</h4>
                                 {featureDetail.screenshots && featureDetail.screenshots.length > 0 && featureDetail.screenshots.map((screenshot, idx) => {
@@ -170,30 +170,30 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
         <header className="project-header text-center mb-4">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                    <h1 className="text-6xl">{projectDetail.title}</h1>
-                    <p className="ml-4">{` - ` + projectDetail.type}</p>
+                    <h1 className="">{projectDetail.title}</h1>
+                    <p className="lg:ml-4">{` - ` + projectDetail.type}</p>
                 </div>
-                <div>
+                {/* <div>
                     <Link to="" className="btn btn-play">Play</Link>
-                </div>
+                </div> */}
             </div>
         </header>
 
         {/* Section With basic information  */}
         <section>
             <div className="grid grid-cols-4 gap-4">
-                <div className="col-span-3">
+                <div className="col-span-4 order-2 lg:col-span-3 lg:order-1">
 
                     <div className="h-full flex flex-col justify-between">
                         <div>
-                            <strong>Intro:</strong>
+                            <b>Intro:</b>
                             <p>{projectDetail.description}</p>
                         </div>
 
                         <div className="mt-6">
                             <LightBox>
                                 <div>
-                                    <strong>Rules:</strong>
+                                    <b>Rules:</b>
                                     <p
                                         className="description"
                                         dangerouslySetInnerHTML={{
@@ -207,69 +207,71 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
 
                 </div>
-                <div className="border-l pl-4">
-                    <div>
-                        <LightBox>
-                            <div className="flex justify-between items-center">
-                                <strong>Year:</strong> 
-                                <StickerBox>
-                                    {projectDetail.year}
-                                </StickerBox>
+                <div className="col-span-4 lg:col-span-1 lg:border-l lg:pl-4 order-1 lg:order-2">
+                    <div className="block md:grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+                        <div>
+                            <LightBox>
+                                <div className="flex justify-between items-center">
+                                    <b>Year:</b> 
+                                    <StickerBox>
+                                        {projectDetail.year}
+                                    </StickerBox>
+                                </div>
+                            </LightBox>
+                        </div>
+                        {projectDetail.roles && projectDetail.roles.length > 0 && (
+                            <div>
+                                <LightBox>
+                                    <div className="flex justify-between items-center">
+                                        <b>Role:</b> 
+                                        <div className="flex flex-row">
+                                            { projectDetail.roles.map((role, idx) => {
+                                                return (
+                                                    <div className="ml-3">
+                                                        <StickerBox key={`role-${idx + 1}`}>
+                                                            {role}
+                                                        </StickerBox>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                </LightBox>
                             </div>
-                        </LightBox>
+                        )}
+                    {projectDetail.tools && projectDetail.tools.length > 0 && (
+                            <div>
+                                <LightBox>
+                                    <div className="flex justify-between items-center">
+                                        <b>Tools:</b> 
+                                        <div className="flex flex-row w-full justify-end">
+                                            { projectDetail.tools.map((tool, idx) => {
+                                                return (
+                                                    <div className="ml-3">
+                                                        <StickerBox key={`role-${idx + 1}`}>
+                                                            {tool}
+                                                        </StickerBox>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                </LightBox>
+                            </div>
+                        )}
+                        {progress && (
+                            <div>
+                                <LightBox>
+                                    <div className="w-full flex justify-center items-center">
+                                        <b className="mr-4">Progress:</b>
+                                        <div className="w-full">
+                                            <Progressbar progress={progress}/>
+                                        </div>
+                                    </div>
+                                </LightBox>
+                            </div>
+                        )}
                     </div>
-                    {projectDetail.roles && projectDetail.roles.length > 0 && (
-                        <div className="mt-3">
-                            <LightBox>
-                                <div className="flex justify-between items-center">
-                                    <strong>Role:</strong> 
-                                    <div className="flex flex-row">
-                                        { projectDetail.roles.map((role, idx) => {
-                                            return (
-                                                <div className="ml-3">
-                                                    <StickerBox key={`role-${idx + 1}`}>
-                                                        {role}
-                                                    </StickerBox>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                            </LightBox>
-                        </div>
-                    )}
-                   {projectDetail.tools && projectDetail.tools.length > 0 && (
-                        <div className="mt-3">
-                            <LightBox>
-                                <div className="flex justify-between items-center">
-                                    <strong>Tools:</strong> 
-                                    <div className="flex flex-row w-full overflow-scroll">
-                                        { projectDetail.tools.map((tool, idx) => {
-                                            return (
-                                                <div className="ml-3">
-                                                    <StickerBox key={`role-${idx + 1}`}>
-                                                        {tool}
-                                                    </StickerBox>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                </div>
-                            </LightBox>
-                        </div>
-                    )}
-                    {progress && (
-                        <div className="mt-3">
-                            <LightBox>
-                                <div className="w-full flex justify-center items-center">
-                                    <strong className="mr-4">Progress:</strong>
-                                    <div className="w-full">
-                                        <Progressbar progress={progress}/>
-                                    </div>
-                                </div>
-                            </LightBox>
-                        </div>
-                    )}
                 </div>
             </div>
         </section>
@@ -288,26 +290,30 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
             {this.renderChallenges()}
         </section>
 
-        <GameWrapper folderName={projectDetail.folderName} />
+        <div className="hidden md:block">
+            <GameWrapper folderName={projectDetail.folderName} />
+        </div>
 
         {projectDetail.resources && projectDetail.resources.length > 0 && (
         <section>
             <h3 className="border-b mb-6">
                 References
             </h3>
-            <div className="grid grid-cols-2 gap-4">
-                {projectDetail.resources.map((resource, idx) => {
-                    return (
-                        <div key={`resource${idx + 1}`} className={`${idx > 1 ? "mt-6 " : ""} flex justify-between flex-col`}>
-                            <small>
-                                {resource.title}
-                            </small>
-                            <div>
-                                <a href={resource.url} target="_blank" className="generic-link"><small>{resource.url}</small></a>
+            <div className="grid rid-cols-1 lg:grid-cols-2 lg:gap-4">
+                <Dropdown title="References">
+                    {projectDetail.resources.map((resource, idx) => {
+                        return (
+                            <div key={`resource${idx + 1}`} className={`${idx >= 1 ? "mt-6 " : ""} flex justify-between flex-col`}>
+                                <small>
+                                    {resource.title}
+                                </small>
+                                <div>
+                                    <a href={resource.url} target="_blank" className="generic-link"><small>{resource.url}</small></a>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </Dropdown>
             </div>
         </section>
 
@@ -320,19 +326,19 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                     View all
                 </Link>
             </div>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-4">
                 {gameProjects.projectList && gameProjects.projectList.length > 0 && gameProjects.projectList.map((project, index) => {
                     return (
                         <LightBox>
                             <div key={`project-${index + 1}`} className="h-full">
-                                <div>
-                                    <img src={project.img.url} alt={project.img.alt} />
+                                <div className="flex justify-center items-center">
+                                    <img src={project.img.url} alt={project.img.alt} className="h-[50px] md:h-[150px]"/>
                                 </div>
                                 <div>
                                     <div>
                                         <small>{project.type}</small>
                                     </div>
-                                    <strong>{project.title}</strong>
+                                    <b>{project.title}</b>
                                     <div className="flex justify-center items-center">
                                         <Link className="w-full text-center btn btn-light" to={""}>View Project</Link>
                                     </div>

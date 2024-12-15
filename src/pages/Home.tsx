@@ -233,9 +233,9 @@ class Home extends Component {
                     <div className="container mx-auto h-full w-full flex flex-col justify-evenly items-center">
                         <div className='animate__animated animate__fadeOutDown'>
                             <h2 className="font-bold text-center">Recent Projects</h2>
-                            <p className="text-center text-gray-600 lg:mt-4">Explore some of my most recent projects.</p>
+                            <p className="text-center text-gray-600 lg:mt-4 hidden md:block">Explore some of my most recent projects.</p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+                        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:mt-8">
                             {projectsOverviewData.projectList && projectsOverviewData.projectList.length > 0 && projectsOverviewData.projectList.map((project, idx) => {
                                 return (
                                     <ProjectCard
@@ -250,7 +250,7 @@ class Home extends Component {
                             })}
                         </div>
                         <div className='animate__animated animate__fadeOutDownBig text-center'>
-                            <Link to="/my-portfolio" className='btn btn-white'>View Portfolio</Link>
+                            <Link to="/my-portfolio" className='btn btn-white'>Portfolio</Link>
                         </div>
                     </div>
                 </section>

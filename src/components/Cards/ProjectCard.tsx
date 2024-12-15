@@ -21,27 +21,29 @@ export default class ProjectCard extends React.Component<ProjectCardProps> {
         <div key={`project-card-${idx + 1}`} className={`${(idx + 1 ) % 2 ? "animate__animated animate__fadeOutDown" : "animate__animated animate__fadeOutDownBig"} project-card`}>
             {this.props.type && (
                 <div className='type'>
-                    <span>
+                    <small>
                         {"# " + this.props.type}
-                    </span>
+                    </small>
                 </div>
             )}
             <div>
                 <div className="img-wrapper shadow-lg">
                     <img src={this.props.img.url} alt={this.props.img.alt}/>
                 </div>
-                <div className='content'>
+                <div className='content-text'>
                     <div>
-                        <div className='flex justify-between items-end'>
-                            <h4 className="mt-4 text-xl font-bold">{this.props.title}</h4>
-                            <StickerBox>{this.props.year}</StickerBox>
+                        <div className='md:flex justify-between items-end'>
+                            <h4 className="md:mt-4 font-bold truncate">{this.props.title}</h4>
+                            <div className='hidden md:inline'>
+                                <StickerBox>{this.props.year}</StickerBox>
+                            </div>
                         </div>
-                        <p className="mt-2 text-gray-600">{this.props.description}</p>
+                        <p className="md:mt-2 text-gray-600 hidden sm:inline">{this.props.description}</p>
                     </div>
                 </div>
             </div>
-            <div className="content">
-                <Link to="/my-portfolio/web/project-1" className="text-center block btn btn-white">View Project</Link>
+            <div className="content-btn">
+                <Link to="/my-portfolio/web/project-1" className="text-center btn btn-white">View Project</Link>
             </div>
         </div>
     );

@@ -63,7 +63,6 @@ class Router extends Component {
                             />
                         ))}
                     </Routes>
-                    <Footer />
                 </BrowserRouter>
             </div>
         );

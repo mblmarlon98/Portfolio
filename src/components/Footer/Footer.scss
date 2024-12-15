@@ -1,5 +1,21 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
 footer {
   padding: 4rem 0;
+  @media screen and (max-width: breakpoint(md)) {
+    padding: 2rem 0;
+  }
   
   .footer-title {
       position: relative;
@@ -11,6 +27,10 @@ footer {
         line-height: 24px;
         text-align: center;
         color: var(--text_primary);
+
+        @media screen and (max-width: breakpoint(md)) {
+          margin-bottom: 0.5rem;
+        }
     
         &:before {
           content: "";
@@ -19,10 +39,16 @@ footer {
           top: 50%;
           transform: translateY(-50%);
           display: block;
-          width: 36px;
+          width: 20px;
           height: 2px;
           background-color: #696969;
           border-radius: 20px;
+          @media screen and (min-width: breakpoint(md)) {
+            width: 25px !important;
+          }
+          @media screen and (min-width: breakpoint(lg)) {
+            width: 36px !important;
+          }
         }
     
         &:after {
@@ -32,10 +58,16 @@ footer {
           top: 50%;
           transform: translateY(-50%);
           display: block;
-          width: 36px;
+          width: 20px;
           height: 2px;
           background-color: #696969;
           border-radius: 20px;
+          @media screen and (min-width: breakpoint(md)) {
+            width: 25px !important;
+          }
+          @media screen and (min-width: breakpoint(lg)) {
+            width: 36px !important;
+          }
         }
     }
 }

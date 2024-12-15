@@ -5,6 +5,7 @@ import Tooltip from '../components/Tooltip/Tooltip';
 import StickerBox from '../components/Box/StickerBox/StickerBox';
 import { projectsOverviewData } from '../data/projectsOverview';
 import FactsSection from '../components/Sections/FactsSection/FactsSection';
+import ProjectCard from '../components/Cards/ProjectCard';
 
 class Home extends Component {
     state = {
@@ -232,33 +233,19 @@ class Home extends Component {
                     <div className="container mx-auto h-full w-full flex flex-col justify-evenly items-center">
                         <div className='animate__animated animate__fadeOutDown'>
                             <h2 className="font-bold text-center">Recent Projects</h2>
-                            <p className="text-center text-gray-600 mt-4">Explore some of my most recent projects.</p>
+                            <p className="text-center text-gray-600 lg:mt-4">Explore some of my most recent projects.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
                             {projectsOverviewData.projectList && projectsOverviewData.projectList.length > 0 && projectsOverviewData.projectList.map((project, idx) => {
                                 return (
-                                    <div key={`project-card-${idx + 1}`} className={`${(idx + 1 ) % 2 ? "animate__animated animate__fadeOutDown" : "animate__animated animate__fadeOutDownBig"} project-card`}>
-                                        <div className='type'>
-                                            {"# " + project.type}
-                                        </div>
-                                        <div>
-                                            <div className="img-wrapper shadow-lg">
-                                                <img src={project.img.url} alt={project.img.alt}/>
-                                            </div>
-                                            <div className='content'>
-                                                <div>
-                                                    <div className='flex justify-between items-end'>
-                                                        <h4 className="mt-4 text-xl font-bold">{project.title}</h4>
-                                                        <StickerBox>{project.year}</StickerBox>
-                                                    </div>
-                                                    <p className="mt-2 text-gray-600">{project.description}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="content">
-                                            <Link to="/my-portfolio/web/project-1" className="text-center block btn btn-white">View Project</Link>
-                                        </div>
-                                    </div>
+                                    <ProjectCard
+                                        title={project.title}
+                                        description={project.description}
+                                        index={idx}
+                                        img={project.img}
+                                        type={project.type}
+                                        year={project.year}
+                                    />
                                 )
                             })}
                         </div>

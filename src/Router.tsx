@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Portfolio from './pages/Portfolio/Portfolio';
 import GamePortfolio from "./pages/Portfolio/GamePortfolio/GamePortfolio";
@@ -37,7 +37,7 @@ class Router extends Component {
     render() {
         return (
             <div>
-                <BrowserRouter>
+                <HashRouter>
                     <Navbar />
                     <Routes>
                         {/* Home */}
@@ -63,7 +63,7 @@ class Router extends Component {
                             />
                         ))}
                     </Routes>
-                </BrowserRouter>
+                </HashRouter>
             </div>
         );
     }

@@ -45,11 +45,17 @@ $breakpoints: (
             align-items: center;
             scroll-snap-align: start;
             justify-content: center;
+            padding-top: 80px;
+
+            @media screen and (min-width: breakpoint(md)) {
+                padding-top: 100px;
+            }
+
             &:nth-child(even) {
                 background-color: #0d0d0d;
                 color: white;
             }
-    
+
             > div {
                 z-index: 1;
                 max-width: 1280px;
@@ -64,26 +70,74 @@ $breakpoints: (
                 &:hover {
                     border: 1px solid white;
                 }
-                &:nth-child(even) {
-                    animation-delay: 200ms;
-                }
-                height: 100px;
-                width: auto;
+
+                height: auto;
+                width: 80px;
                 margin: 0.5rem;
-    
+
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
-                svg {
-                    width: 90px;
+                gap: 0.5rem;
+
+                svg, img {
+                    width: 50px;
+                    height: auto;
+                    display: block;
                 }
+
+                p {
+                    margin: 0;
+                    text-align: center;
+                    width: 100%;
+                    font-size: 0.875rem;
+                }
+
+                &--hidden {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+
                 @media screen and (max-width: breakpoint(sm)) {
                     padding: 3px;
                     margin: 0.5rem 0;
-                    height: 45px;
                     width: 70px;
+
+                    svg, img {
+                        width: 45px;
+                    }
+
+                    p {
+                        font-size: 0.75rem;
+                    }
                 }
+            }
+
+            // Staggered animation delays for fade-in only
+            .icon-container > *:nth-child(1) .skill-icon.animate__fadeInUp { animation-delay: 0ms; }
+            .icon-container > *:nth-child(2) .skill-icon.animate__fadeInUp { animation-delay: 100ms; }
+            .icon-container > *:nth-child(3) .skill-icon.animate__fadeInUp { animation-delay: 200ms; }
+            .icon-container > *:nth-child(4) .skill-icon.animate__fadeInUp { animation-delay: 300ms; }
+            .icon-container > *:nth-child(5) .skill-icon.animate__fadeInUp { animation-delay: 400ms; }
+            .icon-container > *:nth-child(6) .skill-icon.animate__fadeInUp { animation-delay: 500ms; }
+            .icon-container > *:nth-child(7) .skill-icon.animate__fadeInUp { animation-delay: 600ms; }
+            .icon-container > *:nth-child(8) .skill-icon.animate__fadeInUp { animation-delay: 700ms; }
+            .icon-container > *:nth-child(9) .skill-icon.animate__fadeInUp { animation-delay: 800ms; }
+            .icon-container > *:nth-child(10) .skill-icon.animate__fadeInUp { animation-delay: 900ms; }
+            .icon-container > *:nth-child(11) .skill-icon.animate__fadeInUp { animation-delay: 1000ms; }
+            .icon-container > *:nth-child(12) .skill-icon.animate__fadeInUp { animation-delay: 1100ms; }
+            .icon-container > *:nth-child(13) .skill-icon.animate__fadeInUp { animation-delay: 1200ms; }
+            .icon-container > *:nth-child(14) .skill-icon.animate__fadeInUp { animation-delay: 1300ms; }
+            .icon-container > *:nth-child(15) .skill-icon.animate__fadeInUp { animation-delay: 1400ms; }
+            .icon-container > *:nth-child(16) .skill-icon.animate__fadeInUp { animation-delay: 1500ms; }
+            .icon-container > *:nth-child(17) .skill-icon.animate__fadeInUp { animation-delay: 1600ms; }
+            .icon-container > *:nth-child(18) .skill-icon.animate__fadeInUp { animation-delay: 1700ms; }
+
+            // Faster fade-out with no delay
+            .icon-container > * .skill-icon.animate__fadeOutDown {
+                animation-delay: 0ms !important;
+                animation-duration: 0.3s !important;
             }
             @media screen and (max-width: breakpoint(sm)) {
                 padding: 50px 1rem 10px;
@@ -100,19 +154,32 @@ $breakpoints: (
     }
     
     .icon-container {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
         width: 100%;
-        align-items: center;
+        justify-items: center;
+        padding-bottom: 1rem;
+
+        @media screen and (min-width: breakpoint(sm)) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media screen and (min-width: breakpoint(md)) {
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            padding-bottom: 1rem;
+        }
+
         @media screen and (max-width: 340px) {
-            flex-wrap: nowrap;
-            overflow-x: scroll;
+            grid-template-columns: repeat(3, 1fr);
+            overflow-x: auto;
             width: 100vw;
         }
+
         @media (orientation: landscape) and (max-width: breakpoint(sm)) {
-            flex-wrap: nowrap;
-            overflow-x: scroll;
+            grid-template-columns: repeat(6, 1fr);
+            overflow-x: auto;
             width: 100vw;
         }
     }

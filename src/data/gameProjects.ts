@@ -344,6 +344,113 @@ export const gameProjects: ProjectList = {
             }, 
         ],
       },
+      {
+        title: "Ho-Ho-Holiday",
+        type: "Plattformer",
+        description: "Plattformer game for all Santa lovers.",
+        folderName: "HoHoHoliday",
+        img: { url: `${process.env.PUBLIC_URL}/assets/images/games/HoHoHoliday/game-screenshot.png`, alt: "Shoot-em-up Game" },
+        year: "2024",
+        roles: ["Tech", "Art"],
+        progress: 95,
+        screenshots: [
+          { url: `${process.env.PUBLIC_URL}/assets/images/games/HoHoHoliday/game-screenshot.png`, alt: "Gameplay" },
+        ],
+        features: [
+          {
+            title: "Power-ups",
+            featureDetails: [{
+              name: "Knuckleball",
+              description: "string",
+              screenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/HoHoHoliday/game-screenshot.png`, 
+                alt: "Knuckleball" 
+              }],
+              codeScreenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/HoHoHoliday/game-screenshot.png`, 
+                alt: "Knuckleball",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/HoHoHoliday/game-screenshot.png`, 
+                alt: "Knuckleball",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/VietVaders/game-screenshot.png`, 
+                alt: "Knuckleball",
+                description: "test"
+              },], 
+            }]
+          }, {
+            title: "Crowd Influence",
+            featureDetails: [{
+              name: "Crowd Balloons",
+              description: "string",
+              screenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon" 
+              }],
+              codeScreenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },], 
+            }],
+          },
+        ],
+        challenges: [{
+          title: "Crowd Influence",
+            featureDetails: [{
+              name: "Crowd Balloons",
+              description: "string",
+              screenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon" 
+              }],
+              codeScreenshots: [{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },{ 
+                url: `${process.env.PUBLIC_URL}/assets/images/games/Pong/CrowdBalloon.png`, 
+                alt: "CrowdBalloon",
+                description: "test"
+              },], 
+            }],
+          },
+        ],
+        tools: ["Stencyl", "Photoshop", "Illustrator"],
+        rules: "",
+        resources: [
+            { 
+                title: "Blacknut Cloud Gaming. (n.d.). Men of War: Vietnam - Apocalypse Now. Retrieved November 22, 2024, from", 
+                url: "https://www.blacknutlemag.com/en/men-of-war-vietnam-video-game" 
+            }, { 
+                title: "Ahemotion Music. (2022, March 1). Helicopter sound effect [Video]. YouTube. ", 
+                url: "https://www.youtube.com/watch?v=QlGzLhnwJX4" 
+            }, { 
+                title: "Sound Effects Pro. (2019, July 15). Explosion sound effect [Video]. YouTube.", 
+                url: "https://www.youtube.com/watch?v=LdGe-qosfRA" 
+            }, { 
+                title: "HD Sound Effects. (2016, November 30). Missile sound effect [Video]. YouTube.", 
+                url: "https://www.youtube.com/watch?v=1qUN59Oebe0" 
+            }, { 
+                title: "PhantomMusic. (2014, April 12). Title song [Video]. YouTube. ", 
+                url: "https://www.youtube.com/watch?v=OrPKJos3tA0" 
+            }, 
+        ],
+      }
     ],
   };
   

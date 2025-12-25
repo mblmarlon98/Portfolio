@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { Component, createRef } from "react";
 import "./Dropdown.scss";
 
 type DropdownProps = {
@@ -6,51 +6,56 @@ type DropdownProps = {
   children: React.ReactNode;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
+type DropdownState = {
+  isOpen: boolean;
+};
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+class Dropdown extends Component<DropdownProps, DropdownState> {
+  contentRef = createRef<HTMLDivElement>();
 
-    // Scroll into view when opened
-    if (!isOpen && contentRef.current) {
-      const navbarHeight = 150; // Adjust this value to match your navbar's height
-      const offsetTop = contentRef.current.getBoundingClientRect().top + window.scrollY - navbarHeight;
+  constructor(props: DropdownProps) {
+    super(props);
+    this.state = { isOpen: false };
+  }
 
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
+  toggleDropdown = () => {
+    const { isOpen } = this.state;
+    this.setState({ isOpen: !isOpen }, () => {
+      if (!isOpen && this.contentRef.current) {
+        const navbarHeight = 150;
+        const offsetTop = this.contentRef.current.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      }
+    });
   };
 
-  return (
-    <div className="mb-4 dropdown overflow-hidden">
-      <button
-        onClick={toggleDropdown}
-        className={`w-full text-left dropdown-title transition uppercase tracking-widest border-b flex justify-between items-center ${
-          isOpen ? "" : ""
-        }`}
-      >
-        <p data-text={title}>{title}</p>
-        <img
-          className={`h-[10px] md:h-[15px] ${isOpen ? "" : "rotate-90"}`}
-          src={`${process.env.PUBLIC_URL}/assets/images/icons/triangle.png`}
-          alt=""
-        />
-      </button>
-      <div
-        ref={contentRef}
-        className={`transition-all duration-500 ease-in-out overflow-hidden ${
-          isOpen ? "" : "max-h-0"
-        }`}
-        style={{ maxHeight: isOpen ? contentRef.current?.scrollHeight : 0 }}
-      >
-        <div className="dropdown-content">{children}</div>
+  render() {
+    const { title, children } = this.props;
+    const { isOpen } = this.state;
+
+    return (
+      <div className="mb-4 dropdown overflow-hidden">
+        <button
+          onClick={this.toggleDropdown}
+          className={`w-full text-left dropdown-title transition uppercase tracking-widest border-b flex justify-between items-center ${isOpen ? "" : ""}`}
+        >
+          <p data-text={title}>{title}</p>
+          <img
+            className={`h-[10px] md:h-[15px] ${isOpen ? "" : "rotate-90"}`}
+            src={`${process.env.PUBLIC_URL}/assets/images/icons/triangle.png`}
+            alt=""
+          />
+        </button>
+        <div
+          ref={this.contentRef}
+          className={`transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? "" : "max-h-0"}`}
+          style={{ maxHeight: isOpen ? this.contentRef.current?.scrollHeight : 0 }}
+        >
+          <div className="dropdown-content">{children}</div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Dropdown;

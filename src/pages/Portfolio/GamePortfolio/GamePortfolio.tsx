@@ -23,10 +23,27 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
 
   componentDidMount() {
     this.startSlider();
+    const navbar = document.getElementById("navbar");
+    if (navbar) {
+      if(!navbar.classList.contains("bg-dark")) {
+        navbar.classList.add("bg-dark");
+      }
+    }
+    window.addEventListener('mousemove', this.handleMouseMove);
+  }
+
+  componentDidUpdate() {
+    const navbar = document.getElementById("navbar");
+    if (navbar) {
+      if(!navbar.classList.contains("bg-dark")) {
+        navbar.classList.add("bg-dark");
+      }
+    }
   }
 
   componentWillUnmount() {
     this.stopSlider();
+    window.removeEventListener('mousemove', this.handleMouseMove);
   }
 
   startSlider = () => {
@@ -51,14 +68,23 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
     this.setState({ isHovered: hovered });
   };
 
+  handleMouseMove = (e: MouseEvent) => {
+    const el = document.querySelector('.game-portfolio') as HTMLElement | null;
+    if (!el) return;
+    const dx = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+    const dy = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+    el.style.setProperty('--px', `${dx * 18}px`);
+    el.style.setProperty('--py', `${dy * 18}px`);
+  };
+
   render() {
     const { currentSlide } = this.state;
 
     return (
       <div className="game-portfolio max-w-screen-xl mx-auto">
-        <h2>Overview</h2>
+        <h2 className="animate__animated animate__fadeInDown">Overview</h2>
         {/* Grid Layout */}
-        <div className="grid grid-cols-3 lg:grid-cols-3 gap-2 lg:gap-4">
+        <div className="grid grid-cols-3 lg:grid-cols-3 gap-2 lg:gap-4 animate__animated animate__fadeInUp" style={{ animationDelay: '0.1s' }}>
           {/* Column 1: All Projects */}
           <Link 
             to={"/my-portfolio/game/projects"} 
@@ -97,10 +123,12 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
             </div>
 
             {/* Description Overlay */}
-            <div className="description-overlay">
+            <Link to={`/my-portfolio/game/projects/${encodeURIComponent(
+                      gameProjects.projectList[currentSlide].title.toLowerCase().replace(/\s+/g, "-")
+                    )}`} className="description-overlay">
               <h2>{gameProjects.projectList[currentSlide].title}</h2>
               <p>{gameProjects.projectList[currentSlide].description}</p>
-            </div>
+            </Link>
 
             {/* Slider Indicator */}
             <div className="slider-indicator">

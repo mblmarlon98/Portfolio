@@ -10,7 +10,7 @@ export default class Navbar extends React.Component < NavbarProps > {
         return (
             <nav id="navbar">
                 <div className="max-w-screen-xl flex items-center justify-between mx-auto">
-                    <div className="flex justify-between w-full items-end md:justify-center md:w-auto">
+                    <div className="flex justify-between w-full items-center md:w-auto">
                         <Link to="/" className="flex items-center logo">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

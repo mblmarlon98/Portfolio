@@ -45,7 +45,8 @@ $breakpoints: (
 
 
     .logo {
-      border: inset;
+      border: 2px solid black;
+      transition: all 0.2s ease;
     }
     svg {
       height: 20px;
@@ -86,6 +87,9 @@ $breakpoints: (
         fill: white;
       }
 
+      .logo {
+        border-color: white;
+      }
   
     }
 

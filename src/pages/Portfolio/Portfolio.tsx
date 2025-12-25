@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "../../utils/withRouter"; // Import the custom HOC
+import { Link } from "react-router-dom";
 import "./Portfolio.scss";
 
 class Portfolio extends React.Component<any> {
@@ -9,6 +9,8 @@ class Portfolio extends React.Component<any> {
   };
 
   inactivityTimer: NodeJS.Timeout | null = null;
+  webLinkRef = React.createRef<HTMLAnchorElement>();
+  gameLinkRef = React.createRef<HTMLAnchorElement>();
 
   componentDidMount() {
     this.startHintCycle();
@@ -53,10 +55,8 @@ class Portfolio extends React.Component<any> {
   // Handle navigation based on the active side
   handleEnter = () => {
     const { activeSide } = this.state;
-    const { navigate } = this.props;
-
-    if (activeSide === "web") navigate("/my-portfolio/web");
-    if (activeSide === "game") navigate("/my-portfolio/game");
+    if (activeSide === "web") this.webLinkRef.current?.click();
+    if (activeSide === "game") this.gameLinkRef.current?.click();
   };
 
   // Reset the controller to the center on mouse leave
@@ -82,13 +82,9 @@ class Portfolio extends React.Component<any> {
         onMouseLeave={this.handleMouseLeave} // Reset controller position on mouse leave
       >
         {/* Left Side: Web Development */}
-        <div
-          className={`side web ${activeSide === "web" ? "active" : ""}`}
-          onMouseEnter={() => this.handleMouseEnterSide("web")}
-          onClick={() => this.props.navigate("/my-portfolio/web")}
-        >
+        <Link to="/my-portfolio/web" ref={this.webLinkRef} className={`side web ${activeSide === "web" ? "active" : ""}`} onMouseEnter={() => this.handleMouseEnterSide("web")}>
           <h1 className="title">Web Development</h1>
-        </div>
+        </Link>
 
         {/* Controller */}
         <div className={`controller ${activeSide} ${showHint ? "hint" : ""}`}>
@@ -100,13 +96,9 @@ class Portfolio extends React.Component<any> {
         </div>
 
         {/* Right Side: Game Development */}
-        <div
-          className={`side game ${activeSide === "game" ? "active" : ""}`}
-          onMouseEnter={() => this.handleMouseEnterSide("game")}
-          onClick={() => this.props.navigate("/my-portfolio/game")}
-        >
+        <Link to="/my-portfolio/game" ref={this.gameLinkRef} className={`side game ${activeSide === "game" ? "active" : ""}`} onMouseEnter={() => this.handleMouseEnterSide("game")}>
           <h1 className="title">Game Development</h1>
-        </div>
+        </Link>
 
         {/* Friendly Indicator */}
         <div className="friendly-indicator">
@@ -117,4 +109,4 @@ class Portfolio extends React.Component<any> {
   }
 }
 
-export default withRouter(Portfolio);
+export default Portfolio;

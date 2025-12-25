@@ -4,10 +4,10 @@ import { ProjectDetail } from "../../types/Project";
 import GameWrapper from "../GameWrapper/GameWrapper";
 import Progressbar from '../Progressbar/Progressbar';
 import Dropdown from "../Dropdown/Dropdown";
-import ScreenshotSection from "./Sections/Screenshots";
 import { gameProjects } from "../../data/gameProjects";
 import { Link } from "react-router-dom";
 import LightBox from "../Box/LightBox/LightBox";
+import ScreenshotSection from "./Sections/Screenshots";
 import StickerBox from "../Box/StickerBox/StickerBox";
 import Footer from "../Footer/Footer";
 import DOMPurify from 'dompurify';
@@ -32,6 +32,14 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
     componentDidMount() {
         this.animateProgressBar();
+        const navbar = document.getElementById('navbar');
+        if (navbar && !navbar.classList.contains('bg-dark')) {
+          navbar.classList.add('bg-dark');
+        }
+        window.addEventListener('mousemove', this.handleMouseMove as any);
+    }
+    componentWillUnmount(): void {
+        window.removeEventListener('mousemove', this.handleMouseMove as any);
     }
 
   animateProgressBar = () => {
@@ -105,6 +113,15 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
     );
   };
 
+  handleMouseMove = (e: MouseEvent) => {
+    const el = document.querySelector('.project-detail') as HTMLElement | null;
+    if (!el) return;
+    const dx = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+    const dy = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+    el.style.setProperty('--px', `${dx * 18}px`);
+    el.style.setProperty('--py', `${dy * 18}px`);
+  };
+
   renderChallenges = () => {
     const { challenges } = this.props.projectDetail;
 
@@ -166,8 +183,8 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
     const safeRulesHTML = DOMPurify.sanitize(projectDetail.rules as string);
 
     return (
-      <div className="project-detail xl:w-2/3 mx-auto">
-        <header className="project-header text-center mb-4">
+      <div className="project-detail xl:w-2/3 mx-auto animate__animated animate__fadeInUp">
+        <header className="project-header text-center mb-4 animate__animated animate__fadeInDown">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <h1 className="">{projectDetail.title}</h1>
@@ -180,7 +197,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
         </header>
 
         {/* Section With basic information  */}
-        <section>
+        <section className="animate__animated animate__fadeInUp" style={{ animationDelay: '0.15s' }}>
             <div className="grid grid-cols-4 gap-4">
                 <div className="col-span-4 order-2 lg:col-span-3 lg:order-1">
 
@@ -208,7 +225,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
                 </div>
                 <div className="col-span-4 lg:col-span-1 lg:border-l lg:pl-4 order-1 lg:order-2">
-                    <div className="block md:grid md:grid-cols-2 lg:grid-cols-1 gap-4">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-4">
                         <div>
                             <LightBox>
                                 <div className="flex justify-between items-center">
@@ -244,7 +261,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                                 <LightBox>
                                     <div className="flex justify-between items-center">
                                         <b>Tools:</b> 
-                                        <div className="flex flex-row w-full justify-end">
+                                        <div className="flex flex-row w-full justify-end overflow-scroll">
                                             { projectDetail.tools.map((tool, idx) => {
                                                 return (
                                                     <div className="ml-3">
@@ -278,9 +295,18 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
 
 
 
-        {/* Screenshots */}
+        {/* Playable Game */}
+        <section>
+            <div className="flex justify-center">
+                <div className="w-full md:w-5/6 lg:w-3/4">
+                    <GameWrapper folderName={projectDetail.folderName} />
+                </div>
+            </div>
+        </section>
+
+        {/* Screenshots under the game */}
         {projectDetail.screenshots && projectDetail.screenshots.length > 0 && (
-            <ScreenshotSection screenshots={projectDetail.screenshots} />
+          <ScreenshotSection screenshots={projectDetail.screenshots} />
         )}
   
 
@@ -290,17 +316,15 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
             {this.renderChallenges()}
         </section>
 
-        <div className="hidden md:block">
-            <GameWrapper folderName={projectDetail.folderName} />
-        </div>
+        {/* Removed duplicate GameWrapper at bottom */}
 
         {projectDetail.resources && projectDetail.resources.length > 0 && (
         <section>
             <h3 className="border-b mb-6">
                 References
             </h3>
-            <div className="grid rid-cols-1 lg:grid-cols-2 lg:gap-4">
-                <Dropdown title="References">
+            <Dropdown title="References">   
+                <div className="grid rid-cols-1 lg:grid-cols-2 lg:gap-4">
                     {projectDetail.resources.map((resource, idx) => {
                         return (
                             <div key={`resource${idx + 1}`} className={`${idx >= 1 ? "mt-6 " : ""} flex justify-between flex-col`}>
@@ -313,15 +337,15 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                             </div>
                         )
                     })}
-                </Dropdown>
-            </div>
+                </div>
+            </Dropdown>
         </section>
 
         )}
 
         <section>
             <div className="border-b flex justify-between items-center mb-6">
-                <h3 className="text-3xl">More Porjects</h3>
+                <h3 className="text-3xl">More Projects</h3>
                 <Link to="/my-portfolio/game/projects">
                     View all
                 </Link>

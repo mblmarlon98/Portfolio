@@ -12,9 +12,20 @@ export interface ProjectCardProps {
     type?: string;
     index?: number;
     year?: string;
+    url?: string;
 }
 
 export default class ProjectCard extends React.Component<ProjectCardProps> {
+
+    resolveUrl(url: string): string {
+        let resolvedUrl = "";
+        if (url.toLowerCase().includes("web")) {
+            resolvedUrl = "/my-portfolio/web/";
+        } else if (url.toLowerCase().includes("game")) {
+            resolvedUrl = "/my-portfolio/game/projects/" +encodeURIComponent(this.props.title.toLowerCase().replace(/\s+/g, "-"));
+        }
+        return resolvedUrl
+    }
   public render() {
     const idx = this.props.index || 1;
     return (
@@ -43,7 +54,7 @@ export default class ProjectCard extends React.Component<ProjectCardProps> {
                 </div>
             </div>
             <div className="content-btn">
-                <Link to="/my-portfolio/web/project-1" className="text-center btn btn-white">View Project</Link>
+                <Link to={this.resolveUrl(this.props.url ? this.props.url : this.props.type || "")} className="text-center btn btn-black">View Project</Link>
             </div>
         </div>
     );

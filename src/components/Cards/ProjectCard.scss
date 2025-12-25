@@ -20,14 +20,24 @@ $breakpoints: (
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    // overflow: hidden;
     border-radius: 0px 10px 0px 10px;
+
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-7px);
+    }
 
     @media screen and (min-width: #{breakpoint(md)}) {
         border-radius: 0px 20px 0px 20px;
     }
 
     .type {
+        border-left: inset;
+        border-bottom: inset;
+        border-color: #681876;
+
         position: absolute;
         display: flex;
         justify-content: center;
@@ -56,7 +66,7 @@ $breakpoints: (
                 padding: 0 1rem 1rem 1rem;
             }
             @media screen and (min-width: #{breakpoint(xl)}) {
-                padding: 20px;
+                padding: 0 1.5rem 1.5rem 1.5rem;
             }
         }
         &-btn {
@@ -65,7 +75,7 @@ $breakpoints: (
                 padding: 0 1rem 1rem 1rem;
             }
             @media screen and (min-width: #{breakpoint(xl)}) {
-                padding: 20px;
+                padding: 0 1.5rem 1.5rem 1.5rem;
             }
         }
     }
@@ -77,10 +87,14 @@ $breakpoints: (
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 0px 0px 20px black;
+        border-radius: 0px 10px 0px 10px;
+
 
         img {
             width: 100%;
-            object-fit: fill;
+            object-fit: cover;
+            height: 100%;
         }
 
 

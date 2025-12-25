@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { Component, createRef } from 'react';
 import './FactsSection.scss'; 
 import { removeWhitespace } from '../../../utils/removeWhitespace';
 import { Link } from 'react-router-dom';
@@ -16,69 +16,70 @@ interface FactsSectionProps {
     facts: string[];
 }
 
-function FactsSection(props: FactsSectionProps) {
-    // State and refs initialization
-    const [linePositions, setLinePositions] = useState<{ x1: number; y1: number; x2: number; y2: number; }[]>([]);
-    const lineRefs = useRef<(SVGLineElement | null)[]>([]);
+type FactsSectionState = {
+  linePositions: { x1: number; y1: number; x2: number; y2: number; }[];
+};
 
-    // Box data for each row
-    const boxesRow1: Box[] = [
-        new Box(props.facts[0], 't-l'),
-        new Box(props.facts[1],'t-x-center'),
-        new Box(props.facts[2], 't-r'),
-    ];
+class FactsSection extends Component<FactsSectionProps, FactsSectionState> {
+    lineRefs = createRef<(SVGLineElement | null)[]>();
 
-    const boxesRow2: Box[] = [
-        new Box(props.facts[3],'l-y-center'),
-        new Box(props.facts[4],'r-y-center'),
-    ];
+    constructor(props: FactsSectionProps) {
+        super(props);
+        this.state = { linePositions: [] };
+    }
 
-    const boxesRow3: Box[] = [
-        new Box(props.facts[5], 'b-l'),
-        new Box(props.facts[6],'b-x-center'),
-        new Box(props.facts[7], 'b-r'),
-    ];
+    componentDidMount() {
+        this.calculateLinePositions();
+        window.addEventListener('resize', this.calculateLinePositions);
+        setTimeout(this.calculateLinePositions, 0);
+    }
 
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.calculateLinePositions);
+    }
 
-    useEffect(() => {
-        // Initialize AOS
-        // @ts-ignore
-        // Calculate line positions on mount and resize
-        const calculateLinePositions = () => {
+    calculateLinePositions = () => {
         const boxElements = document.querySelectorAll('.box');
         const imageElement = document.querySelector('.image-container');
-
         if (boxElements.length === 0 || !imageElement) return;
 
         const imageRect = imageElement.getBoundingClientRect();
         const imageCenterX = imageRect.left + imageRect.width / 2;
         const imageCenterY = imageRect.top + imageRect.height / 2;
 
-        const newLinePositions = Array.from(boxElements).map((boxElement, index) => {
+        const newLinePositions = Array.from(boxElements).map((boxElement) => {
             const boxRect = boxElement.getBoundingClientRect();
             const boxCenterX: number = boxRect.left + boxRect.width / 2;
             const boxCenterY = boxRect.top + boxRect.height / 2;
-
             return {
-            x1: boxCenterX - imageRect.left,
-            y1: boxCenterY - imageRect.top,
-            x2: imageCenterX - imageRect.left,
-            y2: imageCenterY - imageRect.top,
+                x1: boxCenterX - imageRect.left,
+                y1: boxCenterY - imageRect.top,
+                x2: imageCenterX - imageRect.left,
+                y2: imageCenterY - imageRect.top,
             };
         });
+        this.setState({ linePositions: newLinePositions });
+    };
 
-        setLinePositions(newLinePositions);
-        };
-
-        calculateLinePositions();
-        window.addEventListener('resize', calculateLinePositions);
-
-        return () => {
-        window.removeEventListener('resize', calculateLinePositions);
-        };
-    }, []);
-
-    return (
+    render() {
+        const props = this.props;
+        // Box data for each row
+        const boxesRow1: Box[] = [
+            new Box(props.facts[0], 't-l'),
+            new Box(props.facts[1],'t-x-center'),
+            new Box(props.facts[2], 't-r'),
+        ];
+        const boxesRow2: Box[] = [
+            new Box(props.facts[3],'l-y-center'),
+            new Box(props.facts[4],'r-y-center'),
+        ];
+        const boxesRow3: Box[] = [
+            new Box(props.facts[5], 'b-l'),
+            new Box(props.facts[6],'b-x-center'),
+            new Box(props.facts[7], 'b-r'),
+        ];
+        const { linePositions } = this.state;
+        return (
         <section className="flex flex-col items-center justify-center facts-section">
             
             {props.title && props.description && (
@@ -107,7 +108,6 @@ function FactsSection(props: FactsSectionProps) {
                         {linePositions.map((linePosition, index) => (
                         <line
                             key={index}
-                            ref={(el) => (lineRefs.current[index] = el)}
                             x1={linePosition.x1}
                             y1={linePosition.y1}
                             x2={linePosition.x2}
@@ -148,8 +148,9 @@ function FactsSection(props: FactsSectionProps) {
         </section>
     );
     }
+}
 
-    function renderBox({ text, classNames }: Box, index: number) {
+function renderBox({ text, classNames }: Box, index: number) {
         // Define the style for the box based on the provided x and y coordinates
 
     return (

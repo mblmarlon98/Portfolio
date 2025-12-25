@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Portfolio from './pages/Portfolio/Portfolio';
 import GamePortfolio from "./pages/Portfolio/GamePortfolio/GamePortfolio";
@@ -8,10 +8,10 @@ import ProjectDetailComponent from "./components/ProjectDetailComponent/ProjectD
 import { ProjectDetail } from './types/Project';
 import "./globalStyles.scss";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
-import WebPortfolio from "./pages/Portfolio/WebPortfolio.tsx/WebPortfolio";
+import WebPortfolio from "./pages/Portfolio/WebPortfolio/WebPortfolio";
 import GameProjects from './pages/Projects/GameProjects/GameProjects';
 import AboutMe from "./pages/AboutMe/AboutMe";
+import NotFound from "./pages/NotFound";
 
 class Router extends Component {
     componentDidMount() {
@@ -37,7 +37,7 @@ class Router extends Component {
     render() {
         return (
             <div>
-                <HashRouter>
+                <BrowserRouter>
                     <Navbar />
                     <Routes>
                         {/* Home */}
@@ -62,8 +62,11 @@ class Router extends Component {
                                 element={<ProjectDetailComponent projectDetail={project} />}
                             />
                         ))}
+
+                        {/* Fallback */}
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
-                </HashRouter>
+                </BrowserRouter>
             </div>
         );
     }

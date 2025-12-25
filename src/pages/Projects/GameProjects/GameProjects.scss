@@ -14,9 +14,196 @@ $breakpoints: (
 
 .game-projects {
     padding: 4rem 1rem 10px;
-    height: 100vh;
+    min-height: 100vh;
+    position: relative;
 
     @media screen and (min-width: breakpoint(md)) {
         padding-top: 8rem ;
+    }
+
+    /* Animated background: moving grid + soft glow */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          radial-gradient(40% 40% at 15% 20%, rgba(33,150,243,0.10), transparent 60%),
+          radial-gradient(35% 35% at 85% 25%, rgba(0,0,0,0.12), transparent 60%),
+          radial-gradient(45% 45% at 75% 80%, rgba(69,69,73,0.12), transparent 65%);
+        background-size: 140% 140%, 130% 130%, 150% 150%;
+        background-position: 0% 0%, 100% 0%, 100% 100%;
+        animation: blobDrift 30s ease-in-out infinite alternate;
+        pointer-events: none;
+        transform: translate(var(--px, 0px), var(--py, 0px));
+        transition: transform 0.08s ease-out;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.06'/></svg>"),
+          repeating-radial-gradient(circle at 0 0, rgba(255,255,255,0.04) 0 2px, transparent 3px 40px),
+          repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 4px, transparent 4px 20px),
+          radial-gradient(ellipse at center, transparent 62%, rgba(0,0,0,0.22) 100%);
+        background-size: 140px 140px, 600px 600px, 800px 800px, 100% 100%;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+        animation: gridDrift 22s linear infinite;
+        mix-blend-mode: overlay;
+        opacity: 0.12;
+        pointer-events: none;
+        transform: translate(calc(var(--px, 0px) * 1.5), calc(var(--py, 0px) * 1.5));
+        transition: transform 0.08s ease-out;
+    }
+    @keyframes blobDrift {
+        0% { background-position: 0% 0%, 100% 0%, 100% 100%; }
+        50% { background-position: 20% 10%, 90% 15%, 85% 85%; }
+        100% { background-position: 30% 20%, 80% 20%, 70% 90%; }
+    }
+    @keyframes gridDrift {
+        0% { background-position: 0 0, 0 0; }
+        100% { background-position: 600px 400px, 800px 600px; }
+    }
+
+    /* ensure content is above background layers */
+    > * { position: relative; z-index: 1; }
+
+    /* Reduced motion accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        &::before, &::after { animation: none !important; transform: none !important; }
+        .project-card .media img, .project-card:hover { transform: none !important; }
+        .project-card .overlay { transition: none !important; }
+    }
+
+    .project-item {
+        border: 1px solid black;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px #0000005e;
+        overflow: hidden;
+        background: #f7f7f7;
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.03);
+        }
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+        @media screen and (min-width: breakpoint(md)) {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        @media screen and (min-width: breakpoint(lg)) {
+            grid-template-columns: 1fr 1fr; /* wider cards */
+            gap: 1.5rem;
+        }
+    }
+
+    .project-card {
+        position: relative;
+        border: 1px solid black;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px #0000005e;
+        overflow: hidden;
+        background: #0d0d0d;
+        color: #fff;
+        transform: translateZ(0);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 4px 6px 18px #00000080;
+        }
+
+        .media {
+            position: relative;
+            height: 180px;
+            background: #000;
+            overflow: hidden;
+            @media screen and (min-width: breakpoint(md)) { height: 200px; }
+            @media screen and (min-width: breakpoint(lg)) { height: 220px; }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+
+            .media-gradient {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1) 60%, transparent);
+                pointer-events: none;
+            }
+        }
+
+        &:hover .media img { transform: scale(1.06); }
+
+        .content {
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            background: #131313;
+            color: #fff;
+            flex: 1 1 auto;
+        }
+
+        .title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            h3 { margin: 0; }
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .desc {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 3.6em; /* ~3 lines */
+        }
+
+        .content-main { flex: 1 1 auto; display: flex; flex-direction: column; gap: 0.5rem; }
+        .content-footer { margin-top: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+
+        .overlay {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            transform: translateY(100%);
+            transition: transform 0.35s ease;
+            background: rgba(255,255,255,0.95);
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: stretch;
+            color: #131313;
+        }
+
+        &:hover .overlay { transform: translateY(0); }
     }
 }

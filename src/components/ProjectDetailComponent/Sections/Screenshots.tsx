@@ -70,7 +70,7 @@ ScreenshotSectionState > {
 
         return (
             <section className="mb-6">
-                <h3 className="border-b mb-6">Screenshots</h3>
+                <h3 className="border-b">Screenshots</h3>
 
                 <div className="screenshot-section">
                     {/* Scrollable List */}
@@ -102,8 +102,8 @@ ScreenshotSectionState > {
 
                     {/* Active Image Display */}
                     <div className="active-image-display">
-                        <h2>{screenshots[activeIndex]
-                                ?.alt}</h2>
+                        <b>{screenshots[activeIndex]
+                                ?.alt}</b>
                         <div className="image-container">
                             <img
                                 src={screenshots[activeIndex]

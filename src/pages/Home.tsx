@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './Home.scss';
 import { Link } from 'react-router-dom';
 import Tooltip from '../components/Tooltip/Tooltip';
-import StickerBox from '../components/Box/StickerBox/StickerBox';
 import { projectsOverviewData } from '../data/projectsOverview';
 import FactsSection from '../components/Sections/FactsSection/FactsSection';
 import ProjectCard from '../components/Cards/ProjectCard';
@@ -124,7 +123,7 @@ class Home extends Component {
                 <section className="flex-row justify-center items-center">
                     <div className="bg-gradient"/>
                     <div className="w-full flex flex-row justify-between">
-                        <div className="w-2/3 xl:w-1/2 flex-start">
+                        <div className="w-2/3 xl:w-1/2 flex flex-col flex-start justify-center">
                             <div className="animate__animated">
                                 <b id="typing">{this.state.typingText}</b>
                             </div>
@@ -141,7 +140,7 @@ class Home extends Component {
                         <div className="flex justify-center items-center">
                             <Link
                                 to="about-me"
-                                className="btn btn-white font-medium">About me</Link>
+                                className="btn btn-bounce font-medium">About me</Link>
                         </div>
                     </div>
                 </section>
@@ -235,7 +234,7 @@ class Home extends Component {
                             <h2 className="font-bold text-center">Recent Projects</h2>
                             <p className="text-center text-gray-600 lg:mt-4 hidden md:block">Explore some of my most recent projects.</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:mt-8">
+                        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:mt-8">
                             {projectsOverviewData.projectList && projectsOverviewData.projectList.length > 0 && projectsOverviewData.projectList.map((project, idx) => {
                                 return (
                                     <ProjectCard

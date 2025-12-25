@@ -37,19 +37,19 @@ export default class ProjectCard extends React.Component<ProjectCardProps> {
                     </small>
                 </div>
             )}
+            {this.props.year && (
+                <div className='year'>
+                    {this.props.year}
+                </div>
+            )}
             <div>
                 <div className="img-wrapper shadow-lg">
                     <img src={this.props.img.url} alt={this.props.img.alt}/>
                 </div>
                 <div className='content-text'>
                     <div>
-                        <div className='md:flex justify-between items-end'>
-                            <h4 className="md:mt-4 font-bold truncate">{this.props.title}</h4>
-                            <div className='hidden md:inline'>
-                                <StickerBox>{this.props.year}</StickerBox>
-                            </div>
-                        </div>
-                        <p className="md:mt-2 text-gray-600 hidden sm:inline">{this.props.description}</p>
+                        <h4 className="font-bold truncate">{this.props.title}</h4>
+                        <p className="mt-2 text-gray-600 hidden sm:inline">{this.props.description}</p>
                     </div>
                 </div>
             </div>

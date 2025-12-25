@@ -143,9 +143,12 @@ font-size: 8px !important;
     &-black {
         background-color: black;
         color: white;
+        border: 1px solid black;
+
         &:hover {
-            background-color: #1f1f1f;
-            color: white;
+            box-shadow: none;
+            border: 1px solid #333;
+            background-color: #1a1a1a;
         }
     }
 

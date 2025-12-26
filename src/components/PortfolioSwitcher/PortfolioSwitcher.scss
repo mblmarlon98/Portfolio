@@ -1,0 +1,94 @@
+$breakpoints: (
+  "xs": 340px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  "2xl": 1536px,
+);
+
+@function breakpoint($size) {
+    @return map-get($breakpoints, $size);
+}
+
+.portfolio-switcher {
+  display: flex;
+  gap: 6px;
+  background: rgba(13, 13, 13, 0.95);
+  padding: 6px;
+  border-radius: 30px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(156, 39, 176, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(156, 39, 176, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 30px rgba(156, 39, 176, 0.2);
+    border-color: rgba(156, 39, 176, 0.4);
+  }
+
+  @media screen and (max-width: breakpoint(md)) {
+    padding: 5px;
+    gap: 4px;
+    border-radius: 25px;
+  }
+
+  .switcher-btn {
+    padding: 10px 20px;
+    border-radius: 22px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+
+    @media screen and (max-width: breakpoint(md)) {
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      border-radius: 18px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(156, 39, 176, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease;
+    }
+
+    &:hover {
+      background: rgba(156, 39, 176, 0.1);
+      border-color: rgba(156, 39, 176, 0.3);
+      color: #fff;
+
+      &::before {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+      color: white;
+      border-color: #9c27b0;
+      box-shadow: 0 4px 20px rgba(156, 39, 176, 0.5);
+      transform: scale(1.05);
+
+      &:hover {
+        background: linear-gradient(135deg, #ab47bc 0%, #8e24aa 100%);
+        box-shadow: 0 6px 25px rgba(156, 39, 176, 0.6);
+      }
+    }
+  }
+}

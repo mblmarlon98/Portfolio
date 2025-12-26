@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Read(//Users/marlonberdefy/Desktop/Projects/BerdefyMarlon.com/Website_new/berdefymarlon.com/src/views/**)",
+      "Bash(sed:*)",
+      "Bash(python3:*)",
+      "Read(//var/folders/y5/jk9b91tj5nj8qdhj6ndvptv00000gn/T/TemporaryItems/NSIRD_screencaptureui_RjMvEK/**)",
+      "Read(//var/folders/y5/jk9b91tj5nj8qdhj6ndvptv00000gn/T/TemporaryItems/NSIRD_screencaptureui_uF7u26/**)",
+      "Bash(npm start)",
+      "Read(//var/folders/y5/jk9b91tj5nj8qdhj6ndvptv00000gn/T/TemporaryItems/NSIRD_screencaptureui_3oOoNv/**)",
+      "Read(//var/folders/y5/jk9b91tj5nj8qdhj6ndvptv00000gn/T/TemporaryItems/NSIRD_screencaptureui_quP8ld/**)",
+      "Read(//var/folders/y5/jk9b91tj5nj8qdhj6ndvptv00000gn/T/TemporaryItems/NSIRD_screencaptureui_1xpB1h/**)"
     ],
     "deny": [],
     "ask": []

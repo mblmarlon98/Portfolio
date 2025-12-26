@@ -24,43 +24,822 @@ $breakpoints: (
       padding-bottom: 4rem;
     }
 
-    .portfolio-header {
-      text-align: center;
-      margin-bottom: 3rem;
+    /* Inventory Header */
+    .inventory-header {
+      max-width: 1280px;
+      margin: 0 auto 2rem;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #666;
+      border-radius: 4px;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Courier New', monospace;
+
+      .inventory-tabs {
+        display: flex;
+        gap: 10px;
+
+        .tab {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid #666;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          .tab-icon {
+            font-size: 1rem;
+          }
+
+          .tab-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+          }
+
+          &.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: #ffd700;
+
+            .tab-name {
+              color: #ffd700;
+            }
+          }
+
+          &.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+
+          &:not(.disabled):not(.active):hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+
+      .inventory-info {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 600;
+
+        .inventory-weight {
+          color: #ffd700;
+        }
+      }
+    }
+
+    /* Retro Gaming HUD */
+    .game-hud {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid #666;
+      font-family: 'Courier New', monospace;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      padding: 2px 20px;
 
       @media screen and (min-width: breakpoint(md)) {
-        margin-bottom: 4rem;
+        padding: 3px 40px;
       }
 
-      .main-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        color: white;
+      .hud-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .hud-left, .hud-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
 
         @media screen and (min-width: breakpoint(md)) {
-          font-size: 3.5rem;
-        }
-
-        @media screen and (min-width: breakpoint(lg)) {
-          font-size: 4rem;
+          gap: 15px;
         }
       }
 
-      .subtitle {
-        font-size: 1rem;
+      .hud-right {
+        justify-content: flex-end;
+      }
+
+      .hud-item {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+
+        @media screen and (min-width: breakpoint(md)) {
+          gap: 4px;
+        }
+
+        .hud-label {
+          font-size: 0.55rem;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 0.6);
+          letter-spacing: 0.3px;
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 0.6rem;
+          }
+        }
+
+        .hud-value {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: white;
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 0.75rem;
+          }
+        }
+
+        &.score-item {
+          position: relative;
+
+          .score-increase {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+            animation: score-popup 1.5s ease;
+            letter-spacing: 1px;
+
+            @media screen and (min-width: breakpoint(md)) {
+              font-size: 0.85rem;
+            }
+          }
+        }
+
+        &.hp-bar {
+          .hp-container {
+            width: 50px;
+            height: 8px;
+            background: #1a1a1a;
+            border: 1px solid #666;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+
+            @media screen and (min-width: breakpoint(md)) {
+              width: 70px;
+              height: 10px;
+            }
+
+            @media screen and (min-width: breakpoint(lg)) {
+              width: 90px;
+              height: 10px;
+            }
+
+            .hp-fill {
+              height: 100%;
+              transition: width 0.1s linear, background 0.3s ease, box-shadow 0.3s ease;
+            }
+          }
+        }
+      }
+    }
+
+    /* Pause Menu */
+    .pause-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+
+      .pause-menu-content {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #666;
+        border-radius: 4px;
+        padding: 40px;
+        max-width: 500px;
+        width: 90%;
+        font-family: 'Courier New', monospace;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+
+        .pause-title {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #ffd700;
+          text-align: center;
+          margin: 0 0 30px 0;
+          letter-spacing: 3px;
+          text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .pause-options {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 30px;
+
+          .pause-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #666;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+
+            &:hover {
+              background: rgba(255, 255, 255, 0.1);
+              border-color: white;
+              transform: translateX(10px);
+            }
+
+            .option-key {
+              font-weight: 700;
+              color: white;
+              background: rgba(255, 255, 255, 0.1);
+              padding: 4px 10px;
+              border: 1px solid #666;
+              border-radius: 2px;
+              min-width: 60px;
+              text-align: center;
+            }
+
+            .option-text {
+              color: rgba(255, 255, 255, 0.9);
+              flex: 1;
+            }
+          }
+        }
+
+        .pause-hint {
+          text-align: center;
+          font-size: 0.85rem;
+          color: rgba(255, 255, 255, 0.5);
+          margin: 0;
+          animation: blink 2s ease-in-out infinite;
+        }
+      }
+    }
+
+    /* Scan-line effect */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: scanline-move 8s linear infinite;
+      opacity: 0.3;
+    }
+
+    /* Quest Tracker - Top Right */
+    .quest-tracker {
+      position: fixed;
+      top: 160px;
+      right: 20px;
+      width: 280px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #666;
+      border-radius: 4px;
+      z-index: 90;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      font-family: 'Courier New', monospace;
+
+      @media screen and (min-width: breakpoint(md)) {
+        width: 320px;
+        right: 40px;
+      }
+
+      @media screen and (max-width: breakpoint(md)) {
+        display: none;
+      }
+
+      .quest-header {
+        background: rgba(255, 215, 0, 0.15);
+        border-bottom: 2px solid #666;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .quest-icon {
+          font-size: 1.2rem;
+          filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+        }
+
+        .quest-title {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #ffd700;
+          letter-spacing: 1px;
+          text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        }
+      }
+
+      .quest-content {
+        padding: 14px;
+
+        .quest-name {
+          font-size: 0.95rem;
+          color: white;
+          margin: 0 0 10px 0;
+          font-weight: 600;
+        }
+
+        .quest-objectives {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          .objective {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            border-left: 2px solid #666;
+            transition: all 0.3s ease;
+
+            &.completed {
+              color: rgba(0, 255, 0, 0.8);
+              border-left-color: #00ff00;
+              text-decoration: line-through;
+            }
+
+            &.active {
+              color: rgba(255, 215, 0, 0.9);
+              border-left-color: #ffd700;
+              background: rgba(255, 215, 0, 0.1);
+              animation: pulse-objective 2s ease-in-out infinite;
+            }
+          }
+        }
+      }
+    }
+
+    /* Controls Hint - Bottom Right */
+    .controls-hint {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #666;
+      border-radius: 4px;
+      z-index: 90;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      font-family: 'Courier New', monospace;
+      padding: 10px 12px;
+
+      @media screen and (min-width: breakpoint(md)) {
+        right: 40px;
+        bottom: 30px;
+      }
+
+      @media screen and (max-width: breakpoint(md)) {
+        display: none;
+      }
+
+      .hint-header {
+        font-size: 0.65rem;
+        font-weight: 700;
         color: rgba(255, 255, 255, 0.6);
-        font-weight: 400;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        text-align: center;
+        border-bottom: 1px solid #666;
+        padding-bottom: 6px;
+      }
 
-        @media screen and (min-width: breakpoint(md)) {
-          font-size: 1.1rem;
+      .hint-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .hint-key {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: white;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 2px 6px;
+          border: 1px solid #666;
+          border-radius: 2px;
+          min-width: 45px;
+          text-align: center;
+        }
+
+        .hint-action {
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.7);
         }
       }
-    } 
-  
+    }
+
+    /* Mini Stats - Bottom Left */
+    .mini-stats {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      gap: 12px;
+      z-index: 90;
+      font-family: 'Courier New', monospace;
+
+      @media screen and (min-width: breakpoint(md)) {
+        left: 40px;
+        bottom: 30px;
+        gap: 16px;
+      }
+
+      @media screen and (max-width: breakpoint(md)) {
+        display: none;
+      }
+
+      .stat-item {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #666;
+        border-radius: 4px;
+        padding: 10px 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        min-width: 80px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .stat-icon {
+          font-size: 1.2rem;
+          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+        }
+
+        .stat-label {
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.6);
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+        }
+
+        .stat-value {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: white;
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+      }
+    }
+
+
+
     > * { position: relative; z-index: 1; }
 
-.grid {
+    /* Inventory Slot Styling */
+    .inventory-slot {
+      position: relative;
+
+      /* Slot Corners */
+      .slot-corner {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-style: solid;
+        border-color: #666;
+        z-index: 10;
+        transition: border-color 0.3s ease;
+
+        &.top-left {
+          top: -2px;
+          left: -2px;
+          border-width: 2px 0 0 2px;
+        }
+
+        &.top-right {
+          top: -2px;
+          right: -2px;
+          border-width: 2px 2px 0 0;
+        }
+
+        &.bottom-left {
+          bottom: -2px;
+          left: -2px;
+          border-width: 0 0 2px 2px;
+        }
+
+        &.bottom-right {
+          bottom: -2px;
+          right: -2px;
+          border-width: 0 2px 2px 0;
+        }
+      }
+
+      /* Item Rarity Label */
+      .item-rarity {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 2px 6px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid;
+        border-radius: 2px;
+        z-index: 10;
+        letter-spacing: 0.5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        @media screen and (min-width: breakpoint(md)) {
+          font-size: 0.65rem;
+        }
+      }
+
+      /* Rarity Colors */
+      &[data-rarity="legendary"] {
+        .slot-corner {
+          border-color: #ff8800;
+        }
+
+        .item-rarity {
+          color: #ff8800;
+          border-color: #ff8800;
+          text-shadow: 0 0 8px rgba(255, 136, 0, 0.6);
+        }
+
+        &:hover .item-rarity {
+          opacity: 1;
+        }
+      }
+
+      &[data-rarity="epic"] {
+        .slot-corner {
+          border-color: #a335ee;
+        }
+
+        .item-rarity {
+          color: #a335ee;
+          border-color: #a335ee;
+          text-shadow: 0 0 8px rgba(163, 53, 238, 0.6);
+        }
+
+        &.epic {
+          color: #a335ee;
+          border-color: #a335ee;
+        }
+      }
+
+      &[data-rarity="rare"] {
+        .slot-corner {
+          border-color: #0070dd;
+        }
+
+        .item-rarity {
+          color: #0070dd;
+          border-color: #0070dd;
+          text-shadow: 0 0 8px rgba(0, 112, 221, 0.6);
+        }
+      }
+
+      &:hover .slot-corner {
+        border-color: white;
+      }
+    }
+
+    /* Featured Item Container - Full Width Slider */
+    .featured-item-container {
+      max-width: 1280px;
+      margin: 0 auto 2rem;
+
+      .featured-label {
+        font-family: 'Courier New', monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #ffd700;
+        letter-spacing: 2px;
+        text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+        margin-bottom: 0.5rem;
+        text-align: center;
+
+        @media screen and (min-width: breakpoint(md)) {
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    /* Inventory Items Grid */
+    .inventory-items-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      @media screen and (min-width: breakpoint(md)) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media screen and (min-width: breakpoint(lg)) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
+
+      /* Project Slots */
+      .project-slot {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        transition: all 0.3s ease;
+        text-decoration: none;
+
+        .project-thumbnail {
+          width: 100%;
+          height: 70%;
+          overflow: hidden;
+          margin-bottom: 0.5rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+        }
+
+        .project-name {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: white;
+          text-align: center;
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 0.95rem;
+          }
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.8);
+          transform: translateY(-4px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+
+          .project-thumbnail img {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      /* Skill Slots */
+      .skill-slot {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        transition: all 0.3s ease;
+        gap: 0.5rem;
+
+        .skill-icon-wrapper {
+          width: 60%;
+          height: 60%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+            transition: all 0.3s ease;
+          }
+        }
+
+        .skill-name {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: white;
+          text-align: center;
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 0.95rem;
+          }
+        }
+
+        .skill-experience {
+          font-size: 0.7rem;
+          color: rgba(255, 255, 255, 0.6);
+          font-family: 'Courier New', monospace;
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 0.75rem;
+          }
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.8);
+          transform: translateY(-4px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+
+          .skill-icon-wrapper svg {
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+            transform: scale(1.15);
+          }
+        }
+      }
+
+      /* All Projects Slot - Legendary */
+      .all-projects-slot {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.6);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        position: relative;
+
+        .slot-icon {
+          width: 40%;
+          height: 40%;
+          margin-bottom: 1rem;
+
+          svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+          }
+        }
+
+        .slot-text {
+          font-size: 1rem;
+          font-weight: 700;
+          color: white;
+          text-align: center;
+
+          @media screen and (min-width: breakpoint(md)) {
+            font-size: 1.1rem;
+          }
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.8);
+          transform: translateY(-4px);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6),
+                      0 0 30px rgba(255, 136, 0, 0.3);
+
+          .slot-icon svg {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+
+.inventory-grid {
       /* Menu Items */
       .menu-item {
         position: relative;
@@ -86,10 +865,38 @@ $breakpoints: (
         &.all-projects-btn {
           background: black;
           border-color: white;
+          position: relative;
+
+          /* Pixelated border effect */
+          &::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg,
+              transparent 48%,
+              white 48%,
+              white 52%,
+              transparent 52%
+            );
+            background-size: 8px 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border-radius: 4px;
+          }
+
+          &:hover::before {
+            opacity: 0.15;
+          }
 
           &:hover {
             background: #1a1a1a;
             border-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
+                        0 0 20px rgba(255, 255, 255, 0.1);
           }
 
           .btn-content {
@@ -134,6 +941,33 @@ $breakpoints: (
               transform: translateX(0);
             }
           }
+
+          /* Button prompt */
+          .button-prompt {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 8px;
+            border: 1px solid #666;
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            letter-spacing: 1px;
+
+            @media screen and (min-width: breakpoint(md)) {
+              font-size: 0.85rem;
+              padding: 6px 10px;
+            }
+          }
+
+          &:hover .button-prompt {
+            opacity: 1;
+          }
         }
         
         &-skills {
@@ -147,6 +981,30 @@ $breakpoints: (
 
           &:hover {
             border-color: white;
+          }
+
+          /* Achievement header for skills */
+          &::before {
+            content: '⭐ SKILLS UNLOCKED ⭐';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffff00;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 255, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 12px;
+            border: 2px solid #666;
+            border-radius: 2px;
+            z-index: 2;
+
+            @media screen and (min-width: breakpoint(md)) {
+              font-size: 0.8rem;
+            }
           }
 
           .web-dev-link {
@@ -164,35 +1022,23 @@ $breakpoints: (
             border-top: 1px solid #666;
             transition: all 0.3s ease;
             border-radius: 0 0 4px 4px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
 
             &:hover {
               background: rgba(255, 255, 255, 0.2);
               border-top-color: white;
             }
+
+            /* Add button prompt indicator */
+            &::before {
+              content: '[B] ';
+              color: rgba(255, 255, 255, 0.5);
+              font-size: 0.85rem;
+            }
           }
         }
 
-        &-overlay {
-          color: white;
-          bottom: 0;
-          height: 40%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 5px;
-          background-color: #131313;
-          padding: 10px;
-          
-          @media screen and (min-width: breakpoint(lg)) {
-            position: absolute;
-            height: 40%;
-            right: 0;
-            left: 0;
-            background-color: #0000006e;
-            border: 30px solid #454549;
-          }
-
-        }
       }
   
       /* Slider */
@@ -216,6 +1062,72 @@ $breakpoints: (
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
           border-color: white;
           transform: translateY(-2px);
+
+          .slider-controls {
+            opacity: 1;
+          }
+        }
+
+        /* Game-style label for slider */
+        .slider-label {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          z-index: 3;
+          background: rgba(0, 0, 0, 0.85);
+          border: 2px solid #666;
+          border-radius: 2px;
+          padding: 4px 12px;
+
+          .label-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ffff00;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 255, 0, 0.6);
+
+            @media screen and (min-width: breakpoint(md)) {
+              font-size: 0.75rem;
+            }
+          }
+        }
+
+        /* Slider navigation controls */
+        .slider-controls {
+          position: absolute;
+          bottom: 50px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 20px;
+          z-index: 3;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+
+          @media screen and (min-width: breakpoint(md)) {
+            padding: 0 30px;
+          }
+
+          .control-prompt {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            border: 1px solid #666;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+
+            @media screen and (min-width: breakpoint(md)) {
+              font-size: 0.85rem;
+              padding: 8px 14px;
+            }
+          }
         }
 
 
@@ -355,12 +1267,41 @@ $breakpoints: (
       transition: all 0.3s ease;
       background: rgba(255, 255, 255, 0.05);
       color: white;
+      position: relative;
+
+      /* Level-up notification */
+      &::after {
+        content: 'LEVEL UP!';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        font-family: 'Courier New', monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #00ff00;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+        letter-spacing: 1px;
+      }
 
       &:hover {
           border: 2px solid white;
           background: rgba(255, 255, 255, 0.1);
           transform: translateY(-4px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
+                      0 0 20px rgba(255, 255, 255, 0.15);
+          animation: level-up-shake 0.5s ease;
+
+          &::after {
+            animation: level-up-text 1.5s ease;
+          }
+
+          svg, img {
+            animation: level-up-icon 0.5s ease;
+          }
       }
 
       &:nth-child(even) {
@@ -379,6 +1320,8 @@ $breakpoints: (
       svg, img {
           width: 90px;
           height: auto;
+          filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+          transition: filter 0.3s ease;
       }
 
       p {
@@ -400,6 +1343,11 @@ $breakpoints: (
           p {
             font-size: 0.75rem;
           }
+
+          &::after {
+            font-size: 0.6rem;
+            top: -15px;
+          }
       }
 
       /* subtle float animation for icons */
@@ -411,4 +1359,99 @@ $breakpoints: (
   0% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
   100% { transform: translateY(0); }
+}
+
+@keyframes scanline-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes level-up-shake {
+  0%, 100% {
+    transform: translateY(-4px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+}
+
+@keyframes level-up-text {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px);
+  }
+}
+
+@keyframes level-up-icon {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+  }
+}
+
+@keyframes score-popup {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+}
+
+@keyframes pulse-objective {
+  0%, 100% {
+    background: rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    background: rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
 }

@@ -14,7 +14,8 @@ class Home extends Component {
         typingText: "",
         distanceScrolled: 0,
         changeColor: true,
-        scrollPosition: 0
+        scrollPosition: 0,
+        portfolioActiveSide: "none"
     };
 
     componentDidMount() {
@@ -52,6 +53,14 @@ class Home extends Component {
             : rect.top) / -rect.height) * 100)) < percentVisible || Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < percentVisible));
     };
 
+    handlePortfolioMouseEnter = (side: string) => {
+        this.setState({ portfolioActiveSide: side });
+    };
+
+    handlePortfolioMouseLeave = () => {
+        this.setState({ portfolioActiveSide: "none" });
+    };
+
     updateScroll = () => {
         const scrollContainer = document.getElementById('scroll_snap_container');
         const navbar = document.getElementById('navbar');
@@ -79,6 +88,8 @@ class Home extends Component {
         const sections = document.querySelectorAll('section');
         sections.forEach((section) => {
             const animatedDivs = section.querySelectorAll('div.animate__animated');
+            const animatedCards = section.querySelectorAll('.project-card.animate__animated');
+
             if (this.isPartiallyInViewport(section, 80)) {
                 animatedDivs.forEach(animatedDiv => {
                   if (animatedDiv.classList.contains("animate__fadeOutDown")) {
@@ -88,15 +99,24 @@ class Home extends Component {
                     animatedDiv.classList.remove("animate__fadeOutDownBig");
                     animatedDiv.classList.add("animate__fadeInUpBig");
                   } else if (animatedDiv.classList.contains("animate__fadeOutUp")) {
-                    animatedDiv.classList.remove("animate__fadeOutUp"); 
+                    animatedDiv.classList.remove("animate__fadeOutUp");
                     animatedDiv.classList.add("animate__fadeInDown");
                   } else if (animatedDiv.classList.contains("animate__fadeOutLeft")) {
                     animatedDiv.classList.remove("animate__fadeOutLeft");
                     animatedDiv.classList.add("animate__fadeInLeft");
                   }
                 })
-                
-                
+
+                animatedCards.forEach(card => {
+                  if (card.classList.contains("project-card--hidden")) {
+                    card.classList.remove("project-card--hidden");
+                    card.classList.add("animate__fadeInUp");
+                  } else if (card.classList.contains("animate__fadeOutDown")) {
+                    card.classList.remove("animate__fadeOutDown");
+                    card.classList.add("animate__fadeInUp");
+                  }
+                })
+
             } else {
               animatedDivs.forEach(animatedDiv => {
                 if (animatedDiv.classList.contains("animate__fadeInUp")) {
@@ -111,6 +131,13 @@ class Home extends Component {
                 } else if (animatedDiv.classList.contains("animate__fadeInLeft")) {
                   animatedDiv.classList.remove("animate__fadeInLeft");
                   animatedDiv.classList.add("animate__fadeOutLeft");
+                }
+              })
+
+              animatedCards.forEach(card => {
+                if (card.classList.contains("animate__fadeInUp")) {
+                  card.classList.remove("animate__fadeInUp");
+                  card.classList.add("animate__fadeOutDown");
                 }
               })
             }
@@ -174,6 +201,36 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+
+                <div className="portfolio-wrapper">
+                    <div className="portfolio-section" onMouseLeave={this.handlePortfolioMouseLeave}>
+                        <h1 className="portfolio-main-title">Portfolio</h1>
+                        <Link
+                            to="/my-portfolio/web"
+                            className={`side web ${this.state.portfolioActiveSide === "web" ? "active" : ""}`}
+                            onMouseEnter={() => this.handlePortfolioMouseEnter("web")}
+                        >
+                            <h1 className="title">Web Development</h1>
+                        </Link>
+                        <div className={`controller ${this.state.portfolioActiveSide}`}>
+                            <img
+                                src={`${process.env.PUBLIC_URL}/assets/images/icons/Controller.svg`}
+                                alt="Controller"
+                                className="controller-image"
+                            />
+                        </div>
+                        <Link
+                            to="/my-portfolio/game"
+                            className={`side game ${this.state.portfolioActiveSide === "game" ? "active" : ""}`}
+                            onMouseEnter={() => this.handlePortfolioMouseEnter("game")}
+                        >
+                            <h1 className="title">Game Development</h1>
+                        </Link>
+                        <div className="friendly-indicator">
+                            <p>Pick your interest: Web wizardry or game magic? 🧙🎮</p>
+                        </div>
+                    </div>
+                </div>
 
                 <FactsSection
                     title="What I Do"

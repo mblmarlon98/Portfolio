@@ -23,9 +23,13 @@ $breakpoints: (
 .partial-book-slider {
     perspective: 70em;
     height: 70vh;
+    width: 100%;
+    overflow: visible;
 
     @media screen and (max-width: breakpoint(sm)) {
-        height: 70vh;
+        height: auto;
+        min-height: 50vh;
+        perspective: none;
     }
     a {
         color: black !important;
@@ -79,19 +83,30 @@ $breakpoints: (
     color: white;
     box-shadow: 0 0 20px 0 #ffffff0a;
     height: 100%;
+    position: relative;
     @media screen and (max-width: breakpoint(sm)) {
-        height: 60vh;
+        height: auto;
+        min-height: 50vh;
     }
 
     .content {
         position: relative;
+        height: 100%;
         > .container-fluid {
             position: absolute;
             left: 0;
             right: 0;
-            overflow-x: scroll;
-            scrollbar-width: thick;
-            scrollbar-color: white;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+
+            @media screen and (max-width: breakpoint(sm)) {
+                overflow-y: auto;
+                position: relative;
+            }
         }
     }
 
@@ -168,10 +183,13 @@ $breakpoints: (
         transition: opacity 0.3s;
         transition-delay: 0.2s;
         padding: 30px;
+        @media screen and (max-width: breakpoint(md)) {
+            padding: 20px;
+        }
         @media screen and (max-width: breakpoint(sm)) {
             display: block;
             transform: rotateY(-0deg);
-            padding: 10px;
+            padding: 15px;
         }
     }
     .img-wrap {
@@ -210,16 +228,24 @@ $breakpoints: (
     }
     @media screen and (max-width: breakpoint(sm)) {
         width: 100%;
-        &:not(.flipepd) {
-            height: 30%;
+        position: relative;
+        height: auto !important;
+        min-height: 50vh;
+
+        &:not(.flipped) {
+            display: none;
         }
         &.flipped {
-            height: 60%;
-            transform-origin: 0 74.3% !important;
+            display: block;
+            transform-origin: center !important;
+            transform: none !important;
         }
         .content-wrap {
-            transform: rotateY(0deg) !important;
-            transform: rotateX(-180deg) !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+        .img-wrap {
+            display: none;
         }
     }
 }

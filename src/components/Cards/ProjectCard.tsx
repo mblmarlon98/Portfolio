@@ -29,7 +29,7 @@ export default class ProjectCard extends React.Component<ProjectCardProps> {
   public render() {
     const idx = this.props.index || 1;
     return (
-        <div key={`project-card-${idx + 1}`} className={`${(idx + 1 ) % 2 ? "animate__animated animate__fadeOutDown" : "animate__animated animate__fadeOutDownBig"} project-card`}>
+        <Link to={this.resolveUrl(this.props.url ? this.props.url : this.props.type || "")} key={`project-card-${idx + 1}`} className="project-card animate__animated project-card--hidden">
             {this.props.type && (
                 <div className='type'>
                     <small>
@@ -53,10 +53,7 @@ export default class ProjectCard extends React.Component<ProjectCardProps> {
                     </div>
                 </div>
             </div>
-            <div className="content-btn">
-                <Link to={this.resolveUrl(this.props.url ? this.props.url : this.props.type || "")} className="text-center btn btn-black">View Project</Link>
-            </div>
-        </div>
+        </Link>
     );
   }
 }

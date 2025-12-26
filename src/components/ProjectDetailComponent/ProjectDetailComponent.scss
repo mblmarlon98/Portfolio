@@ -11,13 +11,10 @@ $breakpoints: (
     @return map-get($breakpoints, $size);
 }
 
-.project-detail {
-  padding: 4rem 1rem 10px;
-  display: flex;
-  flex-direction: column;
-  font-family: "Arial", sans-serif;
-  position: relative;
+.project-detail-wrapper {
+  background: #0a0a0a;
   min-height: 100vh;
+  position: relative;
 
   /* Premium background: blobs + animated grid/noise */
   &::before {
@@ -55,6 +52,7 @@ $breakpoints: (
     transform: translate(calc(var(--px, 0px) * 1.5), calc(var(--py, 0px) * 1.5));
     transition: transform 0.08s ease-out;
   }
+
   @keyframes detailBlobDrift {
     0% { background-position: 0% 0%, 100% 0%, 100% 100%; }
     50% { background-position: 20% 10%, 90% 15%, 85% 85%; }
@@ -66,11 +64,16 @@ $breakpoints: (
   }
 
   > * { position: relative; z-index: 1; }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    &::before, &::after { animation: none !important; transform: none !important; }
-    .screenshot-section .image-item img, .active-image-display .image-container img { transition: none !important; transform: none !important; }
-  }
+.project-detail {
+  padding: 4rem 1rem 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Arial", sans-serif;
+  position: relative;
+  color: #e0e0e0;
+
   
   @media screen and (min-width: breakpoint(md)) {
     padding-top: 8rem;
@@ -89,14 +92,16 @@ $breakpoints: (
     .project-header {
       text-align: center;
       margin-bottom: 1.5rem;
-  
+
       h1 {
         font-weight: bold;
+        color: #00ff88;
+        text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
       }
-  
+
       p {
         font-size: 1rem;
-        color: #555;
+        color: #a0a0a0;
       }
     }
   

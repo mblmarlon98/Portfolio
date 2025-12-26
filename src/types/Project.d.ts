@@ -51,6 +51,8 @@ export type CodeScreenshot = {
     resources?: ProjectResource[]; // List of project resources
     tools?: string[]; // Tools, frameworks, or languages used
     folderName: string; // Folder name for embedding the game
+    hasDemo?: boolean; // Whether the project has a playable demo
+    demoUrl?: string; // URL to the demo (for WebGL builds)
   };
 
 

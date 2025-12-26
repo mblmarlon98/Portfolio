@@ -34,15 +34,34 @@ export default class GameWrapper extends React.Component<GameWrapperProps, GameW
 
     onIframeLoad = () => {
         this.resizeToContent();
-        this.applyMuteState(this.state.muted);
+        // Start muted by default
+        this.applyMuteState(true);
         this.setupObserver();
+        this.disableUnityFullscreen();
         window.addEventListener('resize', this.resizeToContent);
         // Re-measure a few times after load in case the game boots async
         let ticks = 0;
         const recheck = setInterval(() => {
             this.resizeToContent();
+            this.applyMuteState(this.state.muted);
             if (++ticks > 10) clearInterval(recheck);
         }, 150);
+    };
+
+    disableUnityFullscreen = () => {
+        const doc = this.iframeRef.current?.contentDocument || this.iframeRef.current?.contentWindow?.document;
+        if (!doc) return;
+        // Hide Unity's built-in fullscreen button
+        const fullscreenBtn = doc.querySelector('#unity-fullscreen-button') as HTMLElement;
+        if (fullscreenBtn) fullscreenBtn.style.display = 'none';
+
+        // Prevent canvas click from triggering fullscreen
+        const canvas = doc.querySelector('canvas');
+        if (canvas) {
+            canvas.addEventListener('click', (e) => {
+                e.stopPropagation();
+            }, true);
+        }
     };
 
     setupObserver = () => {
@@ -52,6 +71,7 @@ export default class GameWrapper extends React.Component<GameWrapperProps, GameW
         this.observer = new MutationObserver(() => {
             this.applyMuteState(this.state.muted);
             this.resizeToContent();
+            this.disableUnityFullscreen();
         });
         this.observer.observe(doc, { childList: true, subtree: true });
     };

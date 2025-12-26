@@ -30,7 +30,8 @@ $breakpoints: (
     }
   
     .bg-gray-200 {
-      background-color: #e5e7eb; // Light gray background for the progress bar
+      background-color: rgba(40, 40, 40, 0.8);
+      border: 1px solid rgba(0, 255, 136, 0.2);
     }
   
     .rounded-full {

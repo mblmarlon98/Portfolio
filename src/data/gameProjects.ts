@@ -3,6 +3,65 @@ import { ProjectList } from "../types/Project";
 export const gameProjects: ProjectList = {
     projectList: [
       {
+        title: "In Too Deep",
+        type: "Underwater Exploration",
+        description: "A deep-sea diving adventure where you explore mysterious underwater environments, manage your oxygen, and encounter dangerous sea creatures. Features a comprehensive dialogue system, dynamic enemy AI, and immersive audio design.",
+        folderName: "in-too-deep",
+        img: { url: `${process.env.PUBLIC_URL}/assets/images/games/InTooDeep/thumbnail.png`, alt: "In Too Deep Game" },
+        year: "December 2024",
+        roles: ["Audio Design", "Enemy System", "UI Design", "Dialogue System"],
+        progress: 100,
+        hasDemo: true,
+        demoUrl: "/games/in-too-deep/index.html",
+        screenshots: [
+          { url: `${process.env.PUBLIC_URL}/assets/images/games/InTooDeep/menu.png`, alt: "Main Menu" },
+          { url: `${process.env.PUBLIC_URL}/assets/images/games/InTooDeep/gameplay.png`, alt: "Gameplay" },
+          { url: `${process.env.PUBLIC_URL}/assets/images/games/InTooDeep/Dialogue.png`, alt: "Dialogue System" },
+        ],
+        features: [
+          {
+            title: "Dialogue System",
+            featureDetails: [{
+              name: "Operator Communication",
+              description: "A sophisticated dialogue system featuring operator-to-player communication with sequential navigation, keyboard shortcuts, and quest integration. The system includes automatic dialogue triggers and tracks conversation progress.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+          {
+            title: "Enemy AI System",
+            featureDetails: [{
+              name: "Dynamic Enemy Behavior",
+              description: "State-based enemy AI with customizable behaviors through ScriptableObjects. Enemies react to player presence with patrol, chase, and attack states.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+          {
+            title: "Audio Design",
+            featureDetails: [{
+              name: "Immersive Soundscape",
+              description: "Comprehensive audio implementation including ambient underwater sounds, enemy audio cues, UI feedback, and dialogue integration.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+          {
+            title: "UI System",
+            featureDetails: [{
+              name: "Game Interface",
+              description: "Complete UI system including HUD elements, quest tracking, dialogue panels, pause menus, and depth counters for enhanced player experience.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+        ],
+        challenges: [],
+        tools: ["Unity", "C#", "FMOD", "Photoshop"],
+        rules: "Explore the depths, manage your oxygen supply, complete quests, and survive encounters with dangerous underwater creatures.",
+        resources: [],
+      },
+      {
         title: "Messi vs Ronaldo",
         type: "Pong Game",
         description: `An icon of the gaming industry meets two living legends. Pong X Ronaldo & Messi combines the timeless charm of the classic Pong with football-inspired obstacles and power-ups. This game is the perfect conflict solver on the go the eternal "Who is the Goat?". Simply chose your favorite and play it out!`,

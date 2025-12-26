@@ -183,7 +183,8 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
     const safeRulesHTML = DOMPurify.sanitize(projectDetail.rules as string);
 
     return (
-      <div className="project-detail xl:w-2/3 mx-auto animate__animated animate__fadeInUp">
+      <div className="project-detail-wrapper">
+      <div className="project-detail max-w-screen-xl mx-auto animate__animated animate__fadeInUp">
         <header className="project-header text-center mb-4 animate__animated animate__fadeInDown">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -375,6 +376,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
         </section>
 
         <Footer/>
+      </div>
       </div>
     );
   }

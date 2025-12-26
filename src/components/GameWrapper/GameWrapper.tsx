@@ -192,8 +192,8 @@ export default class GameWrapper extends React.Component<GameWrapperProps, GameW
                         src={src}
                         title="Playable Game"
                         onLoad={this.onIframeLoad}
-                        style={{ border: 'none', display: 'block' }}
-                        allowFullScreen
+                        style={{ border: 'none', display: 'block', height: '50vh'}}
+                        allowFullScreen = {false}
                     />
                 </div>
             </section>

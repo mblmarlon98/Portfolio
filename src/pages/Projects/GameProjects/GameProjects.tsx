@@ -15,18 +15,22 @@ export default class GameProjects extends React.Component<GameProjectsProps> {
     if (navbar && !navbar.classList.contains('bg-dark')) {
       navbar.classList.add('bg-dark');
     }
+    // Add attribute to keep bg-dark class
+    navbar?.setAttribute('data-keep-dark', 'true');
     window.addEventListener('mousemove', this.handleMouseMove as any);
   }
   componentWillUnmount(): void {
+    const navbar = document.getElementById('navbar');
+    navbar?.removeAttribute('data-keep-dark');
     window.removeEventListener('mousemove', this.handleMouseMove as any);
   }
   public render() {
     return (
       <div>
         <div className='game-projects xl:w-2/3 mx-auto'>
-          <h1 className='border-b font-bold animate__animated animate__fadeInDown'>
+          <h4 className='projects-title text-center font-bold animate__animated animate__fadeInDown'>
             Projects
-          </h1>
+          </h4>
             {gameProjects.projectList && gameProjects.projectList.length > 0 ? (
               <div className='projects-grid'>
                 {gameProjects.projectList.map((project, idx) => {
@@ -58,9 +62,6 @@ export default class GameProjects extends React.Component<GameProjectsProps> {
                           {typeof project.progress === 'number' && (
                             <Progressbar progress={project.progress} />
                           )}
-                          <div className="mt-2">
-                            <Link to={`/my-portfolio/game/projects/${slug}`} className='btn btn-white w-full'>View Project</Link>
-                          </div>
                         </div>
                       </div>
                       <div className="overlay">

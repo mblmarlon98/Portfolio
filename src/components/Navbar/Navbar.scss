@@ -14,7 +14,7 @@ $breakpoints: (
 
 
 #navbar {
-    z-index: 99;
+    z-index: 1001;
     position: fixed;
     left: 0;
     right: 0;
@@ -90,7 +90,17 @@ $breakpoints: (
       .logo {
         border-color: white;
       }
-  
+
+      .btn-white {
+        background-color: white;
+        color: black;
+        border-color: white;
+
+        &:hover {
+          background-color: #cacaca;
+        }
+      }
+
     }
 
     @media screen and (max-width: 768px) {

@@ -45,7 +45,7 @@ $breakpoints: (
       radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%),
       repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
     pointer-events: none;
-    z-index: 999;
+    z-index: 10;
   }
 
   @keyframes cyber-bg-shift {

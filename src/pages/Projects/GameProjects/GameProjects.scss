@@ -21,54 +21,57 @@ $breakpoints: (
         padding-top: 8rem ;
     }
 
-    /* Animated background: moving grid + soft glow */
+    /* Cyberpunk grid background */
     &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background-image:
-          radial-gradient(40% 40% at 15% 20%, rgba(33,150,243,0.10), transparent 60%),
-          radial-gradient(35% 35% at 85% 25%, rgba(0,0,0,0.12), transparent 60%),
-          radial-gradient(45% 45% at 75% 80%, rgba(69,69,73,0.12), transparent 65%);
-        background-size: 140% 140%, 130% 130%, 150% 150%;
-        background-position: 0% 0%, 100% 0%, 100% 100%;
-        animation: blobDrift 30s ease-in-out infinite alternate;
-        pointer-events: none;
-        transform: translate(var(--px, 0px), var(--py, 0px));
-        transition: transform 0.08s ease-out;
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.05) 75%, rgba(255, 0, 255, 0.05) 76%, transparent 77%, transparent),
+          linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.05) 75%, rgba(255, 0, 255, 0.05) 76%, transparent 77%, transparent),
+          linear-gradient(135deg, #050010 0%, #0a0020 25%, #150030 50%, #0a0020 75%, #050010 100%);
+        background-size: 50px 50px, 50px 50px, 100% 100%;
+        background-position: 0 0, 0 0, 0 0;
+        animation: cyber-bg-shift 20s linear infinite;
+        z-index: -2;
     }
+
+    /* Cyberpunk vignette with scan lines */
     &::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background-image:
-          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.06'/></svg>"),
-          repeating-radial-gradient(circle at 0 0, rgba(255,255,255,0.04) 0 2px, transparent 3px 40px),
-          repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 4px, transparent 4px 20px),
-          radial-gradient(ellipse at center, transparent 62%, rgba(0,0,0,0.22) 100%);
-        background-size: 140px 140px, 600px 600px, 800px 800px, 100% 100%;
-        background-position: 0 0, 0 0, 0 0, 0 0;
-        animation: gridDrift 22s linear infinite;
-        mix-blend-mode: overlay;
-        opacity: 0.12;
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%),
+          repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
         pointer-events: none;
-        transform: translate(calc(var(--px, 0px) * 1.5), calc(var(--py, 0px) * 1.5));
-        transition: transform 0.08s ease-out;
+        z-index: 10;
     }
-    @keyframes blobDrift {
-        0% { background-position: 0% 0%, 100% 0%, 100% 100%; }
-        50% { background-position: 20% 10%, 90% 15%, 85% 85%; }
-        100% { background-position: 30% 20%, 80% 20%, 70% 90%; }
-    }
-    @keyframes gridDrift {
-        0% { background-position: 0 0, 0 0; }
-        100% { background-position: 600px 400px, 800px 600px; }
+
+    @keyframes cyber-bg-shift {
+        0% { background-position: 0 0, 0 0, 0 0; }
+        100% { background-position: 50px 50px, -50px -50px, 0 0; }
     }
 
     /* ensure content is above background layers */
     > * { position: relative; z-index: 1; }
+
+    .projects-title {
+        color: #00ff88;
+        text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+
+        @media screen and (min-width: breakpoint(md)) {
+            font-size: 3rem;
+        }
+    }
 
     /* Reduced motion accessibility */
     @media (prefers-reduced-motion: reduce) {
@@ -77,66 +80,53 @@ $breakpoints: (
         .project-card .overlay { transition: none !important; }
     }
 
-    .project-item {
-        border: 1px solid black;
-        border-radius: 5px;
-        box-shadow: 2px 2px 10px #0000005e;
-        overflow: hidden;
-        background: #f7f7f7;
-
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        &:hover img {
-            transform: scale(1.03);
-        }
-    }
-
     .projects-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
         margin-top: 1rem;
         @media screen and (min-width: breakpoint(md)) {
-            grid-template-columns: 1fr 1fr;
-            gap: 1.25rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
         }
         @media screen and (min-width: breakpoint(lg)) {
-            grid-template-columns: 1fr 1fr; /* wider cards */
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.25rem;
         }
     }
 
     .project-card {
         position: relative;
-        border: 1px solid black;
-        border-radius: 5px;
-        box-shadow: 2px 2px 10px #0000005e;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+        border-radius: 8px;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
         overflow: hidden;
-        background: #0d0d0d;
-        color: #fff;
+        background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9));
+        backdrop-filter: blur(10px);
+        color: #e0e0e0;
         transform: translateZ(0);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         display: flex;
         flex-direction: column;
 
         &:hover {
             transform: translateY(-4px);
-            box-shadow: 4px 6px 18px #00000080;
+            box-shadow:
+                0 8px 24px rgba(0, 255, 136, 0.2),
+                0 0 20px rgba(0, 255, 136, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 255, 136, 0.5);
         }
 
         .media {
             position: relative;
-            height: 180px;
+            height: 120px;
             background: #000;
             overflow: hidden;
-            @media screen and (min-width: breakpoint(md)) { height: 200px; }
-            @media screen and (min-width: breakpoint(lg)) { height: 220px; }
+            @media screen and (min-width: breakpoint(md)) { height: 130px; }
+            @media screen and (min-width: breakpoint(lg)) { height: 140px; }
 
             img {
                 width: 100%;
@@ -156,13 +146,23 @@ $breakpoints: (
         &:hover .media img { transform: scale(1.06); }
 
         .content {
-            padding: 0.75rem;
+            padding: 0.5rem;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            background: #131313;
-            color: #fff;
+            gap: 0.4rem;
+            background: linear-gradient(145deg, rgba(15, 15, 15, 0.95), rgba(5, 5, 5, 0.98));
+            color: #e0e0e0;
             flex: 1 1 auto;
+
+            h3 {
+                font-size: 0.95rem;
+            }
+
+            .desc {
+                font-size: 0.8rem;
+                -webkit-line-clamp: 2;
+                min-height: 2.4em;
+            }
         }
 
         .title-row {
@@ -195,13 +195,15 @@ $breakpoints: (
             left: 0; right: 0; bottom: 0;
             transform: translateY(100%);
             transition: transform 0.35s ease;
-            background: rgba(255,255,255,0.95);
+            background: linear-gradient(145deg, rgba(0, 255, 136, 0.15), rgba(0, 200, 100, 0.1));
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 255, 136, 0.4);
             padding: 0.75rem;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             align-items: stretch;
-            color: #131313;
+            color: #e0e0e0;
         }
 
         &:hover .overlay { transform: translateY(0); }

@@ -182,6 +182,14 @@ class Home extends Component {
                             <h2 className="font-bold text-center">Recent Projects</h2>
                             <p className="text-center text-gray-600 lg:mt-4 hidden md:block">Explore some of my most recent projects.</p>
                         </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 lg:mt-8 w-full">
+                            <a href="https://kaboona.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/images/kaboona-og.png`} alt="Kaboona FC" className="w-full h-auto" />
+                            </a>
+                            <a href="https://www.worldwideaudioguide.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                                <img src={`${process.env.PUBLIC_URL}/assets/images/images/audioguide-og.jpg`} alt="World Wide AudioGuide" className="w-full h-auto" />
+                            </a>
+                        </div>
                         <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:mt-8">
                             {projectsOverviewData.projectList && projectsOverviewData.projectList.length > 0 && projectsOverviewData.projectList.map((project, idx) => {
                                 return (

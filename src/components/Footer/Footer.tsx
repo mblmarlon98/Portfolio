@@ -10,7 +10,7 @@ class Footer extends Component {
                     <div className="w-1/3 flex justify-around">
                         <a
                             className="flex justify-between items-center"
-                            href="https://github.cosm/mblmarlon98"
+                            href="https://github.com/mblmarlon98"
                             target="_blank">
                             <img src={`${process.env.PUBLIC_URL}/assets/images/icons/github.svg`} className="h-[30px]" alt=""/>
                         </a>

@@ -8,37 +8,19 @@ import Tooltip from "../../../components/Tooltip/Tooltip";
 type GamePortfolioState = {
   currentSlide: number;
   isHovered: boolean;
-  hp: number;
-  score: number;
-  showScoreIncrease: boolean;
-  lastScoreIncrease: number;
-  showMenu: boolean;
-  isHudSticky: boolean;
 };
 
 class GamePortfolio extends React.Component<{}, GamePortfolioState> {
-  sliderInterval: NodeJS.Timeout | null = null;
-  hpInterval: NodeJS.Timeout | null = null;
-  scoreInterval: NodeJS.Timeout | null = null;
 
   constructor(props: {}) {
     super(props);
     this.state = {
       currentSlide: 0,
       isHovered: false,
-      hp: 50,
-      score: 999999,
-      showScoreIncrease: false,
-      lastScoreIncrease: 0,
-      showMenu: false,
-      isHudSticky: false,
     };
   }
 
   componentDidMount() {
-    this.startSlider();
-    this.startHpAnimation();
-    this.startScoreAnimation();
     const navbar = document.getElementById("navbar");
     if (navbar) {
       if(!navbar.classList.contains("bg-dark")) {
@@ -47,10 +29,6 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
     }
     window.addEventListener('mousemove', this.handleMouseMove);
     window.addEventListener('keydown', this.handleKeyPress);
-    window.addEventListener('scroll', this.handleScroll);
-
-    // Initial check for HUD position on mount
-    this.handleScroll();
   }
 
   componentDidUpdate() {
@@ -63,54 +41,9 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
   }
 
   componentWillUnmount() {
-    this.stopSlider();
-    if (this.hpInterval) clearInterval(this.hpInterval);
-    if (this.scoreInterval) clearInterval(this.scoreInterval);
     window.removeEventListener('mousemove', this.handleMouseMove);
     window.removeEventListener('keydown', this.handleKeyPress);
-    window.removeEventListener('scroll', this.handleScroll);
   }
-
-  startSlider = () => {
-    this.sliderInterval = setInterval(() => {
-      if (!this.state.isHovered) {
-        this.setState((prevState) => ({
-          currentSlide: (prevState.currentSlide + 1) % gameProjects.projectList.length,
-        }));
-      }
-    }, 4000);
-  };
-
-  stopSlider = () => {
-    if (this.sliderInterval) clearInterval(this.sliderInterval);
-  };
-
-  startHpAnimation = () => {
-    let time = 0;
-    this.hpInterval = setInterval(() => {
-      // Cosine wave animation: oscillates between 20 and 100
-      const hp = 60 + 40 * Math.cos(time * 0.05);
-      this.setState({ hp });
-      time++;
-    }, 100);
-  };
-
-  startScoreAnimation = () => {
-    this.scoreInterval = setInterval(() => {
-      // Randomly add points every 3-7 seconds
-      const randomPoints = Math.floor(Math.random() * 500) + 100;
-      this.setState(prevState => ({
-        score: prevState.score + randomPoints,
-        showScoreIncrease: true,
-        lastScoreIncrease: randomPoints,
-      }));
-
-      // Hide the score increase indicator after 1.5 seconds
-      setTimeout(() => {
-        this.setState({ showScoreIncrease: false });
-      }, 1500);
-    }, Math.random() * 4000 + 3000);
-  };
 
   navigateToSlide = (index: number) => {
     this.setState({ currentSlide: index });
@@ -129,39 +62,7 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
     el.style.setProperty('--py', `${dy * 18}px`);
   };
 
-  handleScroll = () => {
-    const hudContainer = document.querySelector('.hud-container-wrapper') as HTMLElement | null;
-    const navbar = document.getElementById('navbar') as HTMLElement | null;
-
-    if (!navbar || !hudContainer) return;
-
-    const navbarHeight = navbar.offsetHeight;
-    const containerRect = hudContainer.getBoundingClientRect();
-
-    // Switch to fixed when container reaches navbar position
-    if (containerRect.top <= navbarHeight && !this.state.isHudSticky) {
-      this.setState({ isHudSticky: true });
-    } else if (containerRect.top > navbarHeight && this.state.isHudSticky) {
-      this.setState({ isHudSticky: false });
-    }
-  };
-
-  getHpColor = (hp: number): string => {
-    if (hp < 33) return '#ff0000'; // Red
-    if (hp < 66) return '#ffff00'; // Yellow
-    return '#00ff00'; // Green
-  };
-
   handleKeyPress = (e: KeyboardEvent) => {
-    // ESC - Toggle menu
-    if (e.key === 'Escape') {
-      this.setState(prevState => ({ showMenu: !prevState.showMenu }));
-      return;
-    }
-
-    // Ignore keys if menu is open
-    if (this.state.showMenu) return;
-
     // Arrow keys - Navigate slides
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
@@ -184,97 +85,26 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
       )}`;
       window.location.href = projectPath;
     }
-    // A key - Navigate to all projects
-    else if (e.key === 'a' || e.key === 'A') {
-      window.location.href = '/my-portfolio/game/projects';
-    }
-    // B key - Navigate to web portfolio
-    else if (e.key === 'b' || e.key === 'B') {
-      window.location.href = '/my-portfolio/web';
-    }
   };
 
   render() {
-    const { currentSlide, hp, score, showScoreIncrease, lastScoreIncrease, showMenu, isHudSticky } = this.state;
-    const hpColor = this.getHpColor(hp);
+    const { currentSlide } = this.state;
 
     return (
       <div className="game-portfolio max-w-screen-xl mx-auto">
-        {/* Pause Menu */}
-        {showMenu && (
-          <div className="pause-menu">
-            <div className="pause-menu-content">
-              <h2 className="pause-title">GAME PAUSED</h2>
-              <div className="pause-options">
-                <button className="pause-option" onClick={() => this.setState({ showMenu: false })}>
-                  <span className="option-key">[ESC]</span>
-                  <span className="option-text">Resume</span>
-                </button>
-                <a href="/my-portfolio/game/projects" className="pause-option">
-                  <span className="option-key">[A]</span>
-                  <span className="option-text">All Projects</span>
-                </a>
-                <a href="/my-portfolio/web" className="pause-option">
-                  <span className="option-key">[B]</span>
-                  <span className="option-text">Web Portfolio</span>
-                </a>
-                <a href="/" className="pause-option">
-                  <span className="option-key">[H]</span>
-                  <span className="option-text">Home</span>
-                </a>
-              </div>
-              <p className="pause-hint">Press ESC to resume</p>
-            </div>
-          </div>
-        )}
-        {/* Cyberpunk HUD */}
-        <div className="hud-container-wrapper">
-          <div className={`game-hud ${isHudSticky ? 'sticky' : ''}`}>
-            <div className="hud-container max-w-screen-xl mx-auto">
-            <div className="hud-left">
-              <div className="hud-item">
-                <span className="hud-label">LVL</span>
-                <span className="hud-value">99</span>
-              </div>
-              <div className="hud-item hp-bar">
-                <span className="hud-label">HP</span>
-                <div className="hp-container">
-                  <div
-                    className="hp-fill"
-                    style={{
-                      width: `${hp}%`,
-                      background: `linear-gradient(to right, ${hpColor}, ${hpColor})`,
-                      boxShadow: `0 0 10px ${hpColor}80`
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-            <div className="hud-center">
-              <div className="hud-item hud-title">
-                <h4 className="hud-value">Game Dev Portfolio</h4>
-              </div>
-            </div>
-            <div className="hud-right">
-              <div className="hud-item score-item">
-                <span className="hud-label">SCORE</span>
-                <span className="hud-value">{score.toLocaleString()}</span>
-                {showScoreIncrease && <span className="score-increase">+{lastScoreIncrease}</span>}
-              </div>
-            </div>
-          </div>
-          </div>
+        {/* Page Title */}
+        <div className="page-title-wrapper">
+          <h1 className="page-title">Game Dev Portfolio</h1>
         </div>
 
         {/* Scan-line overlay */}
         <div className="scanlines"></div>
 
-
-        {/* Inventory Grid with 3 columns */}
-        <div className="inventory-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate__animated animate__fadeInUp" style={{ animationDelay: '0.3s' }}>
+        {/* Main Grid: 2 columns on lg */}
+        <div className="inventory-grid grid grid-cols-1 lg:grid-cols-3 gap-6 animate__animated animate__fadeInUp" style={{ animationDelay: '0.3s' }}>
 
           {/* Left Column - Slider and Skills */}
-          <div className="left-column col-span-1 md:col-span-2 lg:col-span-2 flex flex-col gap-6">
+          <div className="left-column col-span-1 lg:col-span-2 flex flex-col gap-6">
             {/* Featured Slider */}
             <div
               className="inventory-slot slider"
@@ -286,9 +116,9 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
             <div className="slot-corner bottom-left"></div>
             <div className="slot-corner bottom-right"></div>
 
-            {/* Game-style label */}
+            {/* Label */}
             <div className="slider-label">
-              <span className="label-text">PROJECT QUEST</span>
+              <span className="label-text">FEATURED PROJECTS</span>
             </div>
 
             {/* Overlay */}
@@ -333,10 +163,10 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
               ))}
             </div>
 
-            {/* Navigation button prompts */}
+            {/* Navigation arrows */}
             <div className="slider-controls">
-              <span className="control-prompt left">[←] PREV</span>
-              <span className="control-prompt right">[→] NEXT</span>
+              <span className="control-prompt left" onClick={() => this.setState(prev => ({ currentSlide: prev.currentSlide > 0 ? prev.currentSlide - 1 : gameProjects.projectList.length - 1 }))}>&#8592;</span>
+              <span className="control-prompt right" onClick={() => this.setState(prev => ({ currentSlide: (prev.currentSlide + 1) % gameProjects.projectList.length }))}>&#8594;</span>
             </div>
             </div>
 
@@ -346,11 +176,9 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
               <div className="slot-corner top-right"></div>
               <div className="slot-corner bottom-left"></div>
               <div className="slot-corner bottom-right"></div>
-              <div className="item-rarity">RARE</div>
 
               <div className="skills-header">
-                <span className="skills-icon">⭐</span>
-                <span className="skills-title">SKILLS UNLOCKED</span>
+                <span className="skills-title">SKILLS &amp; TOOLS</span>
               </div>
 
               <div className="flex-1 flex flex-wrap justify-center items-center gap-4">
@@ -384,17 +212,16 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
             </div>
           </div>
 
-          {/* Main Quest - Project List */}
+          {/* Project List */}
           <div className="quest-slot-wrapper">
             <div className="inventory-slot menu-item quest-slot">
             <div className="slot-corner top-left"></div>
             <div className="slot-corner top-right"></div>
             <div className="slot-corner bottom-left"></div>
             <div className="slot-corner bottom-right"></div>
-            <div className="item-rarity">EPIC</div>
 
             <div className="quest-header">
-              <span className="quest-title">PROJECT QUESTS</span>
+              <span className="quest-title">ALL PROJECTS</span>
             </div>
 
             <div className="quest-objectives-list">
@@ -419,49 +246,7 @@ class GamePortfolio extends React.Component<{}, GamePortfolioState> {
                 <path d="M9 15H3V21H9V15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>View All Projects</span>
-              <span className="button-prompt">[A]</span>
             </Link>
-            </div>
-          </div>
-
-          {/* Controls Box */}
-          <div className="inventory-slot menu-item controls-box col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="slot-corner top-left"></div>
-            <div className="slot-corner top-right"></div>
-            <div className="slot-corner bottom-left"></div>
-            <div className="slot-corner bottom-right"></div>
-            <div className="item-rarity">COMMON</div>
-
-            <div className="controls-header">
-              <span className="controls-icon">🎮</span>
-              <span className="controls-title">CONTROLS</span>
-            </div>
-
-            <div className="controls-grid">
-              <div className="control-item">
-                <span className="control-key">[←][→]</span>
-                <span className="control-action">Navigate</span>
-              </div>
-              <div className="control-item">
-                <span className="control-key">[SPACE]</span>
-                <span className="control-action">Select</span>
-              </div>
-              <div className="control-item">
-                <span className="control-key">[A]</span>
-                <span className="control-action">All Projects</span>
-              </div>
-              <div className="control-item">
-                <span className="control-key">[B]</span>
-                <span className="control-action">Web Portfolio</span>
-              </div>
-              <div className="control-item">
-                <span className="control-key">[H]</span>
-                <span className="control-action">Home</span>
-              </div>
-              <div className="control-item">
-                <span className="control-key">[ESC]</span>
-                <span className="control-action">Menu</span>
-              </div>
             </div>
           </div>
 

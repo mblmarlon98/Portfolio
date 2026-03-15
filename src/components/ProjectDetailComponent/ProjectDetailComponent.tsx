@@ -353,9 +353,10 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-4">
                 {gameProjects.projectList && gameProjects.projectList.length > 0 && gameProjects.projectList.map((project, index) => {
+                    const projectSlug = encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, "-"));
                     return (
-                        <LightBox>
-                            <div key={`project-${index + 1}`} className="h-full">
+                        <LightBox key={`project-${index + 1}`}>
+                            <div className="h-full">
                                 <div className="flex justify-center items-center">
                                     <img src={project.img.url} alt={project.img.alt} className="h-[50px] md:h-[150px]"/>
                                 </div>
@@ -365,7 +366,7 @@ class ProjectDetailComponent extends Component<ProjectDetailProps, ProjectDetail
                                     </div>
                                     <b>{project.title}</b>
                                     <div className="flex justify-center items-center">
-                                        <Link className="w-full text-center btn btn-light" to={""}>View Project</Link>
+                                        <Link className="w-full text-center btn btn-light" to={`/my-portfolio/game/projects/${projectSlug}`}>View Project</Link>
                                     </div>
                                 </div>
                             </div>

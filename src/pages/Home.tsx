@@ -15,14 +15,18 @@ class Home extends Component {
         distanceScrolled: 0,
         changeColor: true,
         scrollPosition: 0,
-        portfolioActiveSide: "none"
+        recentFilter: "Website" as "Game" | "Website",
+        pillsHinted: false,
     };
+
+    bannerAutoScrollDone = false;
 
     componentDidMount() {
         this.typeWriter();
         const scrollContainer = document.getElementById('scroll_snap_container');
         if (scrollContainer) {
             scrollContainer.addEventListener('scroll', this.updateScroll);
+            scrollContainer.addEventListener('scroll', this.handleBannerAutoScroll, { passive: true });
         }
     }
 
@@ -30,8 +34,21 @@ class Home extends Component {
         const scrollContainer = document.getElementById('scroll_snap_container');
         if (scrollContainer) {
             scrollContainer.removeEventListener('scroll', this.updateScroll);
+            scrollContainer.removeEventListener('scroll', this.handleBannerAutoScroll);
         }
     }
+
+    handleBannerAutoScroll = () => {
+        const container = document.getElementById('scroll_snap_container');
+        if (!container || this.bannerAutoScrollDone) return;
+        if (container.scrollTop <= 0 || container.scrollTop >= window.innerHeight * 0.5) return;
+        this.bannerAutoScrollDone = true;
+        const target = container.querySelector('.featured-projects') as HTMLElement | null;
+        if (target) {
+            const navHeight = document.getElementById('navbar')?.offsetHeight ?? 0;
+            container.scrollTo({ top: target.offsetTop - navHeight, behavior: 'smooth' });
+        }
+    };
 
     typeWriter = () => {
         const {i, txt, speed, typingText} = this.state;
@@ -53,17 +70,24 @@ class Home extends Component {
             : rect.top) / -rect.height) * 100)) < percentVisible || Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < percentVisible));
     };
 
-    handlePortfolioMouseEnter = (side: string) => {
-        this.setState({ portfolioActiveSide: side });
-    };
-
-    handlePortfolioMouseLeave = () => {
-        this.setState({ portfolioActiveSide: "none" });
+    setRecentFilter = (filter: "Game" | "Website") => {
+        this.setState({ recentFilter: filter }, () => {
+            // New cards mount hidden; trigger the visibility check immediately
+            // so they fade in without requiring a scroll event.
+            requestAnimationFrame(() => this.updateScroll());
+        });
     };
 
     updateScroll = () => {
         const scrollContainer = document.getElementById('scroll_snap_container');
         const navbar = document.getElementById('navbar');
+
+        if (!this.state.pillsHinted) {
+            const featured = document.querySelector('.featured-projects');
+            if (featured && this.isPartiallyInViewport(featured, 40)) {
+                this.setState({ pillsHinted: true });
+            }
+        }
 
         if (scrollContainer && navbar) {
             this.setState({scrollPosition: scrollContainer.scrollTop});
@@ -90,7 +114,7 @@ class Home extends Component {
             const animatedDivs = section.querySelectorAll('div.animate__animated');
             const animatedCards = section.querySelectorAll('.project-card.animate__animated');
 
-            if (this.isPartiallyInViewport(section, 80)) {
+            if (this.isPartiallyInViewport(section, 40)) {
                 animatedDivs.forEach(animatedDiv => {
                   if (animatedDiv.classList.contains("animate__fadeOutDown")) {
                     animatedDiv.classList.remove("animate__fadeOutDown");
@@ -116,30 +140,6 @@ class Home extends Component {
                     card.classList.add("animate__fadeInUp");
                   }
                 })
-
-            } else {
-              animatedDivs.forEach(animatedDiv => {
-                if (animatedDiv.classList.contains("animate__fadeInUp")) {
-                  animatedDiv.classList.remove("animate__fadeInUp");
-                  animatedDiv.classList.add("animate__fadeOutDown");
-                } else if (animatedDiv.classList.contains("animate__fadeInUpBig")) {
-                  animatedDiv.classList.remove("animate__fadeInUpBig");
-                  animatedDiv.classList.add("animate__fadeOutDownBig");
-                } else if (animatedDiv.classList.contains("animate__fadeInDown")) {
-                  animatedDiv.classList.remove("animate__fadeInDown");
-                  animatedDiv.classList.add("animate__fadeOutUp");
-                } else if (animatedDiv.classList.contains("animate__fadeInLeft")) {
-                  animatedDiv.classList.remove("animate__fadeInLeft");
-                  animatedDiv.classList.add("animate__fadeOutLeft");
-                }
-              })
-
-              animatedCards.forEach(card => {
-                if (card.classList.contains("animate__fadeInUp")) {
-                  card.classList.remove("animate__fadeInUp");
-                  card.classList.add("animate__fadeOutDown");
-                }
-              })
             }
         });
     };
@@ -182,18 +182,55 @@ class Home extends Component {
                             <h2 className="font-bold text-center">Recent Projects</h2>
                             <p className="text-center text-gray-600 lg:mt-4 hidden md:block">Explore some of my most recent projects.</p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 lg:mt-8 w-full">
-                            <a href="https://kaboona.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
-                                <img src={`${process.env.PUBLIC_URL}/assets/images/images/kaboona-og.png`} alt="Kaboona FC" className="w-full h-auto" />
-                            </a>
-                            <a href="https://www.worldwideaudioguide.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
-                                <img src={`${process.env.PUBLIC_URL}/assets/images/images/audioguide-og.jpg`} alt="World Wide AudioGuide" className="w-full h-auto" />
-                            </a>
+                        <div className="flex justify-center w-full mt-6 lg:mt-8">
+                            <div className={`filter-pills ${this.state.pillsHinted ? "is-hinting" : ""}`} role="tablist" aria-label="Recent projects filter">
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={this.state.recentFilter === "Game"}
+                                    className={`filter-pill ${this.state.recentFilter === "Game" ? "is-active" : ""}`}
+                                    onClick={() => this.setRecentFilter("Game")}
+                                >
+                                    <svg className="filter-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <path d="M6 11h4M8 9v4"/>
+                                        <circle cx="15.5" cy="11.5" r="0.6" fill="currentColor"/>
+                                        <circle cx="17.5" cy="13.5" r="0.6" fill="currentColor"/>
+                                        <path d="M17.32 6H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 10.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 6Z"/>
+                                    </svg>
+                                    Games
+                                </button>
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={this.state.recentFilter === "Website"}
+                                    className={`filter-pill ${this.state.recentFilter === "Website" ? "is-active" : ""}`}
+                                    onClick={() => this.setRecentFilter("Website")}
+                                >
+                                    <svg className="filter-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <rect x="2.5" y="4" width="19" height="13" rx="2"/>
+                                        <line x1="8.5" y1="21" x2="15.5" y2="21"/>
+                                        <line x1="12" y1="17" x2="12" y2="21"/>
+                                    </svg>
+                                    Websites
+                                </button>
+                            </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-12 lg:mt-8">
-                            {projectsOverviewData.projectList && projectsOverviewData.projectList.length > 0 && projectsOverviewData.projectList.map((project, idx) => {
-                                return (
+                        {this.state.recentFilter === "Website" && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 lg:mt-8 w-full">
+                                <a href="https://kaboona.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/images/kaboona-og.png`} alt="Kaboona FC" className="w-full h-auto" />
+                                </a>
+                                <a href="https://www.worldwideaudioguide.com/" target="_blank" rel="noopener noreferrer" className="block rounded-lg overflow-hidden transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
+                                    <img src={`${process.env.PUBLIC_URL}/assets/images/images/audioguide-og.jpg`} alt="World Wide AudioGuide" className="w-full h-auto" />
+                                </a>
+                            </div>
+                        )}
+                        <div className="recent-projects-grid grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 mt-8 lg:mt-14 w-full">
+                            {projectsOverviewData.projectList
+                                .filter((project) => project.type === this.state.recentFilter)
+                                .map((project, idx) => (
                                     <ProjectCard
+                                        key={`${this.state.recentFilter}-${project.title}`}
                                         title={project.title}
                                         description={project.description}
                                         index={idx}
@@ -201,44 +238,15 @@ class Home extends Component {
                                         type={project.type}
                                         year={project.year}
                                     />
-                                )
-                            })}
+                                ))}
                         </div>
-                        <div className='animate__animated animate__fadeOutDownBig text-center'>
-                            <Link to="/my-portfolio" className='btn btn-white'>View All Projects</Link>
+                        <div className='animate__animated animate__fadeOutDownBig text-center mt-16'>
+                            <Link to={this.state.recentFilter === "Game" ? "/my-portfolio/game" : "/my-portfolio/web"} className='btn btn-white'>
+                                View All {this.state.recentFilter === "Game" ? "Games" : "Websites"}
+                            </Link>
                         </div>
                     </div>
                 </section>
-
-                <div className="portfolio-wrapper">
-                    <div className="portfolio-section" onMouseLeave={this.handlePortfolioMouseLeave}>
-                        <h1 className="portfolio-main-title">Portfolio</h1>
-                        <Link
-                            to="/my-portfolio/web"
-                            className={`side web ${this.state.portfolioActiveSide === "web" ? "active" : ""}`}
-                            onMouseEnter={() => this.handlePortfolioMouseEnter("web")}
-                        >
-                            <h1 className="title">Web Development</h1>
-                        </Link>
-                        <div className={`controller ${this.state.portfolioActiveSide}`}>
-                            <img
-                                src={`${process.env.PUBLIC_URL}/assets/images/icons/Controller.svg`}
-                                alt="Controller"
-                                className="controller-image"
-                            />
-                        </div>
-                        <Link
-                            to="/my-portfolio/game"
-                            className={`side game ${this.state.portfolioActiveSide === "game" ? "active" : ""}`}
-                            onMouseEnter={() => this.handlePortfolioMouseEnter("game")}
-                        >
-                            <h1 className="title">Game Development</h1>
-                        </Link>
-                        <div className="friendly-indicator">
-                            <p>Pick your interest: Web wizardry or game magic? 🧙🎮</p>
-                        </div>
-                    </div>
-                </div>
 
                 <FactsSection
                     title="What I Do"
@@ -257,17 +265,23 @@ class Home extends Component {
                 />
 
 
-                <section>
+                <section className="contact-section">
                     <div
                         className="animate__animated animate__fadeOutDown flex flex-col justify-center items-center w-full">
-                        <div className="w-full md:w-1/2 text-center">
-                            <h1 className="mb-5">Get in touch!</h1>
-                            <p className="mb-5">What would you do if you had a developer at hand? Click the
-                                button bellow and let me know.</p>
-                            <div className="mt-5">
+                        <div className="w-full md:w-3/4 lg:w-2/3 text-center contact-card">
+                            <span className="contact-eyebrow">Let's collaborate</span>
+                            <h1 className="contact-title">Get in touch!</h1>
+                            <p className="contact-subtitle">
+                                Have a project in mind, a half-baked idea, or just a question? Drop me a line. I usually get back within a day.
+                            </p>
+                            <div className="contact-actions">
                                 <a
                                     href="mailto:berdefymarlon@gmail.com?subject=Project%20Inquiry%20from%20mbl.com&body=Hi%20Marlon,%0D%0A%0D%0AI%20am%20reaching%20out%20regarding%20a%20potential%20project.%20I've%20had%20the%20chance%20to%20explore%20your%20work%20on%20your%20website,%20and%20I%20would%20like%20to%20discuss%20a%20specific%20project%20in%20more%20detail.%0D%0A%0D%0ACould%20you%20please%20provide%20additional%20information%20on%20your%20availability,%20rates,%20and%20the%20next%20steps%20for%20starting%20a%20collaboration?%0D%0A%0D%0AThank%20you,%0D%0A[Sender's%20Name]"
-                                    className="btn btn-white font-medium">
+                                    className="contact-cta">
+                                    <svg className="contact-cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                                        <path d="M3 7l9 6 9-6"/>
+                                    </svg>
                                     Hire Me!
                                 </a>
                             </div>

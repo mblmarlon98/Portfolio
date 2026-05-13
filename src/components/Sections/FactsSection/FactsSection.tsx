@@ -112,9 +112,9 @@ class FactsSection extends Component<FactsSectionProps, FactsSectionState> {
                             y1={linePosition.y1}
                             x2={linePosition.x2}
                             y2={linePosition.y2}
-                            stroke="#606060"
+                            stroke="rgba(168, 139, 250, 0.35)"
                             strokeWidth="1"
-                            strokeDasharray="3 3"
+                            strokeDasharray="2 4"
                         />
                         ))}
                     </svg>

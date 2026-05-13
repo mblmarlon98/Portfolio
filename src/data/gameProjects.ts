@@ -3,6 +3,52 @@ import { ProjectList } from "../types/Project";
 export const gameProjects: ProjectList = {
     projectList: [
       {
+        title: "Planet Civilisation",
+        type: "4X Space Strategy",
+        description: "Planet Civilisation is a turn-based 4X space strategy game set across a procedurally generated galaxy. Players colonise planets, build out structures from blueprints, manage food, metals and credits, recruit fleets, engage in ship-to-ship battles, and shape relations through diplomacy and trade. Built in Unity by Team GPS2. I led the UI/UX revamp across the main menu, in-game HUD and screen flow, and handled sound design across menus and gameplay.",
+        folderName: "planet-civilisation",
+        img: { url: `${process.env.PUBLIC_URL}/assets/images/games/PlanetCivilisation/cover.png`, alt: "Planet Civilisation" },
+        year: "2026",
+        roles: ["UI/UX Designer", "Sound Designer"],
+        progress: 70,
+        screenshots: [
+          { url: `${process.env.PUBLIC_URL}/assets/images/games/PlanetCivilisation/cover.png`, alt: "Planet Civilisation" },
+        ],
+        features: [
+          {
+            title: "UI/UX Revamp",
+            featureDetails: [{
+              name: "Main Menu & In-Game HUD",
+              description: "Redesigned the main menu and in-game HUD with a clearer information hierarchy: planet list, faction list, home ship, resources (food, metals, credits), and quick-access action buttons. Focused on legibility at distance and consistent iconography across the screens.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+          {
+            title: "Sound Design",
+            featureDetails: [{
+              name: "Menu & Gameplay Audio",
+              description: "Designed audio across the menu flow and core gameplay loop, covering UI feedback, ambient soundscapes, and event cues for combat, diplomacy and turn transitions.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+          {
+            title: "Gameplay Systems",
+            featureDetails: [{
+              name: "4X Loop: eXplore, eXpand, eXploit, eXterminate",
+              description: "Procedural galaxy generation, planet colonisation and structure construction (recipe-based), fleet management with ship-to-ship battles, diplomacy and trade between factions, all on a turn-based cadence.",
+              screenshots: [],
+              codeScreenshots: [],
+            }]
+          },
+        ],
+        challenges: [],
+        tools: ["Unity", "C#", "Figma", "DAW"],
+        rules: "Colonise planets, manage food / metals / credits, build structures, recruit and command fleets, and outlast rival factions through war, diplomacy or trade across a procedurally generated galaxy.",
+        resources: [],
+      },
+      {
         title: "In Too Deep",
         type: "Underwater Exploration",
         description: "A deep-sea diving adventure where you explore mysterious underwater environments, manage your oxygen, and encounter dangerous sea creatures. Features a comprehensive dialogue system, dynamic enemy AI, and immersive audio design.",
